@@ -1,0 +1,96 @@
+OrdererOrgs:
+  #--------------------------------------------------------------------------
+  # Orderer
+  # --------------------------------------------------------------------------
+  - Name: Orderer
+    Domain: example.com
+    EnableNodeOUs: true
+
+    #------------------------------------------------------------
+    # "Specs" - See PeerOrgs below for complete description
+    # ------------------------------------------------------------
+
+    Specs:
+      -Hostname: orderer
+
+# ----------------------------------------------------------------------------
+# "PeerOrgs" - Definitions of organizations managing peer nodes
+# -----------------------------------------------------------------------------
+
+PeerOrgs:
+  # -----------------------------------------------------------------------------
+  # Org1
+  # -----------------------------------------------------------------------------
+
+  - Name: Org1
+    Domain: org1.example.com
+    EnableNodeOUs: true
+
+    Template:
+      # count here means it create 1 peer certificates
+      Count: 1
+      SANS:
+        - localhost
+         # Start: 5
+      # Hostname: {{.Prefix}}{{.Index}} # default
+    # ---------------------------------------------------------------------------
+    # "Users"
+    # ---------------------------------------------------------------------------
+    # Count: The number of user accounts _in addition_ to Admin
+    # ---------------------------------------------------------------------------
+    Users:
+      Count: 1
+
+
+  # ---------------------------------------------------------------
+  # organization 2
+  # ---------------------------------------------------------------
+  
+
+  - Name: Org2
+    Domain: org2.example.com
+    EnableNodeOUs: true
+
+    Template:
+      # count here means it create 1 peer certificates
+      Count: 1
+      SANS:
+        - localhost
+         # Start: 5
+      # Hostname: {{.Prefix}}{{.Index}} # default
+    # ---------------------------------------------------------------------------
+    # "Users"
+    # ---------------------------------------------------------------------------
+    # Count: The number of user accounts _in addition_ to Admin
+    # ---------------------------------------------------------------------------
+    Users:
+      Count: 1 
+
+  # ---------------------------------------------------------------
+  # organization 3
+  # ---------------------------------------------------------------
+  
+  
+  - Name: Org3
+    Domain: org3.example.com
+    EnableNodeOUs: true
+
+    Template:
+      # count here means it create 1 peer certificates
+      Count: 1
+      SANS:
+        - localhost
+         # Start: 5
+      # Hostname: {{.Prefix}}{{.Index}} # default
+    # ---------------------------------------------------------------------------
+    # "Users"
+    # ---------------------------------------------------------------------------
+    # Count: The number of user accounts _in addition_ to Admin
+    # ---------------------------------------------------------------------------
+    Users:
+      Count: 1
+
+
+
+
+
