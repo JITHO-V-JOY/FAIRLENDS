@@ -11,7 +11,7 @@ OrdererOrgs:
     # ------------------------------------------------------------
 
     Specs:
-      -Hostname: orderer
+      - Hostname: orderer
 
 # ----------------------------------------------------------------------------
 # "PeerOrgs" - Definitions of organizations managing peer nodes
