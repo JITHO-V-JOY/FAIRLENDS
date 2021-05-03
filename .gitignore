@@ -1,2 +1,3 @@
- organizations/crypto-config/*
+ organizations/cryptogen/crypto-config
+ channel
  
