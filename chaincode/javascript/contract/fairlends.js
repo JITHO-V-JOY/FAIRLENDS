@@ -75,13 +75,13 @@ class Fairlends extends Contract{
         loan.bankTax = tax;
 
         // adding emi schedule for borrower to pay;
-        for(var i = 0; i<=tenure; i++){
+        for(let i = 0; i<=tenure; i++){
             let date = new Date(today.setMonth(today.getMonth()+i));
             loan.emi[date] = false;
         }
 
         // adding schedule to pay tax by lender;
-        for(var i = 0; i<=tenure; i++){
+        for(let i = 0; i<=tenure; i++){
             let date = new Date(today.setMonth(today.getMonth()+i));
             loan.tax[date] = false;
         }
