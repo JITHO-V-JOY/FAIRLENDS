@@ -32,12 +32,11 @@ class Fairlends extends Contract{
 
     }
 
-    
+
 
     async addLender(ctx, lender, loanNumber){
 
         console.info("*************** Adding Lender ***************");
-
 
         const loanAsBytes = await ctx.stub.getState(loanNumber);
         if(!loanAsBytes|| loanAsBytes.length === 0){
@@ -50,6 +49,46 @@ class Fairlends extends Contract{
 
         await ctx.stub.putState(loanNumber, Buffer.from(JSON.stringify(loan)));
         console.info("*************** Lender added Successfully ***************");
+
+
+    }
+
+
+    async approveLoan(ctx, loanNumber, tax){
+
+        console.info("*************** Approving Loan ***************");
+
+        const loanAsBytes = await ctx.stub.getState(loanNumber);
+
+        if(!loanAsBytes|| loanAsBytes.length === 0){
+            throw new Error(`${loanNumber} does not exist`);
+        }
+
+        const loan = JSON.parse(loanAsBytes.toString());
+
+        loan.approved = true;
+        loan.status = "active";
+
+        var today = new Date();
+        loan.approvedDate = today;
+        loan.endDate = new Date(today.setMonth(today.getMonth()+loan.tenure));
+        loan.bankTax = tax;
+
+        // adding emi schedule for borrower to pay;
+        for(var i = 0; i<=tenure; i++){
+            let date = new Date(today.setMonth(today.getMonth()+i));
+            loan.emi[date] = false;
+        }
+
+        // adding schedule to pay tax by lender;
+        for(var i = 0; i<=tenure; i++){
+            let date = new Date(today.setMonth(today.getMonth()+i));
+            loan.tax[date] = false;
+        }
+
+        await ctx.stub.putState(loanNumber, Buffer.from(JSON.stringify(loan)));
+
+        console.info("*************** Loan Approved Successfully ***************");
 
 
     }
