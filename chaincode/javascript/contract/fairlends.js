@@ -22,14 +22,14 @@ class Fairlends extends Contract{
 
     }
 
-    async issueLoan(ctx, issuer, loanNumber, loanAmount, interest, tenure){
+    async issueLoan(ctx, adharNo, loanNumber, loanAmount, interest, tenure){
         console.info("*************** Creating Loan request ***************");
         
         const d = new Date();
 
         const loan = {
             "id":loanNumber,
-            "issuer" : issuer,
+            "issuer" : adharNo,
             "lender" : null,
             "approved":false,
             "loanAmount": loanAmount,
