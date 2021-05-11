@@ -52,7 +52,7 @@ class Fairlends extends Contract{
 
 
 
-    async addLender(ctx, lender, loanNumber){
+    async addLender(ctx, adharNo, loanNumber){
 
         console.info("*************** Adding Lender ***************");
 
@@ -63,7 +63,7 @@ class Fairlends extends Contract{
 
         const loan = JSON.parse(loanAsBytes.toString());
 
-        loan.lender = lender;
+        loan.lender = adharNo;
 
         await ctx.stub.putState(loanNumber, Buffer.from(JSON.stringify(loan)));
         console.info("*************** Lender added Successfully ***************");
