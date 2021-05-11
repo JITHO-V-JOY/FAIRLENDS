@@ -4,6 +4,24 @@ const {Contract} = require('fabric-contract-api');
 
 class Fairlends extends Contract{
 
+    async createUser(ctx, adharNo, name, role, state, city, address, pincode){
+        console.info("*************** Creating User ***************")
+
+        const user = {
+            adharNo,
+            name,
+            role,
+            state,
+            city,
+            address, 
+            pincode
+        };
+
+        await ctx.stub.putState(adharNo, Buffer.from(JSON.stringify(user)));
+        console.info("*************** Created New User ***************")
+
+    }
+
     async issueLoan(ctx, issuer, loanNumber, loanAmount, interest, tenure){
         console.info("*************** Creating Loan request ***************");
         
