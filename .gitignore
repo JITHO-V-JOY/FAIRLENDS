@@ -1,0 +1,4 @@
+ channel
+ organizations/cryptogen/crypto-config
+ chaincode/javascript/node_modules
+ chaincode/javascript/package-lock.json
