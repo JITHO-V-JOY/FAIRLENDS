@@ -4,8 +4,65 @@ const {Contract} = require('fabric-contract-api');
 
 class Fairlends extends Contract{
 
+    async initLedger(ctx){
+
+        console.info("*************** initializing ledger ***************");
+
+        const user=[
+            {
+                adharNo:665577887733,
+                name:"abc",
+                role:"lender",
+                state:"kerala",
+                city:"kochi",
+                address:"xyz",
+                pincode:654321
+
+            },
+            {
+                adharNo:665577887734,
+                name:"pqr",
+                role:"borrower",
+                state:"kerala",
+                city:"kochi",
+                address:"mno",
+                pincode:654321
+
+            },
+            {
+                adharNo:665577887735,
+                name:"obc",
+                role:"lender",
+                state:"kerala",
+                city:"kochi",
+                address:"lmn",
+                pincode:654321
+
+            },
+            {
+                adharNo:665577887736,
+                name:"rst",
+                role:"borrower",
+                state:"kerala",
+                city:"kochi",
+                address:"uvx",
+                pincode:654321
+            }
+
+        ];
+
+        for(let i = 0; i<user.length; i++){
+            await ctx.stub.putState(user[i].adharNo, Buffer.from(JSON.stringify(user[i])));
+            console.info("Added ", user[i]);
+        }
+
+        console.info("*************** ledger initialized ***************");
+
+    }
+    
+
     async createUser(ctx, adharNo, name, role, state, city, address, pincode){
-        console.info("*************** Creating User ***************")
+        console.info("*************** Creating User ***************");
 
         const user = {
             adharNo,
