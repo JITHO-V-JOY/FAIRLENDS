@@ -47,7 +47,23 @@ packageChaincode(){
 }
 
 
+installChaincode(){
 
-packageChaincode
+    setGlobalsForPeer0Org1
+    peer lifecycle chaincode install ${CC_NAME}.tar.gz 
+    echo "===================== Chaincode is installed on peer0.org1 ===================== "
+
+    setGlobalsForPeer0Org2
+    peer lifecycle chaincode install ${CC_NAME}.tar.gz 
+    echo "===================== Chaincode is installed on peer0.org2 ===================== "
+
+    setGlobalsForPeer0Org3
+    peer lifecycle chaincode install ${CC_NAME}.tar.gz 
+    echo "===================== Chaincode is installed on peer0.org3 ===================== "
+
+}
+
+#packageChaincode
+installChaincode
 
 
