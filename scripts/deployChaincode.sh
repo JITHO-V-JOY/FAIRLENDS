@@ -73,9 +73,87 @@ queryInstalled(){
 
 }
 
+approveForMyOrg1(){
+    setGlobalsForPeer0Org1
+    # set -x
+    peer lifecycle chaincode approveformyorg -o localhost:7050 \
+        --ordererTLSHostnameOverride orderer.example.com --tls \
+        --cafile $ORDERER_CA --channelID $CHANNEL_NAME --name ${CC_NAME} --version ${VERSION} \
+        --init-required --package-id ${PACKAGE_ID} --sequence ${SEQUENCE}
+    # set +x
+
+    echo "===================== chaincode approved from org 1 ===================== "
+
+}
+
+checkCommitReadyness(){
+    setGlobalsForPeer0Org1
+    peer lifecycle chaincode checkcommitreadiness \
+        --channelID $CHANNEL_NAME --name ${CC_NAME} --version ${VERSION} \
+        --sequence ${SEQUENCE} --output json --init-required
+    
+    echo "===================== checking commit readyness from org 1 ===================== "
+
+}
+
+
+approveForMyOrg2(){
+    setGlobalsForPeer0Org2
+    # set -x
+    peer lifecycle chaincode approveformyorg -o localhost:7050 \
+        --ordererTLSHostnameOverride orderer.example.com --tls $CORE_PEER_TLS_ENABLED \
+        --cafile $ORDERER_CA --channelID $CHANNEL_NAME --name ${CC_NAME} --version ${VERSION} \
+        --init-required --package-id ${PACKAGE_ID} --sequence ${SEQUENCE}
+    # set +x
+
+    echo "===================== chaincode approved from org 2 ===================== "
+
+}
+
+checkCommitReadyness() {
+
+    setGlobalsForPeer0Org2
+    peer lifecycle chaincode checkcommitreadiness --channelID $CHANNEL_NAME \
+        --peerAddresses localhost:8051 --tlsRootCertFiles $PEER0_ORG2_CA \
+        --name ${CC_NAME} --version ${VERSION} --sequence ${VERSION} --output json --init-required
+    echo "===================== checking commit readyness from org 2===================== "
+}
+
+
+approveForMyOrg3(){
+    setGlobalsForPeer0Org3
+    # set -x
+    peer lifecycle chaincode approveformyorg -o localhost:7050 \
+        --ordererTLSHostnameOverride orderer.example.com --tls $CORE_PEER_TLS_ENABLED \
+        --cafile $ORDERER_CA --channelID $CHANNEL_NAME --name ${CC_NAME} --version ${VERSION} \
+        --init-required --package-id ${PACKAGE_ID} --sequence ${SEQUENCE}
+    # set +x
+
+    echo "===================== chaincode approved from org 3 ===================== "
+
+}
+
+checkCommitReadyness() {
+
+    setGlobalsForPeer0Org3
+    peer lifecycle chaincode checkcommitreadiness --channelID $CHANNEL_NAME \
+        --peerAddresses localhost:9051 --tlsRootCertFiles $PEER0_ORG3_CA \
+        --name ${CC_NAME} --version ${VERSION} --sequence ${VERSION} --output json --init-required
+    echo "===================== checking commit readyness from org 3 ===================== "
+}
+
 #packageChaincode
 #installChaincode
-
 queryInstalled
+
+approveForMyOrg1
+approveForMyOrg2
+approveForMyOrg3
+
+checkCommitReadyness
+
+
+
+
 
 
