@@ -63,7 +63,19 @@ installChaincode(){
 
 }
 
+queryInstalled(){
+    setGlobalsForPeer0Org1
+    peer lifecycle chaincode queryinstalled >&log.txt
+    cat log.txt
+    PACKAGE_ID=$(sed -n "/${CC_NAME}_${VERSION}/{s/^Package ID: //; s/, Label:.*$//; p;}" log.txt)
+    echo PackageID is ${PACKAGE_ID}
+    echo "===================== Query installed successful on peer0.org1 on channel ===================== "
+
+}
+
 #packageChaincode
-installChaincode
+#installChaincode
+
+queryInstalled
 
 
