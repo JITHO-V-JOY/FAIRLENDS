@@ -24,6 +24,7 @@ type User struct {
 	Name     string `json:"name"`
 	Role     string `json:"role"`
 	Address  string `json:"address"`
+	Phone    string `json:"phone"`
 	UPI_ID   string `json:"upi_id"`
 	State    string `json:"state"`
 	City     string `json:"city"`
@@ -94,7 +95,7 @@ func (s *SmartContract) IssueLoan(ctx contractapi.TransactionContextInterface, l
 	return ctx.GetStub().GetTxID(), ctx.GetStub().PutState(loan.Loan_ID, loanAsBytes)
 }
 
-// ******************************************** Adding Lenderfunction *************************************************************
+// ******************************************** Adding Lender function *************************************************************
 
 func (s *SmartContract) AddLender(ctx contractapi.TransactionContextInterface, adhar_id string, loan_id string) (string, error) {
 	if len(adhar_id) == 0 || len(loan_id) == 0 {
@@ -146,6 +147,36 @@ func (s *SmartContract) ApproveLoan(ctx contractapi.TransactionContextInterface,
 	_ = json.Unmarshal(loanAsBytes, loan)
 
 	loan.Approved = true
+
+	loanAsBytes, err = json.Marshal(loan)
+	if err != nil {
+		return "", fmt.Errorf("Failed while marshling loan. %s", err.Error())
+	}
+
+	return ctx.GetStub().GetTxID(), ctx.GetStub().PutState(loan.Loan_ID, loanAsBytes)
+}
+
+// ******************************************** Redeem function *************************************************************
+
+func (s *SmartContract) Redeem(ctx contractapi.TransactionContextInterface, loan_id string) (string, error) {
+	if len(loan_id) == 0 {
+		return "", fmt.Errorf("Please pass the correct loan data")
+	}
+
+	loanAsBytes, err := ctx.GetStub().GetState(loan_id)
+
+	if err != nil {
+		return "", fmt.Errorf("Failed to get loan data. %s", err.Error())
+	}
+
+	if loanAsBytes == nil {
+		return "", fmt.Errorf("%s does not exist", loan_id)
+	}
+
+	loan := new(Loan)
+	_ = json.Unmarshal(loanAsBytes, loan)
+
+	loan.Status = "Redeem"
 
 	loanAsBytes, err = json.Marshal(loan)
 	if err != nil {
