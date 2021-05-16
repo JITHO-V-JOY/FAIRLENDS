@@ -147,6 +147,7 @@ func (s *SmartContract) ApproveLoan(ctx contractapi.TransactionContextInterface,
 	_ = json.Unmarshal(loanAsBytes, loan)
 
 	loan.Approved = true
+	loan.Status = "Active"
 
 	loanAsBytes, err = json.Marshal(loan)
 	if err != nil {
