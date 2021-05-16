@@ -1,11 +1,8 @@
 package main
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
-	"strconv"
-	"time"
 
 	"github.com/hyperledger/fabric-contract-api-go/contractapi"
 	"github.com/hyperledger/fabric/common/flogging"
@@ -17,17 +14,39 @@ type SmartContract struct {
 
 var logger = flogging.MustGetLogger("fabcar_cc")
 
-type User struct {
-	Adhar_ID    string `json:"adhar_id"`
-	Name    	string `json:"name"`
-	Role 	    string `json:"role"`
-	Address   	string `json:"address"`
-	UPI_ID   	string `json:"upi_id"`
-	State 		string `json:"state"`
-	City 		string `json:"city"`
-	Pincode 	string `json:"pincode"`
+type Repayment struct {
+	Date    string `json:"date"`
+	Payment bool   `json:"payment"`
 }
 
+type User struct {
+	Adhar_ID string `json:"adhar_id"`
+	Name     string `json:"name"`
+	Role     string `json:"role"`
+	Address  string `json:"address"`
+	UPI_ID   string `json:"upi_id"`
+	State    string `json:"state"`
+	City     string `json:"city"`
+	Pincode  string `json:"pincode"`
+}
+
+type Loan struct {
+	Loan_ID      string      `json:"loan_id"`
+	Issuer       string      `json:"issuer"`
+	Lender       string      `json:"lender"`
+	Amount       int64       `json:"amount"`
+	Interest     int         `json:"interest"`
+	Tenure       int         `json:"tenure"`
+	Approved     bool        `json:"approved"`
+	IssuedDate   string      `json:"issued_date"`
+	ApprovedDate string      `json:"approved_date"`
+	EndDate      string      `json:"end_date"`
+	Emi          []Repayment `json:"emi"`
+	Tax          []Repayment `json:"tax"`
+	Status       string      `json:"status"`
+}
+
+// ******************************************** Create User function *************************************************************
 
 func (s *SmartContract) CreateUser(ctx contractapi.TransactionContextInterface, userData string) (string, error) {
 
@@ -51,6 +70,31 @@ func (s *SmartContract) CreateUser(ctx contractapi.TransactionContextInterface, 
 	return ctx.GetStub().GetTxID(), ctx.GetStub().PutState(user.Adhar_ID, userAsBytes)
 }
 
+// ******************************************** Issue Loan function *************************************************************
+
+func (s *SmartContract) IssueLoan(ctx contractapi.TransactionContextInterface, loanData string) (string, error) {
+
+	if len(loanData) == 0 {
+		return "", fmt.Errorf("Please pass the correct loan data")
+	}
+
+	var loan Loan
+	err := json.Unmarshal([]byte(loanData), &loan)
+	if err != nil {
+		return "", fmt.Errorf("Failed while unmarshling loan. %s", err.Error())
+	}
+
+	loanAsBytes, err := json.Marshal(loan)
+	if err != nil {
+		return "", fmt.Errorf("Failed while marshling car. %s", err.Error())
+	}
+
+	ctx.GetStub().SetEvent("CreateAsset", loanAsBytes)
+
+	return ctx.GetStub().GetTxID(), ctx.GetStub().PutState(loan.Loan_ID, loanAsBytes)
+}
+
+// ******************************************** main function *************************************************************
 
 func main() {
 
