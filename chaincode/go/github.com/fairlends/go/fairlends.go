@@ -190,6 +190,41 @@ func (s *SmartContract) PayEMI(ctx contractapi.TransactionContextInterface, date
 	return ctx.GetStub().GetTxID(), ctx.GetStub().PutState(loan.Loan_ID, loanAsBytes)
 }
 
+// ******************************************** pay tax *************************************************************
+
+func (s *SmartContract) PayTax(ctx contractapi.TransactionContextInterface, date string, loan_id string) (string, error) {
+	if len(date) == 0 || len(loan_id) == 0 {
+		return "", fmt.Errorf("Please pass the correct date")
+	}
+
+	loanAsBytes, err := ctx.GetStub().GetState(loan_id)
+
+	if err != nil {
+		return "", fmt.Errorf("Failed to get loan data. %s", err.Error())
+	}
+
+	if loanAsBytes == nil {
+		return "", fmt.Errorf("%s does not exist", loan_id)
+	}
+
+	loan := new(Loan)
+	_ = json.Unmarshal(loanAsBytes, loan)
+
+	for i := 0; i < len(loan.Tax); i++ {
+		if loan.Tax[i].Date == date {
+			loan.Tax[i].Payment = true
+			break
+		}
+	}
+
+	loanAsBytes, err = json.Marshal(loan)
+	if err != nil {
+		return "", fmt.Errorf("Failed while marshling loan. %s", err.Error())
+	}
+
+	return ctx.GetStub().GetTxID(), ctx.GetStub().PutState(loan.Loan_ID, loanAsBytes)
+}
+
 // ******************************************** main function *************************************************************
 
 func main() {
