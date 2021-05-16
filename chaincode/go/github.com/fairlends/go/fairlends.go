@@ -125,6 +125,36 @@ func (s *SmartContract) AddLender(ctx contractapi.TransactionContextInterface, a
 
 }
 
+// ******************************************** Approve Loan function *************************************************************
+
+func (s *SmartContract) ApproveLoan(ctx contractapi.TransactionContextInterface, loan_id string) (string, error) {
+	if len(loan_id) == 0 {
+		return "", fmt.Errorf("Please pass the correct loan data")
+	}
+
+	loanAsBytes, err := ctx.GetStub().GetState(loan_id)
+
+	if err != nil {
+		return "", fmt.Errorf("Failed to get loan data. %s", err.Error())
+	}
+
+	if loanAsBytes == nil {
+		return "", fmt.Errorf("%s does not exist", loan_id)
+	}
+
+	loan := new(Loan)
+	_ = json.Unmarshal(loanAsBytes, loan)
+
+	loan.Approved = true
+
+	loanAsBytes, err = json.Marshal(loan)
+	if err != nil {
+		return "", fmt.Errorf("Failed while marshling loan. %s", err.Error())
+	}
+
+	return ctx.GetStub().GetTxID(), ctx.GetStub().PutState(loan.Loan_ID, loanAsBytes)
+}
+
 // ******************************************** main function *************************************************************
 
 func main() {
