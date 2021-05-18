@@ -8,6 +8,17 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+var mongoose = require('mongoose');
+// mongoose connection
+
+mongoose.connect('mongodb://localhost:27017/test', {useNewUrlParser : true, useUnifiedTopology: true});
+
+const connection = mongoose.connection;
+connection.once('open', () => {
+    console.log('MongoDB database connection established successfully!');
+});
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
