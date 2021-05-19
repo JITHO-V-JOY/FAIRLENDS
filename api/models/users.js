@@ -7,12 +7,6 @@ const userSchema = new Schema({
     adhar_id : {type: String, require :true},
     name : {type: String, require :true},
     role : {type: String, require :true},
-    address : {type: String, require :true},
-    phone : {type: String, require :true},
-    upi_id : {type: String, require :true},
-    state : {type: String, require :true},
-    city : {type: String, require :true},
-    pincode : {type: String, require :true},
     password : {type: String, require :true}
 });
 
