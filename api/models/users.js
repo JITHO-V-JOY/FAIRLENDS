@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose  = require('mongoose');
 const {Schema} = mongoose;
 const bcrypt = require('bcrypt');
 SALT_WORK_FACTOR = 10;
@@ -10,7 +10,7 @@ const userSchema = new Schema({
     password : {type: String, require :true}
 });
 
-userSchema.pre(save, function(next) {
+userSchema.pre('save', function(next) {
     var user = this;
 // only hash the password if it has been modified (or is new)
 if (!user.isModified('password')) return next();
