@@ -11,6 +11,34 @@ exports.signup = (req, res)=>{
         }
         res.send(user);
     })
+}
 
+exports.signin = (req, res)=>{
+    const {adhar_id, password} = req.body;
+    User.findOne({adhar_id}, (err, usr)=>{
+        if(err){
+            return res.status(400).json({
+                error: "error occured"
+            })
+        }
+        if(!usr){
+            return res.status(400).json({
+                error: "User does not exists"
+            });
+        }
+        else if(usr){
+            usr.authenticate(password, (err, isMatch)=>{
+                if(err){
+                    console.log(err)
+                    return res.status(400).json({
+                        error:"invalid password!"
+                    })
+                }else if(isMatch){
+                    res.send(usr);
+                }
 
+            })
+        }
+
+    })
 }
