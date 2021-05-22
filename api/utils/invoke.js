@@ -2,18 +2,20 @@ const { Gateway, Wallets, TxEventHandler, GatewayOptions, DefaultEventHandlerStr
 const fs = require('fs');
 const EventStrategies = require('fabric-network/lib/impl/event/defaulteventhandlerstrategies');
 const path = require("path")
-const log4js = require('log4js');
-const logger = log4js.getLogger('BasicNetwork');
-const util = require('util')
+//const log4js = require('log4js');
+//const logger = log4js.getLogger('BasicNetwork');
+//const util = require('util')
 
 const helper = require('./helper');
-const { blockListener, contractListener } = require('./Listeners');
+const { Console } = require('console');
+//const { blockListener, contractListener } = require('./Listeners');
 
 const invokeTransaction = async (channelName, chaincodeName, fcn, args, username, org_name, transientData) => {
     try {
         const ccp = await helper.getCCP(org_name);
-
+        console.log(ccp);
         const walletPath = await helper.getWalletPath(org_name);
+        console.log(walletPath);
         const wallet = await Wallets.newFileSystemWallet(walletPath);
         console.log(`Wallet path: ${walletPath}`);
 
@@ -49,7 +51,7 @@ const invokeTransaction = async (channelName, chaincodeName, fcn, args, username
 
         switch (fcn) {
             case "CreateUser":
-                result = await contract.submitTransaction(fcn, args[0]);
+                result = await contract.submitTransaction(fcn, JSON.stringify(args[0]));
                 console.log(result.toString())
                 result = {txid: result.toString()}
                 break;
@@ -129,7 +131,7 @@ const invokeTransaction = async (channelName, chaincodeName, fcn, args, username
 
 
     } catch (error) {
-
+    
         console.log(`Getting error: ${error}`)
         return error.message
 
