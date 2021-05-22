@@ -1,4 +1,6 @@
 const User = require('../models/users');
+const jwt = require('jsonwebtoken');
+const expressjwt = require('express-jwt');
 
 exports.signup = (req, res)=>{
     const {adhar_id, name, role, password} = req.body;
@@ -34,7 +36,14 @@ exports.signin = (req, res)=>{
                         error:"invalid password!"
                     })
                 }else if(isMatch){
-                    res.send(usr);
+                    //sigin, create token,  put token into the cookies.
+                    const token = jwt.sign({_id: usr._id}, process.env.SECRET)
+                    res.cookie("token", token, {expire: new Date() + 120});
+
+                    return res.json({
+                        token,
+                        usr
+                    });
                 }
 
             })

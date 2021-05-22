@@ -6,3 +6,4 @@ config/connection-org1.json
 config/connection-org2.json
 config/connection-org3.json
 constants.json
+.env
