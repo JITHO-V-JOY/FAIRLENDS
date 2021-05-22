@@ -58,3 +58,31 @@ exports.signout = (req, res) => {
         message :"user signout successfully"
     })
 }
+
+
+
+exports.isSignedIn = (req, res, next)=>{
+    const bearerHeader = req.headers['authorization']
+    if (typeof bearerHeader !== 'undefined'){
+        const bearerToken = bearerHeader.split(' ')[1];
+        req.token = bearerToken;
+        next()
+        console.log("hello");
+    }else{
+        
+    res.sendStatus(403); // forbidden
+    }
+}
+
+exports.isAuthenticated = (req, res)=>{
+    jwt.verify(req.token, process.env.SECRET, (err, data)=>{
+        if(err){
+            res.sendStatus(403)
+        }else{
+            res.json({
+                message:"success",
+                data
+            })
+        }
+    })
+}

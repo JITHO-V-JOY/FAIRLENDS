@@ -7,4 +7,6 @@ router.post('/signin', auth.signin);
 router.post('/signup', auth.signup);
 router.get("/signout", auth.signout);
 
-module.exports = router;
+router.get("/testroute",  auth.isSignedIn, auth.isAuthenticated)
+
+module.exports = router;    
