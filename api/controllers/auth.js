@@ -69,8 +69,8 @@ exports.isSignedIn = (req, res, next)=>{
         next()
         console.log("hello");
     }else{
-        
-    res.sendStatus(403); // forbidden
+    res.render('index', { title: 'Fairlends' });
+    //res.sendStatus(403); // forbidden
     }
 }
 

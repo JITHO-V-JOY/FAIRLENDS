@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+:root{
+    --primary-color: #c9cdcf;
+    --secondary-color:#2ce296;
+}
+
+body{
+    background: #f7f7f7;
+    margin: 2em;
+    font-family:'Poppins'; 
+}
+
+.navbar{
+    background-color:rgb(130, 130, 221);
+    padding: 1em;
+
+    .container{     
+         display: flex;
+         place-content: space-between;
+    }
+
+    .logo{
+        text-decoration: none;
+        font-weight: bold;
+        color: black;
+        font-size: 1.2em;
+        letter-spacing: .1em;
+
+    }  
+}   
+
+
+
+ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    
+}
+a{
+    text-decoration: none;
+}
+
+.navbar nav{
+    background: none;
+    position: relative;
+    height: auto;
+    width: 100%;
+    padding: 0;
+
+    ul{
+        display: flex;
+        float: right;
+       
+    }
+    ul.primary-nav{
+        margin: 0;
+       
+    }
+    a{
+        color: black;
+        font-size: 1em;
+        padding: .1em 1em;
+    }
+    li{
+        padding:0 1em;
+    }
+    li.login-btn a{
+        color: var(--secondary-color);
+        border: 3px solid var(--secondary-color);
+        border-radius: 5em;
+        margin-top: -.2em;
+        font-weight: bold;
+
+        &:hover{
+            background: var(--secondary-color);
+            color: white;
+        }
+    }
+
+    li.reg-btn a{
+        color: var(--primary-color);
+        border: 3px solid var(--primary-color);
+        border-radius: 5em;
+        margin-top: -.2em;
+        font-weight: bold;
+
+        &:hover{
+            background: var(--primary-color);
+            color: white;
+        }
+    }
+}
+
+
+section{
+    padding:.1em 2em;
+}
+
+
+.hero{
+    text-align: center;
+    .left-col{
+        .subhead{
+            text-transform: uppercase;
+            font-weight: bold;
+            color: gray;
+            letter-spacing: .3em;
+            font-size: 3em;
+
+        }
+
+        h1{
+            font-size: 2em;
+            line-height: 1.3em;
+            margin-top: .1em;
+        }
+
+    }
+}
+.hero-img{
+    width: 80%;
+    margin-top: 1em;
+}
+
+
+@media only screen and (min-width: 768px){
+
+    
+    .hero-img{
+        width: 40%;
+        height: 40%;
+    }
+
+}
+
+ 

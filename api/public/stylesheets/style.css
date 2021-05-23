@@ -1,8 +1,131 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+:root {
+  --primary-color: #c9cdcf;
+  --secondary-color:#2ce296;
+}
+
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: #f7f7f7;
+  margin: 2em;
+  font-family: 'Poppins';
+}
+
+.navbar {
+  background-color: #8282dd;
+  padding: 1em;
+}
+
+.navbar .container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  place-content: space-between;
+}
+
+.navbar .logo {
+  text-decoration: none;
+  font-weight: bold;
+  color: black;
+  font-size: 1.2em;
+  letter-spacing: .1em;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 a {
-  color: #00B7FF;
+  text-decoration: none;
 }
+
+.navbar nav {
+  background: none;
+  position: relative;
+  height: auto;
+  width: 100%;
+  padding: 0;
+}
+
+.navbar nav ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  float: right;
+}
+
+.navbar nav ul.primary-nav {
+  margin: 0;
+}
+
+.navbar nav a {
+  color: black;
+  font-size: 1em;
+  padding: .1em 1em;
+}
+
+.navbar nav li {
+  padding: 0 1em;
+}
+
+.navbar nav li.login-btn a {
+  color: var(--secondary-color);
+  border: 3px solid var(--secondary-color);
+  border-radius: 5em;
+  margin-top: -.2em;
+  font-weight: bold;
+}
+
+.navbar nav li.login-btn a:hover {
+  background: var(--secondary-color);
+  color: white;
+}
+
+.navbar nav li.reg-btn a {
+  color: var(--primary-color);
+  border: 3px solid var(--primary-color);
+  border-radius: 5em;
+  margin-top: -.2em;
+  font-weight: bold;
+}
+
+.navbar nav li.reg-btn a:hover {
+  background: var(--primary-color);
+  color: white;
+}
+
+section {
+  padding: .1em 2em;
+}
+
+.hero {
+  text-align: center;
+}
+
+.hero .left-col .subhead {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: gray;
+  letter-spacing: .3em;
+  font-size: 3em;
+}
+
+.hero .left-col h1 {
+  font-size: 2em;
+  line-height: 1.3em;
+  margin-top: .1em;
+}
+
+.hero-img {
+  width: 80%;
+  margin-top: 1em;
+}
+
+@media only screen and (min-width: 768px) {
+  .hero-img {
+    width: 40%;
+    height: 40%;
+  }
+}
+/*# sourceMappingURL=style.css.map */
