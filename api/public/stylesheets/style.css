@@ -122,7 +122,49 @@ section {
   margin-top: 1em;
 }
 
+h2 {
+  font-size: 2em;
+}
+
+label {
+  display: block;
+  font-size: 1.2em;
+  margin-bottom: .3em;
+}
+
+input {
+  width: 100%;
+  padding: .8em;
+  margin-bottom: 1em;
+  border: 1px solid gray;
+  border-radius: .3em;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: large;
+}
+
+input[type="submit"] {
+  background-color: #8282dd;
+  color: white;
+  font-weight: bold;
+  font-size: 1.3em;
+  border: none;
+  display: inline-block;
+  margin-bottom: 3em;
+  border-radius: 3em;
+  padding: .8em 2em;
+  width: unset;
+  cursor: pointer;
+}
+
 @media only screen and (min-width: 768px) {
+  .login-container {
+    width: 1080px;
+    margin: 0 auto;
+  }
+  section {
+    padding: 10em 4em;
+  }
   .hero-img {
     width: 40%;
     height: 40%;
