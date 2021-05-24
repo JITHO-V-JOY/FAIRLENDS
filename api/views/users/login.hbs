@@ -17,7 +17,14 @@
                        <label for="adhar">Adhar ID</label>
                        <input type="text" name="adhar" id="adhar" >
                        <label for="password">Password</label>
-                       <input type="password" name="password" id="password" >   
+                       <input type="password" name="password" id="password" >  
+                       {{#if err}} 
+                            <p class="error">{err}</p>
+                       {{/if}}
+                       {{#if loggedin}} 
+                            <p class="error">success</p>
+                       {{/if}}
+
                        <input type="submit" class="login">
                    </form>
                </div>

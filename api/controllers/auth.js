@@ -37,6 +37,11 @@ exports.signin = (req, res)=>{
                     })
                 }else if(isMatch){
                     //sigin, create token,  put token into the cookies.
+                    req.session.loggedIn=true;
+                    req.session.user=usr;
+                    console.log(req.session.user);
+                    return res.render('users/login', {err:false, loggedin:true})
+                    /*
                     const token = jwt.sign({_id: usr._id}, process.env.SECRET)
                     res.cookie("token", token, {expire: new Date() + 120});
 
@@ -44,6 +49,7 @@ exports.signin = (req, res)=>{
                         token,
                         usr
                     });
+                    */
                 }
 
             })
@@ -62,6 +68,16 @@ exports.signout = (req, res) => {
 
 
 exports.isSignedIn = (req, res, next)=>{
+
+    let user = req.session.user;
+    if(user){
+        console.log(user);
+        next();
+    }else{
+        return res.render('index'); // forbidden
+    }
+
+    /*
     const bearerHeader = req.headers['authorization']
     if (typeof bearerHeader !== 'undefined'){
         const bearerToken = bearerHeader.split(' ')[1];
@@ -72,17 +88,6 @@ exports.isSignedIn = (req, res, next)=>{
     res.render('index', { title: 'Fairlends' });
     //res.sendStatus(403); // forbidden
     }
+    */
 }
 
-exports.isAuthenticated = (req, res)=>{
-    jwt.verify(req.token, process.env.SECRET, (err, data)=>{
-        if(err){
-            res.sendStatus(403)
-        }else{
-            res.json({
-                message:"success",
-                data
-            })
-        }
-    })
-}
