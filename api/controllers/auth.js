@@ -78,10 +78,13 @@ exports.signin = (req, res)=>{
 }
 
 exports.signout = (req, res) => {
-    res.clearCookie("token");
-    res.json({
-        message :"user signout successfully"
-    })
+    req.session.destroy(err => {
+        if (err) {
+          res.status(400).send('Unable to log out')
+        } else {
+            res.redirect('/');
+        }
+      });
 }
 
 

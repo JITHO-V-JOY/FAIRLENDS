@@ -5,7 +5,12 @@ var auth = require('../controllers/auth');
 
 /* GET home page. */
 router.get('/', auth.isSignedIn, (req, res)=>{
-    res.render('users/home', {user:req.session.user});
+    if(req.session.user.role === "borrower"){
+    res.render('users/borrowerHome', {user:req.session.user});
+    }else{
+        res.render('users/lenderHome', {user:req.session.user});
+  
+    }
 });
 
 module.exports = router;
