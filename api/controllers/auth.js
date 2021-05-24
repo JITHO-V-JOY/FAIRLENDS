@@ -2,17 +2,30 @@ const User = require('../models/users');
 const jwt = require('jsonwebtoken');
 const expressjwt = require('express-jwt');
 
-exports.signup = (req, res)=>{
+exports.signup = (req, res, next)=>{
     const {adhar_id, name, role, password} = req.body;
     const user = new User({adhar_id, name, role, password}); // creating user object and populate with the request object..
+    delete req.body.password;
+    let arg = new Array(req.body);
+    console.log(arg, req.body)
     user.save((err, user)=>{
         if(err){
             return res.status(400).json({
                 error: "NOT able to save user in DB"
             })
         }
-        res.send(user);
-    })
+        
+       
+    });
+
+    req.userName = req.body.adhar_id;
+    req.userOrg = (role === "lender") ? "Org2": "Org1" ;
+    req.args = arg;
+    req.chaincodeName = "fabcar";
+    req.channelName = "mychannel";
+    req.fcn = "CreateUser";
+    
+    next();
 }
 
 exports.signin = (req, res)=>{

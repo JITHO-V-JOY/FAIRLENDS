@@ -1,8 +1,9 @@
 const helper = require('../utils/helper');
 const invoke = require('../utils/invoke');
 
-exports.register = async (req, res)=>{
-    const {userName, userOrg} = req.body;
+exports.register = async (req, res, next)=>{
+    const userName = req.userName;
+    const userOrg = req.userOrg;
     console.log(userName, userOrg);
     if(!userName){
         res.status(400).json({
@@ -11,12 +12,12 @@ exports.register = async (req, res)=>{
     }
     if(!userOrg){
         res.status(400).json({
-            error:"orgization is missing"
+            error:"organization is missing"
         })
     }
 
     helper.getRegisteredUser(userName, userOrg, true).then((response)=>{
-        res.json(response);
+        next();
     }).catch(e =>{
         res.json({
             success: false,
@@ -27,10 +28,18 @@ exports.register = async (req, res)=>{
 }
 
 exports.invokeTransaction = (req, res) => {
-    console.log("*********************inoke function************************")
-    const chaincodeName = req.params.chaincodeName;
-    const channelName = req.params.channelName;
-    const {fcn, args, trasient, userName, userOrg} = req.body;
+    console.log("*********************invoke function************************")
+    const chaincodeName = req.chaincodeName;
+    const channelName = req.channelName;
+    const fcn = req.fcn;
+    const args = req.args;
+    const userName = req.userName;
+    const userOrg = req.userOrg;
+    const trasient = req.trasient;
+
+    console.log(req.userName);
+
+   // const {fcn, args, trasient, userName, userOrg, chaincodeName, channelName} = req.body;
     if(!chaincodeName){
         res.status(400).json({
             error: "chain code name is missing"
@@ -54,8 +63,9 @@ exports.invokeTransaction = (req, res) => {
     }
 
     invoke.invokeTransaction(channelName, chaincodeName, fcn, args, userName, userOrg, trasient).then((response)=>{
-        res.send(response);
+     
         console.log(response);
+        res.render('users/login');
     }).catch((e)=>{
         console.log(e)
         res.status(400).json({
