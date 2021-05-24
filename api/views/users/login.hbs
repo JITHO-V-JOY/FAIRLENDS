@@ -1,5 +1,5 @@
-<div class="navbar">
-           <div class="container">
+<div class="navs">
+           <div class="head">
                <a class="logo" href="#">FAIRLENDS</a>
                <nav>
                    <ul class="primary-nav">
@@ -11,11 +11,10 @@
 
  <section class="login-section">
            <div class="login-container">
-               <div class="contact-left">
                    <h2>Login</h2>
-                   <form action="">
-                       <label for="adhar">Adhar ID</label>
-                       <input type="text" name="adhar" id="adhar" >
+                   <form method="POST" action="/auth/signin">
+                       <label for="adhar_id">Adhar ID</label>
+                       <input type="text" name="adhar_id" id="adhar_id" >
                        <label for="password">Password</label>
                        <input type="password" name="password" id="password" >  
                        {{#if err}} 

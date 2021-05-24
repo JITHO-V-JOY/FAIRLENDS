@@ -5,7 +5,7 @@ var auth = require('../controllers/auth');
 
 /* GET home page. */
 router.get('/', auth.isSignedIn, (req, res)=>{
-    res.render('index')
+    res.render('users/home', {user:req.session.user});
 });
 
 module.exports = router;

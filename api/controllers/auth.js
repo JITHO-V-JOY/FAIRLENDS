@@ -17,6 +17,7 @@ exports.signup = (req, res)=>{
 
 exports.signin = (req, res)=>{
     const {adhar_id, password} = req.body;
+    console.log(req.body);
     User.findOne({adhar_id}, (err, usr)=>{
         if(err){
             return res.status(400).json({
@@ -40,7 +41,8 @@ exports.signin = (req, res)=>{
                     req.session.loggedIn=true;
                     req.session.user=usr;
                     console.log(req.session.user);
-                    return res.render('users/login', {err:false, loggedin:true})
+                    res.redirect('/')
+            
                     /*
                     const token = jwt.sign({_id: usr._id}, process.env.SECRET)
                     res.cookie("token", token, {expire: new Date() + 120});
@@ -50,6 +52,10 @@ exports.signin = (req, res)=>{
                         usr
                     });
                     */
+                }else{
+                    return res.status(400).json({
+                        error:"invalid password!"
+                    })
                 }
 
             })

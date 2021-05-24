@@ -10,19 +10,19 @@ body {
   font-family: 'Poppins';
 }
 
-.navbar {
+.navs {
   background-color: #8282dd;
   padding: 1em;
 }
 
-.navbar .container {
+.navs .head {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   place-content: space-between;
 }
 
-.navbar .logo {
+.navs .logo {
   text-decoration: none;
   font-weight: bold;
   color: black;
@@ -40,7 +40,7 @@ a {
   text-decoration: none;
 }
 
-.navbar nav {
+.navs nav {
   background: none;
   position: relative;
   height: auto;
@@ -48,28 +48,28 @@ a {
   padding: 0;
 }
 
-.navbar nav ul {
+.navs nav ul {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   float: right;
 }
 
-.navbar nav ul.primary-nav {
+.navs nav ul.primary-nav {
   margin: 0;
 }
 
-.navbar nav a {
+.navs nav a {
   color: black;
   font-size: 1em;
   padding: .1em 1em;
 }
 
-.navbar nav li {
+.navs nav li {
   padding: 0 1em;
 }
 
-.navbar nav li.login-btn a {
+.navs nav li.login-btn a {
   color: var(--secondary-color);
   border: 3px solid var(--secondary-color);
   border-radius: 5em;
@@ -77,12 +77,12 @@ a {
   font-weight: bold;
 }
 
-.navbar nav li.login-btn a:hover {
+.navs nav li.login-btn a:hover {
   background: var(--secondary-color);
   color: white;
 }
 
-.navbar nav li.reg-btn a {
+.navs nav li.reg-btn a {
   color: var(--primary-color);
   border: 3px solid var(--primary-color);
   border-radius: 5em;
@@ -90,13 +90,15 @@ a {
   font-weight: bold;
 }
 
-.navbar nav li.reg-btn a:hover {
+.navs nav li.reg-btn a:hover {
   background: var(--primary-color);
   color: white;
 }
 
 section {
-  padding: .1em 2em;
+  padding: .1em 3em;
+  -ms-flex-line-pack: center;
+      align-content: center;
 }
 
 .hero {
@@ -109,12 +111,13 @@ section {
   color: gray;
   letter-spacing: .3em;
   font-size: 3em;
+  margin-top: 1em;
 }
 
 .hero .left-col h1 {
   font-size: 2em;
   line-height: 1.3em;
-  margin-top: .1em;
+  margin-top: 1em;
 }
 
 .hero-img {
@@ -124,6 +127,7 @@ section {
 
 h2 {
   font-size: 2em;
+  margin-top: 1em;
 }
 
 label {
@@ -170,6 +174,17 @@ input[type="submit"] {
   .register-container {
     width: 1080px;
     margin: 0 auto;
+  }
+  .user-section {
+    width: 1080px;
+    margin: 0 auto;
+  }
+  .user-container {
+    width: 1080px;
+    margin: 1em auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
   }
   .hero-img {
     width: 40%;

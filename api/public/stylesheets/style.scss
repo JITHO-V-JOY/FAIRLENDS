@@ -11,11 +11,11 @@ body{
     font-family:'Poppins'; 
 }
 
-.navbar{
+.navs{
     background-color:rgb(130, 130, 221);
     padding: 1em;
 
-    .container{     
+    .head{     
          display: flex;
          place-content: space-between;
     }
@@ -43,7 +43,7 @@ a{
     text-decoration: none;
 }
 
-.navbar nav{
+.navs nav{
     background: none;
     position: relative;
     height: auto;
@@ -96,7 +96,8 @@ a{
 
 
 section{
-    padding:.1em 2em;
+    padding:.1em 3em;
+    align-content: center;
 }
 
 
@@ -109,13 +110,13 @@ section{
             color: gray;
             letter-spacing: .3em;
             font-size: 3em;
-
+            margin-top: 1em;
         }
 
         h1{
             font-size: 2em;
             line-height: 1.3em;
-            margin-top: .1em;
+            margin-top: 1em;
         }
 
     }
@@ -127,6 +128,7 @@ section{
 
 h2 {
     font-size: 2em;
+    margin-top: 1em;
   }
 
 label {
@@ -166,6 +168,8 @@ input[type="submit"] {
       font-style: italic;
   }
 
+
+
 @media only screen and (min-width: 768px){
 
     .login-container {
@@ -173,12 +177,26 @@ input[type="submit"] {
         margin: 0 auto;
        
       }
+
       .register-container {
         width: 1080px;
         margin: 0 auto;
        
       }
-      
+      .user-section{
+        width: 1080px;
+        margin: 0 auto;
+       
+      }
+     
+      .user-container {
+        width: 1080px;
+        margin: 1em auto;
+        display: flex;
+        //place-content: space-between;
+       
+       
+      }
     .hero-img{
         width: 40%;
         height: 40%;
