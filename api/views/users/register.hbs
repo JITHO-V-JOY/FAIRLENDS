@@ -1,0 +1,49 @@
+<div class="navbar">
+           <div class="container">
+               <a class="logo" href="#">FAIRLENDS</a>
+               <nav>
+                   <ul class="primary-nav">
+                        <li class="reg-btn"><a href="login">Login</a></li>
+                   </ul>
+               </nav>
+           </div>
+</div>
+
+ <section class="register-section">
+           <div class="register-container">
+               <div class="contact-left">
+                   <h2>Register</h2>
+                   <form action="">
+                       <label for="adhar">Adhar ID</label>
+                       <input type="text" name="adhar" id="adhar" >
+                        <label for="name">Name</label>
+                       <input type="text" name="name" id="name" >
+                       <label for="role">Role</label>
+                       <select name="name" id="name">
+                            <option value="null">Select Role:</option>
+                            <option value="borrower">Borrower</option>
+                            <option value="lender">Lender</option>
+                        </select>
+                       <label for="address">Address</label>
+                       <textarea name="address" id="address" cols="30" rows="3"></textarea>
+                       <label for="phone">Phone</label>
+                       <input type="text" name="phone" id="phone" > 
+                       <label for="upi_id">UPI ID</label>
+                       <input type="password" name="upi_id" id="upi_id" > 
+                       <label for="state">State</label>
+                       <input type="test" name="state" id="state" > 
+                       <label for="city">City</label>
+                       <input type="text" name="city" id="city" > 
+                        <label for="pincode">Pincode</label>
+                       <input type="text" name="pincode" id="pincode" > 
+                       {{#if err}} 
+                            <p class="error">{err}</p>
+                       {{/if}}
+                       {{#if loggedin}} 
+                            <p class="error">success</p>
+                       {{/if}}
+
+                       <input type="submit" class="login">
+                   </form>
+               </div>
+</section>

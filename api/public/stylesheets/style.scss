@@ -135,7 +135,7 @@ label {
     margin-bottom: .3em;
   } 
 
-input {
+input, select, textarea {
     width: 100%;
     padding: .8em;
     margin-bottom: 1em;
@@ -169,6 +169,11 @@ input[type="submit"] {
 @media only screen and (min-width: 768px){
 
     .login-container {
+        width: 1080px;
+        margin: 0 auto;
+       
+      }
+      .register-container {
         width: 1080px;
         margin: 0 auto;
        
