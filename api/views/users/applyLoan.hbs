@@ -1,0 +1,32 @@
+<div class="navs">
+           <div class="head">
+               <a class="logo" href="#">FAIRLENDS</a>
+               <nav>
+                   <ul class="primary-nav">
+                        <li class="reg-btn"><a href="/auth/signout">Logout</a></li>
+                   </ul>
+               </nav>
+           </div>
+</div>
+
+<section class="user-section">
+        <h2>Apply Loan {{user.name}}</h2>
+           <div class="loan-container">
+                   <form method="POST" action="/users/loan">
+                       <label for="amount">Amount</label>
+                       <input type="number" name="amount" id="amount" >
+                       <label for="tenure">Tenure</label>
+                       <input type="number" name="tenure" id="tenure" >  
+                       <label for="interest">Interest</label>
+                       <input type="number" name="interest" id="interest" >  
+                       {{#if err}} 
+                            <p class="error">{err}</p>
+                       {{/if}}
+                       {{#if loggedin}} 
+                            <p class="error">success</p>
+                       {{/if}}
+
+                       <input type="submit" class="login">
+                   </form>
+               </div>
+</section>

@@ -6,6 +6,11 @@ const {register, invokeTransaction} = require('../controllers/users');
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
+
+router.get('/loan', function(req, res, next) {
+  res.render('users/applyLoan');
+});
+
 router.post('/register', register);
 router.post('/channels/:channelName/chaincodes/:chaincodeName', invokeTransaction)
 
