@@ -168,6 +168,12 @@ input[type="submit"] {
       font-style: italic;
   }
 
+  .special-txt{
+      color: rgb(97, 92, 92);
+      font-weight: bold;
+      font-size: 1.1em;
+  }
+
 
 
 @media only screen and (min-width: 768px){
@@ -187,7 +193,6 @@ input[type="submit"] {
       .loan-container {
         width: 1080px;
         margin: 2em auto;
-       
       }
       .user-section{
         width: 1080px;

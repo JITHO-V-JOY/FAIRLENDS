@@ -166,6 +166,12 @@ input[type="submit"] {
   font-style: italic;
 }
 
+.special-txt {
+  color: #615c5c;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
 @media only screen and (min-width: 768px) {
   .login-container {
     width: 1080px;
