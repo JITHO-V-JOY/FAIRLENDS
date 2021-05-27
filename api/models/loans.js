@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 const {Schema} = mongoose;
 
 const loanSchema = new Schema({
-    count : {type:Number, default:0},
+    borrower : {type: String},
+    lender : {type: String}
 })
 
 const Loan = mongoose.model('Loan', loanSchema);
