@@ -175,6 +175,10 @@ input[type="submit"] {
     width: 1080px;
     margin: 0 auto;
   }
+  .loan-container {
+    width: 1080px;
+    margin: 2em auto;
+  }
   .user-section {
     width: 1080px;
     margin: 0 auto;

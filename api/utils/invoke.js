@@ -62,6 +62,12 @@ const invokeTransaction = async (channelName, chaincodeName, fcn, args, username
                 console.log("result", result)
                 result = {txid: result}
                 break;
+            case "GetLoanById":
+                console.log("invoke transaction...Get Loan");
+                result = await contract.submitTransaction(fcn, args);
+                //console.log("result", result.toString())
+                result = {txid: result.toString()}
+                break;
             case "AddLender":
                 result = await contract.submitTransaction(fcn, args[0], args[1]);
                 console.log(result.toString())

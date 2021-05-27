@@ -1,0 +1,36 @@
+<div class="navs">
+           <div class="head">
+               <a class="logo" href="#">FAIRLENDS</a>
+               <nav>
+                   <ul class="primary-nav">
+                        <li class="reg-btn"><a href="/auth/signout">Logout</a></li>
+                   </ul>
+               </nav>
+           </div>
+</div>
+
+<section class="user-section">
+        <h2>My Loans</h2>
+           <div class="loan-container">
+                  {{#if myLoan}}
+                    {{#each myLoan}}
+                         <div class="card">
+                            <div class="card-header">
+                                Loan ID : {{this.loan_id}}
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">Requested Loan Amount : {{this.amount}}</p>
+                                <p class="card-text">Lender : {{#if this.lender}} "No lender yet accepted" {{else}} {{this.lender}} {{/if}}</p>
+                                <p class="card-text">Approved : {{#if this.approved}} "Not Approved yet" {{else}} Approved {{/if}}</p>
+                                <p class="card-text">Issued date : {{this.issued_date}}</p>
+                                <p class="card-text">Status : {{this.status}}</p>
+
+
+                            </div>
+                        </div>
+                    {{/each}}
+                  {{else}}
+                    <p>No loans yet!</p>
+                  {{/if}}
+               </div>
+</section>
