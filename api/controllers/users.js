@@ -225,6 +225,43 @@ exports.getLoansForLender = async (req, res, next)=>{
 }
 
 
+
+
+exports.acceptLoan = async (req, res)=>{
+    if(req.session.user){
+        console.log(req.profile);
+        let channelName = "mychannel";
+        let chaincodeName = "loan";
+        let fcn = "AddLender";
+        let args = new Array();
+        args.push(req.session.user.adhar_id);
+        args.push(String(req.profile._id));
+       
+
+        let userName = req.session.user.adhar_id;
+        let userOrg = (req.session.user.role == "borrower")? "Org1":"Org2";
+        let trasient = "";
+        invoke.invokeTransaction(channelName, chaincodeName, fcn, args, userName, userOrg, trasient).then((response)=>{
+        
+            console.log(response);
+            res.redirect('/');
+        }).catch((e)=>{
+            console.log(e)
+            res.status(400).json({
+                success: false,
+                message: e
+            })
+        });
+
+    }else{
+        return res.status(400).json({
+            error:"not logged in"
+        })
+    }
+}
+
+
+
 exports.invokeTransaction = (req, res) => {
     console.log("*********************invoke function************************")
     const chaincodeName = req.chaincodeName;
