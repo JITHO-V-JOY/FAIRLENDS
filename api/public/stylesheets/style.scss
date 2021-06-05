@@ -12,7 +12,7 @@ body{
 }
 
 .navs{
-    background-color:rgb(130, 130, 221);
+    background-color:rgb(23, 23, 24);
     padding: 1em;
 
     .head{     
@@ -23,9 +23,18 @@ body{
     .logo{
         text-decoration: none;
         font-weight: bold;
-        color: black;
+        color: rgb(241, 232, 232);
         font-size: 1.2em;
         letter-spacing: .1em;
+
+    }  
+    .logoa{
+        text-decoration: none;
+        font-weight: bold;
+        color: rgb(241, 232, 232);
+        font-size: 1.2em;
+        letter-spacing: .1em;
+        padding-left: 1em;
 
     }  
 }   
@@ -96,7 +105,7 @@ a{
 
 
 section{
-    padding:.1em 3em;
+    padding:0em 3em;
     align-content: center;
 }
 
@@ -150,7 +159,7 @@ input, select, textarea {
   
 
 input[type="submit"] {
-    background-color: rgb(130, 130, 221);
+    background-color: rgb(12, 12, 12);
     color: white;
     font-weight: bold;
     font-size: 1.3em;

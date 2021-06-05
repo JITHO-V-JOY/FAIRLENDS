@@ -11,7 +11,7 @@ body {
 }
 
 .navs {
-  background-color: #8282dd;
+  background-color: #171718;
   padding: 1em;
 }
 
@@ -25,9 +25,18 @@ body {
 .navs .logo {
   text-decoration: none;
   font-weight: bold;
-  color: black;
+  color: #f1e8e8;
   font-size: 1.2em;
   letter-spacing: .1em;
+}
+
+.navs .logoa {
+  text-decoration: none;
+  font-weight: bold;
+  color: #f1e8e8;
+  font-size: 1.2em;
+  letter-spacing: .1em;
+  padding-left: 1em;
 }
 
 ul {
@@ -96,7 +105,7 @@ a {
 }
 
 section {
-  padding: .1em 3em;
+  padding: 0em 3em;
   -ms-flex-line-pack: center;
       align-content: center;
 }
@@ -148,7 +157,7 @@ input, select, textarea {
 }
 
 input[type="submit"] {
-  background-color: #8282dd;
+  background-color: #0c0c0c;
   color: white;
   font-weight: bold;
   font-size: 1.3em;

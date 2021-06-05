@@ -11,6 +11,7 @@ var session = require('express-session');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var authRouter = require('./routes/auth');
+var adminsRouter = require('./routes/admins');
 
 var app = express();
 var mongoose = require('mongoose');
@@ -40,6 +41,7 @@ app.use(session({secret:process.env.SECRET,  resave: true,
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/auth', authRouter);
+app.use('/admin', adminsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

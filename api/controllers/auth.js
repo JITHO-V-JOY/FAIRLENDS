@@ -19,7 +19,7 @@ exports.signup = (req, res, next)=>{
     });
 
     req.userName = req.body.adhar_id;
-    req.userOrg = (role === "lender") ? "Org2": "Org1" ;
+    req.userOrg = (role === "admin") ? "Org3": (role === "lender") ? "Org2": "Org1";
     req.args = arg;
     req.chaincodeName = "fairlends";
     req.channelName = "mychannel";
