@@ -140,3 +140,23 @@ exports.getIssuer = async (req, res, next)=>{
     }
               
 }
+
+exports.getLender = async (req, res, next)=>{
+    if(req.session.user){
+       
+        let userName = req.session.user.adhar_id;
+        let userOrg = (req.session.user.role == "borrower")? "Org1": (req.session.user.role == "admin")? "Org3": "Org2";
+        let trasient = "";
+
+        let response = await invoke.invokeTransaction("mychannel", "fairlends", "QueryUser", String(req.profile.lender), userName, userOrg, trasient);
+        let temp  = JSON.parse(response.result.txid)   
+        res.lender = temp;;
+        console.log("response ##############", res.lender);
+        next();       
+    }else{
+        return res.status(400).json({
+            error:"not logged in"
+        })
+    }
+              
+}

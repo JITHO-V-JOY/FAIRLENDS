@@ -1,0 +1,95 @@
+<section class="user-section">
+       
+           <div class="loan-container">
+                  {{#if loanRequest}}
+                        <h4>Loan Details</h4>
+                         <div class="media" style="margin-top: 2em; margin-bottom: 4em;">
+                            <div class="media-body">
+                                <h5 class="mt-0"><span class="special-txt">Loan ID : </span>{{loanRequest.loan_id}}</h5>
+                                <p class="card-text"><span class="special-txt">Issuer : </span> {{loanRequest.issuer}}</p>
+                                <p class="card-text"><span class="special-txt">Lender : </span> {{loanRequest.lender}}</p>
+                                <p class="card-text"><span class="special-txt">Requested Loan Amount : </span>  <i class="fa fa-rupee"></i>{{loanRequest.amount}}</p>
+                                <p class="card-text"><span class="special-txt">Loan Tenure : </span> {{loanRequest.tenure}} months</p>
+                                <p class="card-text"><span class="special-txt">Affordable Interest : </span>{{loanRequest.interest}}%</p>
+                                <p class="card-text"><span class="special-txt">Issued date : </span>{{loanRequest.issued_date}}</p>
+                                <p class="card-text"><span class="special-txt">Status : </span>{{loanRequest.status}}</p>
+
+                               
+                            </div>
+                          
+                        </div>
+                          <hr>
+                  {{else}}
+                    <p>No loan</p>
+                  {{/if}}
+
+                   {{#if Issuer}}
+                        <h4>Issuer Details</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="media" style="margin-top: 2em; margin-bottom: 4em;">
+                                    <div class="media-body">
+                                        <h5 class="mt-0"><span class="special-txt">Adhar ID : </span>{{Issuer.adhar_id}}</h5>
+                                        <p class="card-text"><span class="special-txt">Name : </span>{{Issuer.name}}</p>
+                                        <p class="card-text"><span class="special-txt">Role : </span>{{Issuer.role}}</p>
+                                        <p class="card-text"><span class="special-txt">Address : </span> {{Issuer.address}}</p>
+                                                                                <p class="card-text"><span class="special-txt">Phone : </span>{{Issuer.phone}}%</p>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="media" style="margin-top: 2em; margin-bottom: 4em;">
+                                    <div class="media-body">
+                                        <p class="card-text"><span class="special-txt">UPI ID: </span>{{Issuer.upi_id}}</p>
+                                        <p class="card-text"><span class="special-txt">State : </span>{{Issuer.state}}</p>
+                                        <p class="card-text"><span class="special-txt">City : </span>{{Issuer.city}}</p>
+                                        <p class="card-text"><span class="special-txt">Pincode : </span>{{Issuer.pincode}}</p>
+                                    </div>
+                                </div>
+                               
+                            </div>
+
+                        </div>
+                        
+                          <hr>
+                  {{else}}
+                    <p>No Issuer</p>
+                  {{/if}}
+               </div>
+
+                {{#if Lender}}
+                        <h4>Lender Details</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="media" style="margin-top: 2em; margin-bottom: 4em;">
+                                    <div class="media-body">
+                                        <h5 class="mt-0"><span class="special-txt">Adhar ID : </span>{{Lender.adhar_id}}</h5>
+                                        <p class="card-text"><span class="special-txt">Name : </span>{{Lender.name}}</p>
+                                        <p class="card-text"><span class="special-txt">Role : </span>{{Lender.role}}</p>
+                                        <p class="card-text"><span class="special-txt">Address : </span> {{Lender.address}}</p>
+                                                                                <p class="card-text"><span class="special-txt">Phone : </span>{{Lender.phone}}%</p>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="media" style="margin-top: 2em; margin-bottom: 4em;">
+                                    <div class="media-body">
+                                        <p class="card-text"><span class="special-txt">UPI ID: </span>{{Lender.upi_id}}</p>
+                                        <p class="card-text"><span class="special-txt">State : </span>{{Lender.state}}</p>
+                                        <p class="card-text"><span class="special-txt">City : </span>{{Lender.city}}</p>
+                                        <p class="card-text"><span class="special-txt">Pincode : </span>{{Lender.pincode}}</p>
+                                    </div>
+                                </div>
+                               
+                            </div>
+
+                        </div>
+                        
+                          <hr>
+                  {{else}}
+                    <p>No Issuer</p>
+                  {{/if}}
+               </div>
+</section>
