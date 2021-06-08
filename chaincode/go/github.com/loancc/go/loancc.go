@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"time"
 
 	"github.com/hyperledger/fabric-contract-api-go/contractapi"
 	"github.com/hyperledger/fabric/common/flogging"
@@ -110,6 +111,20 @@ func (s *LoanContract) ApproveLoan(ctx contractapi.TransactionContextInterface, 
 
 	loan.Approved = true
 	loan.Status = "Active"
+	txntmsp, err := ctx.GetStub().GetTxTimestamp()
+	if err != nil {
+		return "", fmt.Errorf("Failed while geting timestamp. %s", err.Error())
+	}
+	loan.ApprovedDate = time.Unix(txntmsp.Seconds, int64(txntmsp.Nanos)).String()
+	loan.EndDate = time.Unix(txntmsp.Seconds, int64(txntmsp.Nanos)).AddDate(0, loan.Tenure, 0).String()
+
+	for i := 1; i <= loan.Tenure; i++ {
+		loan.Emi = append(loan.Emi, Repayment{time.Unix(txntmsp.Seconds, int64(txntmsp.Nanos)).AddDate(0, i, 0).String(), false})
+	}
+
+	for i := 1; i <= loan.Tenure; i++ {
+		loan.Tax = append(loan.Tax, Repayment{time.Unix(txntmsp.Seconds, int64(txntmsp.Nanos)).AddDate(0, i, 0).String(), false})
+	}
 
 	loanAsBytes, err = json.Marshal(loan)
 	if err != nil {
@@ -151,8 +166,8 @@ func (s *LoanContract) Redeem(ctx contractapi.TransactionContextInterface, loan_
 
 // ******************************************** pay emi *************************************************************
 
-func (s *LoanContract) PayEMI(ctx contractapi.TransactionContextInterface, date string, loan_id string) (string, error) {
-	if len(date) == 0 || len(loan_id) == 0 {
+func (s *LoanContract) PayEMI(ctx contractapi.TransactionContextInterface, loan_id string) (string, error) {
+	if len(loan_id) == 0 {
 		return "", fmt.Errorf("Please pass the correct date")
 	}
 
@@ -169,9 +184,24 @@ func (s *LoanContract) PayEMI(ctx contractapi.TransactionContextInterface, date 
 	loan := new(Loan)
 	_ = json.Unmarshal(loanAsBytes, loan)
 
+	txntmsp, err := ctx.GetStub().GetTxTimestamp()
+	if err != nil {
+		return "", fmt.Errorf("Failed while geting timestamp. %s", err.Error())
+	}
+
 	for i := 0; i < len(loan.Emi); i++ {
-		if loan.Emi[i].Date == date {
+		payDate, err := time.Parse("2006-01-02 15:04:05", loan.Emi[i].Date[:len(loan.Emi[i].Date)-20])
+		fmt.Println("pay date", payDate)
+		fmt.Println("checking before", payDate.Before(time.Unix(txntmsp.Seconds, int64(txntmsp.Nanos))))
+		fmt.Println("checking After", payDate.AddDate(0, -1, 0).After(time.Unix(txntmsp.Seconds, int64(txntmsp.Nanos))))
+
+		if err != nil {
+			return "", fmt.Errorf("Failed while parsing date. %s", err.Error())
+		}
+
+		if payDate.Equal(time.Unix(txntmsp.Seconds, int64(txntmsp.Nanos))) || (payDate.After(time.Unix(txntmsp.Seconds, int64(txntmsp.Nanos))) && payDate.AddDate(0, -1, 0).Before(time.Unix(txntmsp.Seconds, int64(txntmsp.Nanos)))) {
 			loan.Emi[i].Payment = true
+			fmt.Println("loan", loan.Emi[i])
 			break
 		}
 	}
@@ -186,8 +216,8 @@ func (s *LoanContract) PayEMI(ctx contractapi.TransactionContextInterface, date 
 
 // ******************************************** pay tax *************************************************************
 
-func (s *LoanContract) PayTax(ctx contractapi.TransactionContextInterface, date string, loan_id string) (string, error) {
-	if len(date) == 0 || len(loan_id) == 0 {
+func (s *LoanContract) PayTax(ctx contractapi.TransactionContextInterface, loan_id string) (string, error) {
+	if len(loan_id) == 0 {
 		return "", fmt.Errorf("Please pass the correct date")
 	}
 
@@ -204,8 +234,17 @@ func (s *LoanContract) PayTax(ctx contractapi.TransactionContextInterface, date 
 	loan := new(Loan)
 	_ = json.Unmarshal(loanAsBytes, loan)
 
+	txntmsp, err := ctx.GetStub().GetTxTimestamp()
+	if err != nil {
+		return "", fmt.Errorf("Failed while geting timestamp. %s", err.Error())
+	}
+
 	for i := 0; i < len(loan.Tax); i++ {
-		if loan.Tax[i].Date == date {
+		payDate, err := time.Parse("2006-01-02 15:04:05", loan.Tax[i].Date[:len(loan.Tax[i].Date)-20])
+		if err != nil {
+			return "", fmt.Errorf("Failed while parsing date. %s", err.Error())
+		}
+		if payDate.Equal(time.Unix(txntmsp.Seconds, int64(txntmsp.Nanos))) || (payDate.After(time.Unix(txntmsp.Seconds, int64(txntmsp.Nanos))) && payDate.AddDate(0, -1, 0).Before(time.Unix(txntmsp.Seconds, int64(txntmsp.Nanos)))) {
 			loan.Tax[i].Payment = true
 			break
 		}
