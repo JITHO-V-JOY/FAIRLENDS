@@ -18,6 +18,8 @@
                             </div>
                           
                         </div>
+                         <a href="/admin/approve/{{loanRequest.loan_id}}" class="btn btn-primary">Approve</a>
+
                           <hr>
                   {{else}}
                     <p>No loan</p>
@@ -33,7 +35,7 @@
                                         <p class="card-text"><span class="special-txt">Name : </span>{{Issuer.name}}</p>
                                         <p class="card-text"><span class="special-txt">Role : </span>{{Issuer.role}}</p>
                                         <p class="card-text"><span class="special-txt">Address : </span> {{Issuer.address}}</p>
-                                                                                <p class="card-text"><span class="special-txt">Phone : </span>{{Issuer.phone}}%</p>
+                                        <p class="card-text"><span class="special-txt">Phone : </span>{{Issuer.phone}}</p>
 
                                     </div>
                                 </div>
@@ -68,7 +70,7 @@
                                         <p class="card-text"><span class="special-txt">Name : </span>{{Lender.name}}</p>
                                         <p class="card-text"><span class="special-txt">Role : </span>{{Lender.role}}</p>
                                         <p class="card-text"><span class="special-txt">Address : </span> {{Lender.address}}</p>
-                                                                                <p class="card-text"><span class="special-txt">Phone : </span>{{Lender.phone}}%</p>
+                                        <p class="card-text"><span class="special-txt">Phone : </span>{{Lender.phone}}</p>
 
                                     </div>
                                 </div>
@@ -92,4 +94,5 @@
                     <p>No Issuer</p>
                   {{/if}}
                </div>
+
 </section>

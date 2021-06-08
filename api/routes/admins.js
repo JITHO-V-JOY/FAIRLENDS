@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-const {getLoansForAdmin, getAcceptedLoansForAdmin, getLoan, getIssuer, getLender} = require('../controllers/admin');
+const {getLoansForAdmin, getAcceptedLoansForAdmin, getLoan, getIssuer, getLender, approveLoan} = require('../controllers/admin');
 const {getLoanById} = require('../controllers/loan');
 
 router.param("loan_id", getLoanById)
@@ -28,5 +28,7 @@ router.get('/view/accepted_loan/:loan_id',getLoan, getIssuer, getLender, functio
     res.render('admin/viewAcceptedLoan', {loanRequest: res.loan, Issuer: res.issuer, Lender: res.lender});
 
 });
+
+router.get('/approve/:loan_id', approveLoan)
 
 module.exports = router;

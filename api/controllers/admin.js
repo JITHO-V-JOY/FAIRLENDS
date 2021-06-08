@@ -160,3 +160,19 @@ exports.getLender = async (req, res, next)=>{
     }
               
 }
+
+exports.approveLoan = async(req, res, next)=>{
+    if(req.session.user.role === "admin"){
+        let userName = req.session.user.adhar_id;
+        let userOrg = (req.session.user.role == "borrower")? "Org1": (req.session.user.role == "admin")? "Org3": "Org2";
+        let trasient = "";
+
+        let response = await invoke.invokeTransaction("mychannel", "loan", "ApproveLoan", String(req.profile._id), userName, userOrg, trasient);
+        console.log("response ##############", JSON.parse(response.result.txid));
+        res.redirect('/admin/accepted_loans');
+    }else{
+        return res.status(400).json({
+            error:"not logged in"
+        })
+    }
+}
