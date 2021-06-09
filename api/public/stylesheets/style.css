@@ -6,7 +6,7 @@
 
 body {
   background: #f7f7f7;
-  margin: 2em;
+  margin: 1em;
   font-family: 'Poppins';
 }
 
@@ -105,7 +105,7 @@ a {
 }
 
 section {
-  padding: 0em 3em;
+  padding: 0em 2em;
   -ms-flex-line-pack: center;
       align-content: center;
 }
@@ -187,6 +187,10 @@ input[type="submit"] {
   font-size: 1.1em;
 }
 
+a:active {
+  background-color: blue;
+}
+
 @media only screen and (min-width: 768px) {
   .login-container {
     width: 1080px;
@@ -214,6 +218,42 @@ input[type="submit"] {
   .hero-img {
     width: 40%;
     height: 40%;
+  }
+  .loan {
+    border: #202020 1px solid;
+    padding: 3em;
+    border-radius: 2em;
+    background-color: #f6f9fa;
+    -webkit-box-shadow: #c9cdcf;
+            box-shadow: #c9cdcf;
+  }
+  .loan p {
+    color: black;
+  }
+  .loan a {
+    color: black;
+  }
+  .back a {
+    background-color: blue;
+    padding: 10px;
+    color: whitesmoke;
+    border-radius: 0.5em;
+    text-decoration: none;
+  }
+  .accept a {
+    background-color: #46e627;
+    padding: 10px;
+    color: whitesmoke;
+    border-radius: 0.5em;
+    text-decoration: none;
+  }
+  .frame {
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+  }
+  body::-webkit-scrollbar {
+    display: none;
   }
 }
 /*# sourceMappingURL=style.css.map */

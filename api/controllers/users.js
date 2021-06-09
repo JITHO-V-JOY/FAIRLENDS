@@ -355,3 +355,43 @@ exports.invokeTransaction = (req, res) => {
         })
     })
 }
+
+exports.getLoan = async (req, res, next)=>{
+    if(req.session.user){
+       
+        let userName = req.session.user.adhar_id;
+        let userOrg = (req.session.user.role == "borrower")? "Org1": (req.session.user.role == "admin")? "Org3": "Org2";
+        let trasient = "";
+
+        let response = await invoke.invokeTransaction("mychannel", "loan", "GetLoanById", String(req.profile._id), userName, userOrg, trasient);
+        let temp  = JSON.parse(response.result.txid)   
+        res.loan = temp;;
+        console.log("response ##############", res.loan);
+        next();       
+    }else{
+        return res.status(400).json({
+            error:"not logged in"
+        })
+    }
+              
+}
+
+exports.getIssuer = async (req, res, next)=>{
+    if(req.session.user){
+       
+        let userName = req.session.user.adhar_id;
+        let userOrg = (req.session.user.role == "borrower")? "Org1": (req.session.user.role == "admin")? "Org3": "Org2";
+        let trasient = "";
+
+        let response = await invoke.invokeTransaction("mychannel", "fairlends", "QueryUser", String(req.profile.borrower), userName, userOrg, trasient);
+        let temp  = JSON.parse(response.result.txid)   
+        res.issuer = temp;;
+        console.log("response ##############", res.issuer);
+        next();       
+    }else{
+        return res.status(400).json({
+            error:"not logged in"
+        })
+    }
+              
+}

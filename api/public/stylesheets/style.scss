@@ -7,7 +7,7 @@
 
 body{
     background: #f7f7f7;
-    margin: 2em;
+    margin: 1em;
     font-family:'Poppins'; 
 }
 
@@ -105,7 +105,7 @@ a{
 
 
 section{
-    padding:0em 3em;
+    padding:0em 2em;
     align-content: center;
 }
 
@@ -189,6 +189,11 @@ input[type="submit"] {
       font-size: 1.1em;
   }
 
+  a:active{
+    background-color: blue;
+}
+
+
 
 
 @media only screen and (min-width: 768px){
@@ -228,6 +233,57 @@ input[type="submit"] {
         height: 40%;
     }
 
+  
+    .loan{
+        border: rgb(32, 32, 32) 1px solid;
+        padding: 3em;
+        border-radius: 2em;
+        background-color: rgb(246, 249, 250);
+        box-shadow: #c9cdcf;
+
+        
+        p{
+            color: black;
+        }
+        a{
+            color: black;
+        }
+    }
+
+  .back{
+      a{
+          background-color: blue;
+          padding: 10px;
+          color: whitesmoke;
+          border-radius: 0.5em;
+          text-decoration: none;
+      }
+  }
+
+  .accept{
+    a{
+        background-color: rgb(70, 230, 39);
+        padding: 10px;
+        color: whitesmoke;
+        border-radius: 0.5em;
+        text-decoration: none;
+    }
+}
+    .frame{
+        margin: 0;
+        padding: 0;
+        max-width: 100%;
+       
+        
+    }
+
+   
+    
+
+   body::-webkit-scrollbar{
+       display: none;
+   }
+    
 
 
 }

@@ -1,8 +1,20 @@
+<div class="navs">
+           <div class="head">
+               <a class="logo" href="#">FAIRLENDS</a>
+               <nav>
+                   <ul class="primary-nav">
+                        <li class="reg-btn"><a href="/auth/signout">Logout</a></li>
+                   </ul>
+               </nav>
+           </div>
+</div>
+
+
 <section class="user-section">
        
            <div class="loan-container">
                <div class="back">
-                   <a href="/admin/loan_requests"> Back</a>
+                   <a href="/users/lender/loans"> Back</a>
                </div>
                   {{#if loanRequest}}
                          <div class="card" style="margin-top: 2em; margin-bottom: 4em;">
@@ -20,12 +32,20 @@
 
                                
                             </div>
+                            
                           
             </div>
                           
                   {{else}}
                     <p>No loan</p>
                   {{/if}}
+
+                    {{#if loanRequest}}
+                   <div class="accept">
+                       <a href="/users/lender/loans/{{this.loan_id}}"> Approve</a>
+                   </div>
+                     {{else}}
+                      {{/if}}
 
                    {{#if Issuer}}
                        
@@ -54,11 +74,15 @@
 
 
    
-
+            
                             </div>
+                           
+
                         
                   {{else}}
                     <p>No Issuer</p>
                   {{/if}}
+
+                
                
 </section>
