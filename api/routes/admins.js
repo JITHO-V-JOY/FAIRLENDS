@@ -34,6 +34,11 @@ router.get('/view/accepted_loan/:loan_id',getLoan, getIssuer, getLender, functio
 
 });
 
+router.get('/view/approved_loan/:loan_id',getLoan, getIssuer, getLender, function(req, res) {
+    res.render('admin/viewApprovedLoan', {loanRequest: res.loan, Issuer: res.issuer, Lender: res.lender});
+
+});
+
 router.get('/approve/:loan_id', approveLoan)
 
 module.exports = router;

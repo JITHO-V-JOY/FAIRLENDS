@@ -1,0 +1,193 @@
+<section class="user-section">
+       
+           <div class="loan-container">
+                 <div class="back">
+                   <a href="/admin/approved_loans"> Back</a>
+               </div>
+                  {{#if loanRequest}}
+                       
+                         <div class="card" style="margin-top: 2em; margin-bottom: 4em;">
+                             <div class="card-header">
+                                <p class="mt-0"><span class="special-txt">Loan ID : </span>{{loanRequest.loan_id}}</p>
+                             </div>
+                            <div class="card-body">
+                                <p class="card-text"><span class="special-txt">Issuer : </span> {{loanRequest.issuer}}</p>
+                                <p class="card-text"><span class="special-txt">Lender : </span> {{loanRequest.lender}}</p>
+                                <p class="card-text"><span class="special-txt">Requested Loan Amount : </span>  <i class="fa fa-rupee"></i>{{loanRequest.amount}}</p>
+                                <p class="card-text"><span class="special-txt">Loan Tenure : </span> {{loanRequest.tenure}} months</p>
+                                <p class="card-text"><span class="special-txt">Affordable Interest : </span>{{loanRequest.interest}}%</p>
+                                <p class="card-text"><span class="special-txt">Issued date : </span>{{loanRequest.issued_date}}</p>
+                                <p class="card-text"><span class="special-txt">Status : </span>{{loanRequest.status}}</p>
+
+                               
+                            </div>
+                          
+                        </div>
+                  {{else}}
+                    <p>No loan</p>
+                  {{/if}}
+         
+                <div class="row">
+                   {{#if Issuer}}
+                        
+                                <div class="col-md-6">
+                                <h4>Issuer</h4>
+                                <div class="card" style="margin-top: 2em; margin-bottom: 4em;">
+                                     <div class="card-header">
+                                          <p class="mt-0"><span class="special-txt"><span class="special-txt">Adhar ID : </span>{{Issuer.adhar_id}}</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text"><span class="special-txt">Name : </span>{{Issuer.name}}</p>
+                                        <p class="card-text"><span class="special-txt">Role : </span>{{Issuer.role}}</p>
+                                        <p class="card-text"><span class="special-txt">Address : </span> {{Issuer.address}}</p>
+                                        <p class="card-text"><span class="special-txt">Phone : </span>{{Issuer.phone}}</p>
+                                        <p class="card-text"><span class="special-txt">UPI ID: </span>{{Issuer.upi_id}}</p>
+                                        <p class="card-text"><span class="special-txt">State : </span>{{Issuer.state}}</p>
+                                        <p class="card-text"><span class="special-txt">City : </span>{{Issuer.city}}</p>
+                                        <p class="card-text"><span class="special-txt">Pincode : </span>{{Issuer.pincode}}</p>
+                                    </div>
+                                </div>
+                                </div>
+                            
+                           
+                  {{else}}
+                    <p>No Issuer</p>
+                  {{/if}}
+
+                {{#if Lender}}
+                            <div class="col-md-6">
+                                <h4>Lender</h4>
+                                <div class="card" style="margin-top: 2em; margin-bottom: 4em;">
+                                     <div class="card-header">
+                                          <p class="mt-0"><span class="special-txt"><span class="special-txt">Adhar ID : </span>{{Lender.adhar_id}}</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text"><span class="special-txt">Name : </span>{{Lender.name}}</p>
+                                        <p class="card-text"><span class="special-txt">Role : </span>{{Lender.role}}</p>
+                                        <p class="card-text"><span class="special-txt">Address : </span> {{Lender.address}}</p>
+                                        <p class="card-text"><span class="special-txt">Phone : </span>{{Lender.phone}}</p>
+                                        <p class="card-text"><span class="special-txt">UPI ID: </span>{{Lender.upi_id}}</p>
+                                        <p class="card-text"><span class="special-txt">State : </span>{{Lender.state}}</p>
+                                        <p class="card-text"><span class="special-txt">City : </span>{{Lender.city}}</p>
+                                        <p class="card-text"><span class="special-txt">Pincode : </span>{{Lender.pincode}}</p>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                       
+                          <hr>
+                  {{else}}
+                    <p>No Issuer</p>
+                  {{/if}}
+               </div>
+
+             {{#if loanRequest}}
+             <div class="row">
+                        
+                                <div class="col-md-6">
+                                <div class="card" style="margin-top: 2em; margin-bottom: 4em;">
+                                     <div class="card-header">
+                                              <h4>Schedule for paying EMI</h4>
+                                    </div>
+                                    <div class="card-body">
+                                       <table>
+                                            <caption>Tenure {{loanRequest.tenure}}</caption>
+                                            <tr>
+                                                <th>
+                                                    Due Date
+                                                </th>
+                                                <th>
+                                                    Amount
+                                                </th>
+                                                <th>
+                                                    Status
+                                                </th>
+                                            </tr>
+
+                                            {{#each loanRequest.emi}}
+                                                <tr>
+                                                    
+                                                    <td>
+                                                        {{this.date}}
+                                                    </td>
+                                                    <td>
+                                                        2045
+                                                    </td>
+                                                    <td>
+                                                        {{#if this.payment}}
+                                                            Payed
+                                                      
+                                                        {{else}}
+                                                            Not Payed
+                                                    
+                                                         {{/if}}
+                                                    </td>
+                                                </tr>
+                                            {{/each}}
+                                        </table>
+                                    </div>
+                                </div>
+                                </div>
+                            
+                            <div class="col-md-6">
+                                <div class="card" style="margin-top: 2em; margin-bottom: 4em;">
+                                     <div class="card-header">
+                                             <h4>Schedule for paying Tax</h4>
+                                    </div>
+                                    <div class="card-body">
+                                         <table>
+                                         <caption>Tenure {{loanRequest.tenure}}</caption>
+
+                                            <tr>
+                                                <th>
+                                                    Due Date
+                                                </th>
+                                                <th>
+                                                    Amount
+                                                </th>
+                                                <th>
+                                                    Status
+                                                </th>
+                                            </tr>
+
+                                            {{#each loanRequest.tax}}
+                                                <tr>
+                                                    
+                                                    <td>
+                                                        {{this.date}}
+                                                    </td>
+                                                    <td>
+                                                        2045
+                                                    </td>
+                                                    <td>
+                                                        {{#if this.payment}}
+                                                            Payed
+                                                      
+                                                        {{else}}
+                                                            Not Payed
+                                                    
+                                                         {{/if}}
+                                                    </td>
+                                                </tr>
+                                            {{/each}}
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                       
+                          <hr>
+
+                 </div>
+                  {{else}}
+                    <p>No Loan</p>
+                  {{/if}}
+              
+
+
+
+
+            </div>
+
+</section>

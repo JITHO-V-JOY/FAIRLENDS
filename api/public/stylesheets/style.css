@@ -196,6 +196,14 @@ a:active {
     width: 1080px;
     margin: 0 auto;
   }
+  table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    background-color: #c9cdcf;
+  }
+  th, td {
+    padding: 7px;
+  }
   .register-container {
     width: 1080px;
     margin: 0 auto;
