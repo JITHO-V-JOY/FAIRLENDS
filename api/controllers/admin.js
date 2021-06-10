@@ -168,7 +168,7 @@ exports.approveLoan = async(req, res, next)=>{
         let trasient = "";
 
         let response = await invoke.invokeTransaction("mychannel", "loan", "ApproveLoan", String(req.profile._id), userName, userOrg, trasient);
-        console.log("response ##############", JSON.parse(response.result.txid));
+        console.log("response ##############", response.result.txid);
         res.redirect('/admin/accepted_loans');
     }else{
         return res.status(400).json({
