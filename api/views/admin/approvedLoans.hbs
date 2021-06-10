@@ -1,0 +1,31 @@
+<section class="user-section">
+       
+           <div class="loan-container">
+                  {{#if loanRequests}}
+                    {{#each loanRequests}}
+                    <a href="/admin/view/approved_loan/{{this.loan_id}}" style="text-decoration: none;">
+
+                         <div class="media loan" style="margin-top: 2em; margin-bottom: 4em; max-width: 1000px">
+                             <div class="align-self-start mr-3">
+                                <img src="http://localhost:3000/images/human.png"  width="150px" height="130px" alt="Generic placeholder image">
+                                <p class="card-text"><span class="special-txt">issuer : </span> {{this.issuer}}</p>
+
+                             </div>
+                            <div class="media-body">
+                                <h5 class="mt-0"><span class="special-txt">Loan ID : </span>{{this.loan_id}}</h5>
+                                <p class="card-text"><span class="special-txt">Requested Loan Amount : </span>  <i class="fa fa-rupee"></i>{{this.amount}}</p>
+                                <p class="card-text"><span class="special-txt">Loan Tenure : </span> {{this.tenure}} months</p>
+                                <p class="card-text"><span class="special-txt">Affordable Interest : </span>{{this.interest}}%</p>
+                                <p class="card-text"><span class="special-txt">Lender : </span> {{this.lender}}</p>
+                                <p class="card-text"><span class="special-txt">Issued date : </span>{{this.issued_date}}</p>
+
+
+                            </div>
+                        </div>
+                      </a>
+                    {{/each}}
+                  {{else}}
+                    <p>No loans yet!</p>
+                  {{/if}}
+               </div>
+</section>
