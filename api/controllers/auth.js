@@ -2,6 +2,39 @@ const User = require('../models/users');
 const jwt = require('jsonwebtoken');
 const expressjwt = require('express-jwt');
 
+exports.fetchUsers = (req, res, next)=>{
+    User.find({role: "borrower"}, (err, users)=>{
+        if(err){
+            return res.status(400).json({
+                error: "error occured"
+            })
+        }
+        if(!users){
+           req.borrowers = 0;
+        }
+        else if(users){
+            req.borrowers = users.length
+        }
+    })
+
+    User.find({role: "lender"}, (err, users)=>{
+        if(err){
+            return res.status(400).json({
+                error: "error occured"
+            })
+        }
+        if(!users){
+           req.lenders = 0;
+    
+        }
+        else if(users){
+            req.lenders = users.length
+        }
+    })
+    console.log(req.borrowers, req.lenders);
+    next();
+}
+
 exports.signup = (req, res, next)=>{
     const {adhar_id, name, role, password} = req.body;
     const user = new User({adhar_id, name, role, password}); // creating user object and populate with the request object..
