@@ -2,7 +2,7 @@
 
 :root{
     --primary-color: #3a3c3d;
-    --secondary-color:#2f66db;
+    --secondary-color:#1955d8;
 }
 
 *{
@@ -135,6 +135,103 @@ main{
     border-radius: 2px;
 }
 
+.card{
+    background: #ffffff;
+    color: var(--secondary-color);
+    padding: 2rem;
+    border-radius: 2px;
+    margin: 1rem 0rem;
+}
+
 .card-single div:last-child span{
     font-size: 3rem;
+}
+
+form{
+    display: block  ;
+}
+
+.apply-loan label{
+    display: block;
+    font-size: 1.2em;
+    margin-bottom: .3em;
+    font-family: 'Poppins' sans-serif;
+    font-weight: 600;
+    
+}
+
+.apply-loan{
+    width: 50%;
+
+}
+
+main{
+    display: flex;
+    justify-content: center;
+}
+
+
+.slidecontainer {
+    width: 100%;
+    height: 45px;
+  }
+  
+  .slider {
+    -webkit-appearance: none;
+    height: 15px;
+    border-radius: 5px;
+    border: none;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+  }
+  
+  .slider:hover {
+    opacity: 1;
+  }
+  
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: var(--secondary-color);
+    cursor: pointer;
+  }
+  
+  .slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #04AA6D;
+    cursor: pointer;
+  }
+
+  input {
+    width: 100%;
+    padding: .8em;
+    margin-bottom: 1em;
+    border: 1px solid gray;
+    border-radius: .3em;
+    box-sizing: border-box;
+
+}
+
+input[type="submit"]{
+    background: var(--secondary-color);
+    color: white;
+    font-weight: bold;
+    font-size: 1.3em;
+    border: none;
+    width: 100%;
+    display: inline-block;
+    margin-bottom: 1em;
+    margin-top: 1em;
+    border-radius: 5px;
+    padding: .4em 2em;
+    cursor: pointer;
+
 }

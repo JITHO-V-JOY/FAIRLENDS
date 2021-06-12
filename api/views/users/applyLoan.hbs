@@ -1,32 +1,120 @@
-<div class="navs">
-           <div class="head">
-               <a class="logo" href="#">FAIRLENDS</a>
-               <nav>
-                   <ul class="primary-nav">
-                        <li class="reg-btn"><a href="/auth/signout">Logout</a></li>
-                   </ul>
-               </nav>
+<div class="sidebar">
+           <div class="sidebar-brand">
+               <h1>
+                    <span class="fas fa-hands-helping"></span>
+                    Fairlends
+               </h1>
+           </div>
+           <div class="sidebar-menu">
+               <ul>
+                   <li>
+                       <a href="/">
+                            <span class="fas fa-tachometer-alt"></span>
+                            <span>Dashboard</span>
+                       </a>
+                   </li>
+                   <li>
+                       <a href="/users/loan" class="active">
+                            <span class="fas fa-clipboard-list"></span>
+                            <span>New Loan</span>
+                       </a>
+                   </li>
+                   <li>
+                       <a href="/users/borrower/myloans" >
+                            <span class="fas fa-clipboard"></span>
+                            <span>My Loans</span>
+                       </a>
+                   </li>
+                    <li>
+                       <a href="/" >
+                            <span class="fas fa-clipboard"></span>
+                            <span>Active Loan</span>
+                       </a>
+                   </li>
+                   <li>
+                       <a href="/" >
+                            <span class="fas fa-user-circle"></span>
+                            <span>Profile</span>
+                       </a>
+                   </li>
+                   <li>
+                       <a href="/" >
+                            <span class="fas fa-sign-out-alt"></span>
+                            <span>Logout</span>
+                       </a>
+                   </li>
+               </ul>
            </div>
 </div>
 
-<section class="user-section">
-        <h2>Apply Loan {{user.name}}</h2>
-           <div class="loan-container">
+<div class="main-content">
+    <header>
+        <h2>
+            <label for=""> <span class="fas fa-bars"></span></label>
+            New Loan
+        </h2>
+        <div class="user-wrapper">
+            <img src="http://localhost:3000/images/human.png" width="40px" height="40px" alt="">
+            <div>
+                {{user.name}}
+            </div>
+        </div>
+    </header>
+
+    <main>
+           <div class="apply-loan">
                    <form method="POST" action="/users/loan">
                        <label for="amount">Amount</label>
-                       <input type="number" name="amount" id="amount" >
-                       <label for="tenure">Tenure</label>
-                       <input type="number" name="tenure" id="tenure" >  
-                       <label for="interest">Interest</label>
-                       <input type="number" name="interest" id="interest" >  
-                       {{#if err}} 
-                            <p class="error">{err}</p>
-                       {{/if}}
-                       {{#if loggedin}} 
-                            <p class="error">success</p>
-                       {{/if}}
+                      <div class="card">
+                            <div class="slidecontainer">
+                            <input type="range" min="25000" max="500000"  class="slider" id="amount" step="25000" name="amount">
+                            <p><span class="fas fa-rupee-sign"></span> <span id="span-amount"></span> </p>
+                        </div>
+                    </div>
 
+                       <label for="tenure">Month Tenure</label>
+                       <div class="card">
+                            <div class="slidecontainer">
+                            <input type="range" min="12" max="48"  class="slider" id="tenure" step="12" name="tenure">
+                            <p><span id="span-tenure"></span> months</p>
+                        </div>
+                       </div>
+                       
+                        <label for="interest">Affordable Interest</label>
+                         <div class="card">
+                            <div class="slidecontainer">
+                            <input type="range" min="5" max="12"  class="slider" id="interest" step="1" name="interest">
+                            <p><span id="span-interest"></span>%</p>
+                        </div>
+                       </div>
                        <input type="submit" class="login">
                    </form>
                </div>
-</section>
+    </main>
+</div>
+
+<script type="text/javascript">
+        var tenure = document.getElementById("tenure");
+        var spanTenure = document.getElementById("span-tenure");
+        spanTenure.innerHTML = tenure.value;
+
+        tenure.oninput = function() {
+        spanTenure.innerHTML = this.value;
+        }
+
+        var amount = document.getElementById("amount");
+        var spanAmount = document.getElementById("span-amount");
+        spanAmount.innerHTML = amount.value;
+
+        amount.oninput = function() {
+        spanAmount.innerHTML = this.value;
+        }
+
+         var interest = document.getElementById("interest");
+        var spanInterest = document.getElementById("span-interest");
+        spanInterest.innerHTML = interest.value;
+
+        interest.oninput = function() {
+        spanInterest.innerHTML = this.value;
+        }
+</script>
