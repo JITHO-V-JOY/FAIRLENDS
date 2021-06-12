@@ -1,41 +1,86 @@
-<div class="navs">
-           <div class="head">
-               <a class="logo" href="#">FAIRLENDS</a>
-               <nav>
-                   <ul class="primary-nav">
-                        <li class="reg-btn"><a href="/auth/signout">Logout</a></li>
-                   </ul>
-               </nav>
+<div class="sidebar">
+           <div class="sidebar-brand">
+               <h1>
+                    <span class="fas fa-hands-helping"></span>
+                    Fairlends
+               </h1>
+           </div>
+           <div class="sidebar-menu">
+               <ul>
+                   <li>
+                       <a href="/">
+                            <span class="fas fa-tachometer-alt"></span>
+                            <span>Dashboard</span>
+                       </a>
+                   </li>
+                   <li>
+                       <a href="/users/loan" >
+                            <span class="fas fa-clipboard-list"></span>
+                            <span>New Loan</span>
+                       </a>
+                   </li>
+                   <li>
+                       <a href="/users/borrower/myloans" class="active" >
+                            <span class="fas fa-clipboard"></span>
+                            <span>My Loans</span>
+                       </a>
+                   </li>
+                    <li>
+                       <a href="/" >
+                            <span class="fas fa-clipboard"></span>
+                            <span>Active Loan</span>
+                       </a>
+                   </li>
+                   <li>
+                       <a href="/" >
+                            <span class="fas fa-user-circle"></span>
+                            <span>Profile</span>
+                       </a>
+                   </li>
+                   <li>
+                       <a href="/" >
+                            <span class="fas fa-sign-out-alt"></span>
+                            <span>Logout</span>
+                       </a>
+                   </li>
+               </ul>
            </div>
 </div>
 
-<section class="user-section">
-        <h2>My Loans</h2>
-           <div class="loan-container">
+<div class="main-content">
+    <header>
+        <h2>
+            <label for=""> <span class="fas fa-bars"></span></label>
+            My Loans
+        </h2>
+        <div class="user-wrapper">
+            <img src="http://localhost:3000/images/human.png" width="40px" height="40px" alt="">
+            <div>
+                {{user.name}}
+            </div>
+        </div>
+    </header>
+    <main>
+         <div class="loan-container">
                   {{#if myLoan}}
                     {{#each myLoan}}
+                        <a href="" style="text-decoration: none;">
                         <div class="card">
-                            <div class="card-header">
-                                <span class="special-txt">Loan ID : </span>{{this.loan_id}}
-                            </div>
                             <div class="card-body">
+                                 <p> <span class="special-txt">Loan Id : </span>{{this.loan_id}}</p>  
+                                <p class="card-text"><span class="special-txt">Issued On: </span>{{this.issued_date}}</p>
                                 <p class="card-text"><span class="special-txt">Requested Loan Amount : </span>  <i class="fa fa-rupee"></i>{{this.amount}}</p>
-                                <p class="card-text"><span class="special-txt">Lender : </span> {{this.lender}}</p>
-                                <p class="card-text"><span class="special-txt">Loan Tenure : </span> {{this.tenure}} months</p>
-                                <p class="card-text"><span class="special-txt">Affordable Interest : </span>{{this.interest}}%</p>
-                                <p class="card-text"><span class="special-txt">Approved : </span>{{#if this.approved}} Approved {{else}} Not Approved yet {{/if}}</p>
-                                <p class="card-text"><span class="special-txt">Issued date : </span>{{this.issued_date}}</p>
                                 <p class="card-text"><span class="special-txt">Status : </span>{{this.status}}</p>
-
-                                <a href="#" class="btn btn-primary">View</a>
-                               
-
-
                             </div>
                         </div>
+                        </a>
                     {{/each}}
                   {{else}}
                     <p>No loans yet!</p>
                   {{/if}}
                </div>
-</section>
+</div>
+
+    </main>
+    
+

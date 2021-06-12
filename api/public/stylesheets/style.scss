@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 :root{
-    --primary-color: #3a3c3d;
-    --secondary-color:#1955d8;
+    --primary-color: #4a55e9;
+    --secondary-color:#b1b3b8;
 }
 
 *{
@@ -32,6 +32,7 @@
 .sidebar-brand h1{
     font-weight: 500;
     letter-spacing: .1em;
+    color: #ffffff;
 }
 
 .sidebar-brand span{
@@ -59,10 +60,11 @@
 }
 
 .sidebar-menu a.active{
-    background-color: #fff;
-    padding-top: 1rem;
+    background-color: var(--secondary-color);
+    padding-top: 1rem ;
+    padding-bottom: 1rem;
     border-radius: 30px 0px 0px 30px;
-    color: var(--secondary-color);
+    color:var(--primary-color);
     font-size: 1.1rem;
 }
 
@@ -114,7 +116,8 @@ header label span{
 main{
     margin-top: 85px;
     padding: 2rem 1.5rem;
-    background: #f1f5f9;
+    background: whitesmoke;
+
     min-height: calc(100vh - 90px);
     
 }
@@ -137,7 +140,7 @@ main{
 
 .card{
     background: #ffffff;
-    color: var(--secondary-color);
+    color: var(--primary-color);
     padding: 2rem;
     border-radius: 2px;
     margin: 1rem 0rem;
@@ -161,14 +164,11 @@ form{
 }
 
 .apply-loan{
+    margin: auto;
     width: 50%;
 
 }
 
-main{
-    display: flex;
-    justify-content: center;
-}
 
 
 .slidecontainer {
@@ -181,7 +181,7 @@ main{
     height: 15px;
     border-radius: 5px;
     border: none;
-    background: #d3d3d3;
+    background: var(--secondary-color);
     outline: none;
     opacity: 0.7;
     -webkit-transition: .2s;
@@ -198,7 +198,7 @@ main{
     width: 25px;
     height: 25px;
     border-radius: 50%;
-    background: var(--secondary-color);
+    background: var(--primary-color);
     cursor: pointer;
   }
   
@@ -221,7 +221,7 @@ main{
 }
 
 input[type="submit"]{
-    background: var(--secondary-color);
+    background: var(--primary-color);
     color: white;
     font-weight: bold;
     font-size: 1.3em;
@@ -234,4 +234,39 @@ input[type="submit"]{
     padding: .4em 2em;
     cursor: pointer;
 
+}
+
+
+.special-txt{
+    color: black;
+    letter-spacing: .1em;
+    font-weight: 600;
+    font-family: 'Poppins' sans-serif;
+}
+
+.loan-container p{
+    letter-spacing: .1em;
+    font-weight: 600;
+    font-family: 'Poppins' sans-serif;
+    color: var(--primary-color);
+}
+
+.loan-container{
+    margin: auto;
+    max-width: 70%;
+}
+
+.loan-container .card{
+    background: var(--secondary-color);
+    color: #ffffff;
+    padding: 2rem;
+    border-radius: 2px;
+    margin: 1rem 0rem;
+}
+
+.loan-container .card span{
+  
+    color: #ffffff;
+    font-size: 1.1rem;
+  
 }
