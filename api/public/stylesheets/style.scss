@@ -122,6 +122,13 @@ main{
     
 }
 
+main .header{
+    padding: 1rem 1.5rem;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    left: 345px;
+    z-index: 100;
+}
+
 .cards{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -248,12 +255,19 @@ input[type="submit"]{
     letter-spacing: .1em;
     font-weight: 600;
     font-family: 'Poppins' sans-serif;
-    color: var(--primary-color);
+    color: black;
 }
 
 .loan-container{
     margin: auto;
-    max-width: 70%;
+    max-width: 100%;
+}
+
+.loan-container .cards{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 2rem;
+    margin-top: 1rem;
 }
 
 .loan-container .card{
@@ -262,6 +276,7 @@ input[type="submit"]{
     padding: 2rem;
     border-radius: 2px;
     margin: 1rem 0rem;
+    width: 100%;
 }
 
 .loan-container .card span{
@@ -269,4 +284,50 @@ input[type="submit"]{
     color: #ffffff;
     font-size: 1.1rem;
   
+}
+
+table{
+    border-collapse: collapse;
+    
+}
+
+td{
+    padding: .5rem;
+    font-size: .9rem;
+    
+}
+
+.recent-grid{
+    margin-top: 3.5rem;
+    display: grid;
+    grid-gap: 2rem;
+    grid-template-columns: 67% auto;
+}
+.card-header{
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    border-bottom: 1px solid #979494
+}
+
+.recent-grid .card{
+    background: #fff;
+    border-radius: 5px
+}
+
+.table-responsive{
+    width: 100%;
+    overflow-x: auto;
+
+}
+thead tr{
+    border-top: 1px solid #f0f0f0;
+    border-bottom: 1px solid #f0f0f0;
+    padding: .5rem 1rem;
+
+}
+
+thead td{
+    font-weight: 700;
+    color: black;
 }
