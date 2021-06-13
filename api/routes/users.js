@@ -37,8 +37,8 @@ router.get('/lender/loans/:loan_id', acceptLoan);
 router.post('/register', register);
 router.post('/channels/:channelName/chaincodes/:chaincodeName', invokeTransaction)
 
-router.get('/view/loan_request/:loan_id',getLoan, getIssuer, function(req, res) {
-  res.render('users/viewLoan', {loanRequest: res.loan, Issuer: res.issuer});
+router.get('/view/borrower/:loan_id',getLoan, getLender, function(req, res) {
+  res.render('users/viewLoan', {myLoan: res.loan, lender: res.lender});
 
 });
 

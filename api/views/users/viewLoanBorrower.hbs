@@ -64,13 +64,61 @@
          <div class="loan-container">
                   {{#if myLoan}}
                     {{#each myLoan}}
-                        <a href="" style="text-decoration: none;">
+                        <a href="/users/view/borrower/{{this.loan_id}}" style="text-decoration: none;">
                         <div class="card">
+                            <div class="card-header">
+                                 <table>
+                                    <tr>
+                                        <td>
+                                            <span class="special-txt">Loan Id </span>
+                                        </td>
+                                        <td>
+                                             <p class="card-text">: {{this.loan_id}}</p>  
+
+                                        </td>
+                                    </tr>
+                                    </table>
+                             </div>
                             <div class="card-body">
-                                 <p> <span class="special-txt">Loan Id : </span>{{this.loan_id}}</p>  
-                                <p class="card-text"><span class="special-txt">Issued On: </span>{{this.issued_date}}</p>
-                                <p class="card-text"><span class="special-txt">Requested Loan Amount : </span>  <i class="fa fa-rupee"></i>{{this.amount}}</p>
-                                <p class="card-text"><span class="special-txt">Status : </span>{{this.status}}</p>
+                                <table>
+                                    
+                                    <tr>
+                                        <td>
+                                            <span class="special-txt">Issued On</span>
+                                        </td>
+                                        <td>
+                                             <p class="card-text">: {{this.issued_date}}</p>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="special-txt">Requested Loan Amount </span>
+                                        </td>
+                                        <td>
+                                            <p class="card-text"> : <i class="fa fa-rupee"></i>{{this.amount}}</p>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="special-txt">Status </span>
+                                        </td>
+                                        <td>
+                                             <p class="card-text">: {{this.status}}</p>
+
+                                        </td>
+                                    </tr>
+                                     <tr>
+                                        <td>
+                                            <span class="special-txt">With</span>
+                                        </td>
+                                        <td>
+                                             <p class="card-text">: {{this.lender}}</p>
+
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
                         </a>
