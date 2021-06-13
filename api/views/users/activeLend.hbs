@@ -6,29 +6,29 @@
                </h1>
            </div>
            <div class="sidebar-menu">
-               <ul>
+                <ul>
                    <li>
-                       <a href="/">
+                       <a href="/" >
                             <span class="fas fa-tachometer-alt"></span>
                             <span>Dashboard</span>
                        </a>
                    </li>
                    <li>
-                       <a href="/users/loan" >
+                       <a href="/users/lender/loans">
                             <span class="fas fa-clipboard-list"></span>
-                            <span>New Loan</span>
+                            <span>Loan Requests</span>
                        </a>
                    </li>
                    <li>
-                       <a href="/users/borrower/myloans" class="active"  >
+                       <a href="/users/lender/acceptedLoans" >
                             <span class="fas fa-clipboard"></span>
-                            <span>My Loans</span>
+                            <span>My Lends</span>
                        </a>
                    </li>
                     <li>
-                       <a href="/users/borrower/active_loan"  >
+                       <a href="/users/lender/activeLoans" class="active" >
                             <span class="fas fa-clipboard"></span>
-                            <span>Active Loan</span>
+                            <span>Active Lends</span>
                        </a>
                    </li>
                    <li>
@@ -138,18 +138,18 @@
                   {{/if}}
 
 
-                  {{#if lender}}
+                  {{#if issuer}}
                  
                          <div class="card">
                              <div class="card-header">
                                  <table>
                                      <tr>
                                          <td>
-                                            <span class="special-txt">Lender </span>
+                                            <span class="special-txt">Issuer </span>
 
                                          </td>
                                          <td>
-                                            <p class="card-text">: {{lender.name}}</p>  
+                                            <p class="card-text">: {{issuer.name}}</p>  
 
                                          </td>
                                      </tr>
@@ -162,7 +162,7 @@
                                             <span class="special-txt">Adhar Id</span>
                                         </td>
                                         <td>
-                                             <p class="card-text">: {{lender.adhar_id}}</p>
+                                             <p class="card-text">: {{issuer.adhar_id}}</p>
 
                                         </td>
                                     </tr>
@@ -171,7 +171,7 @@
                                             <span class="special-txt">Phone No </span>
                                         </td>
                                         <td>
-                                            <p class="card-text"> : {{lender.phone}}</p>
+                                            <p class="card-text"> : {{issuer.phone}}</p>
 
                                         </td>
                                     </tr>
@@ -180,7 +180,7 @@
                                             <span class="special-txt">State </span>
                                         </td>
                                         <td>
-                                             <p class="card-text">: {{lender.state}}</p>
+                                             <p class="card-text">: {{issuer.state}}</p>
 
                                         </td>
                                     </tr>
@@ -189,7 +189,7 @@
                                             <span class="special-txt">City</span>
                                         </td>
                                         <td>
-                                             <p class="card-text">: {{lender.city}}</p>
+                                             <p class="card-text">: {{issuer.city}}</p>
 
                                         </td>
                                     </tr>
@@ -198,7 +198,7 @@
                                             <span class="special-txt">Pincode</span>
                                         </td>
                                         <td>
-                                             <p class="card-text">: {{lender.pincode}}</p>
+                                             <p class="card-text">: {{issuer.pincode}}</p>
 
                                         </td>
                                     </tr>
@@ -211,7 +211,7 @@
                </div>
 
             {{#if myLoan.approved}}
-            
+            <div class="cards">
             <div class="card">
                 <div class="card-header">
                      <h2 style="color: black;">EMI Schedule</h2>
@@ -234,7 +234,7 @@
                                                     Status
                                                 </td>
                                                 <td>
-                                                    Make Payment
+                                                    Action
                                                 </td>
                                             </tr>
                                         </thead>
@@ -261,6 +261,69 @@
                                                         </td>
                                                         <td>
                                                             {{#if this.payment}}
+                                                            <button disabled>Report</button>
+                                                            {{else}}
+                                                            <button>Report</button>
+                                                            {{/if}}
+                                                        </td>
+                                                    </tr>
+                                                {{/each}}
+                                            {{/if}}
+                                        
+                                        </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                <div class="card-header">
+                     <h2 style="color: black;">Tax Schedule</h2>
+                </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table width="100%">
+                                        <thead>
+                                            <tr>
+                                                <td>
+                                                    No
+                                                </td>
+                                                <td>
+                                                    Due date
+                                                </td>
+                                                <td>
+                                                    Amount
+                                                </td>
+                                                <td>
+                                                    Status
+                                                </td>
+                                                <td>
+                                                    Make Payment
+                                                </td>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            {{#if myLoan}}
+                                                {{#each myLoan.tax}}
+                                                    <tr>
+                                                        <td>
+                                                            {{index}}
+                                                        </td>
+                                                        <td>
+                                                            {{this.date}}
+                                                        </td>
+                                                        <td>
+                                                            23
+                                                        </td>
+                                                        <td>
+                                                            {{#if this.payment}}
+                                                            Payed
+                                                            {{else}}
+                                                            Not payed
+                                                            {{/if}}
+                                                        </td>
+                                                        <td>
+                                                            {{#if this.payment}}
                                                             <button disabled>Pay</button>
                                                             {{else}}
                                                             <button>Pay</button>
@@ -275,6 +338,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
                 {{/if}}
                     
                 </div>

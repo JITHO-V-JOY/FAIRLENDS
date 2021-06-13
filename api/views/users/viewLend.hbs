@@ -8,27 +8,27 @@
            <div class="sidebar-menu">
                <ul>
                    <li>
-                       <a href="/">
+                       <a href="/" >
                             <span class="fas fa-tachometer-alt"></span>
                             <span>Dashboard</span>
                        </a>
                    </li>
                    <li>
-                       <a href="/users/loan" >
+                       <a href="/users/lender/loans" >
                             <span class="fas fa-clipboard-list"></span>
-                            <span>New Loan</span>
+                            <span>Loan Requests</span>
                        </a>
                    </li>
                    <li>
-                       <a href="/users/borrower/myloans" class="active"  >
+                       <a href="/users/lender/acceptedLoans" class="active" >
                             <span class="fas fa-clipboard"></span>
-                            <span>My Loans</span>
+                            <span>My Lends</span>
                        </a>
                    </li>
                     <li>
-                       <a href="/users/borrower/active_loan"  >
+                       <a href="/users/lender/activeLoans" >
                             <span class="fas fa-clipboard"></span>
-                            <span>Active Loan</span>
+                            <span>Active Lends</span>
                        </a>
                    </li>
                    <li>
@@ -51,19 +51,17 @@
     <header>
         <h2>
             <label for=""> <span class="fas fa-bars"></span></label>
-             Loan Id {{myLoan.loan_id}}
+            Loan Id: {{myLoan.loan_id}}
         </h2>
         <div class="user-wrapper">
-            <img src="http://localhost:3000/images/human.png" width="40px" height="40px" alt="">
+            <img src="images/human.png" width="40px" height="40px" alt="">
             <div>
                 {{user.name}}
             </div>
         </div>
     </header>
-     
-    <main>
-   
-         <div class="loan-container">
+ <main>
+        <div class="loan-container">
               <div class="cards">
                   {{#if myLoan}}
                  
@@ -138,18 +136,18 @@
                   {{/if}}
 
 
-                  {{#if lender}}
+                  {{#if issuer}}
                  
                          <div class="card">
                              <div class="card-header">
                                  <table>
                                      <tr>
                                          <td>
-                                            <span class="special-txt">Lender </span>
+                                            <span class="special-txt">Issuer </span>
 
                                          </td>
                                          <td>
-                                            <p class="card-text">: {{lender.name}}</p>  
+                                            <p class="card-text">: {{issuer.name}}</p>  
 
                                          </td>
                                      </tr>
@@ -162,7 +160,7 @@
                                             <span class="special-txt">Adhar Id</span>
                                         </td>
                                         <td>
-                                             <p class="card-text">: {{lender.adhar_id}}</p>
+                                             <p class="card-text">: {{issuer.adhar_id}}</p>
 
                                         </td>
                                     </tr>
@@ -171,7 +169,7 @@
                                             <span class="special-txt">Phone No </span>
                                         </td>
                                         <td>
-                                            <p class="card-text"> : {{lender.phone}}</p>
+                                            <p class="card-text"> : {{issuer.phone}}</p>
 
                                         </td>
                                     </tr>
@@ -180,7 +178,7 @@
                                             <span class="special-txt">State </span>
                                         </td>
                                         <td>
-                                             <p class="card-text">: {{lender.state}}</p>
+                                             <p class="card-text">: {{issuer.state}}</p>
 
                                         </td>
                                     </tr>
@@ -189,7 +187,7 @@
                                             <span class="special-txt">City</span>
                                         </td>
                                         <td>
-                                             <p class="card-text">: {{lender.city}}</p>
+                                             <p class="card-text">: {{issuer.city}}</p>
 
                                         </td>
                                     </tr>
@@ -198,7 +196,7 @@
                                             <span class="special-txt">Pincode</span>
                                         </td>
                                         <td>
-                                             <p class="card-text">: {{lender.pincode}}</p>
+                                             <p class="card-text">: {{issuer.pincode}}</p>
 
                                         </td>
                                     </tr>
@@ -206,82 +204,12 @@
                             </div>
                         </div>
                   {{else}}
-                    <p>No loans yet!</p>
+                    <p>No issuer yet!</p>
                   {{/if}}
                </div>
 
-            {{#if myLoan.approved}}
-            
-            <div class="card">
-                <div class="card-header">
-                     <h2 style="color: black;">EMI Schedule</h2>
-                </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table width="100%">
-                                        <thead>
-                                            <tr>
-                                                <td>
-                                                    No
-                                                </td>
-                                                <td>
-                                                    Due date
-                                                </td>
-                                                <td>
-                                                    Amount
-                                                </td>
-                                                <td>
-                                                    Status
-                                                </td>
-                                                <td>
-                                                    Make Payment
-                                                </td>
-                                            </tr>
-                                        </thead>
-
-                                        <tbody>
-                                            {{#if myLoan}}
-                                                {{#each myLoan.emi}}
-                                                    <tr>
-                                                        <td>
-                                                            {{index}}
-                                                        </td>
-                                                        <td>
-                                                            {{this.date}}
-                                                        </td>
-                                                        <td>
-                                                            8976
-                                                        </td>
-                                                        <td>
-                                                            {{#if this.payment}}
-                                                            Payed
-                                                            {{else}}
-                                                            Not payed
-                                                            {{/if}}
-                                                        </td>
-                                                        <td>
-                                                            {{#if this.payment}}
-                                                            <button disabled>Pay</button>
-                                                            {{else}}
-                                                            <button>Pay</button>
-                                                            {{/if}}
-                                                        </td>
-                                                    </tr>
-                                                {{/each}}
-                                            {{/if}}
-                                        
-                                        </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                {{/if}}
-                    
-                </div>
             </div>
-                    
     </main>
-
-</div>
     
+</div>
 

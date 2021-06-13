@@ -1,39 +1,96 @@
-<div class="navs">
-           <div class="head">
-               <a class="logo" href="#">FAIRLENDS</a>
-               <nav>
-                   <ul class="primary-nav">
-                        <li class="reg-btn"><a href="/auth/signout">Logout</a></li>
-                   </ul>
-               </nav>
+<div class="sidebar">
+           <div class="sidebar-brand">
+               <h1>
+                    <span class="fas fa-hands-helping"></span>
+                    Fairlends
+               </h1>
+           </div>
+           <div class="sidebar-menu">
+               <ul>
+                   <li>
+                       <a href="/" class="active">
+                            <span class="fas fa-tachometer-alt"></span>
+                            <span>Dashboard</span>
+                       </a>
+                   </li>
+                   <li>
+                       <a href="/users/lender/loans">
+                            <span class="fas fa-clipboard-list"></span>
+                            <span>Loan Requests</span>
+                       </a>
+                   </li>
+                   <li>
+                       <a href="/users/lender/acceptedLoans" >
+                            <span class="fas fa-clipboard"></span>
+                            <span>My Lends</span>
+                       </a>
+                   </li>
+                    <li>
+                       <a href="/users/lender/activeLoans" >
+                            <span class="fas fa-clipboard"></span>
+                            <span>Active Lends</span>
+                       </a>
+                   </li>
+                   <li>
+                       <a href="/" >
+                            <span class="fas fa-user-circle"></span>
+                            <span>Profile</span>
+                       </a>
+                   </li>
+                   <li>
+                       <a href="/" >
+                            <span class="fas fa-sign-out-alt"></span>
+                            <span>Logout</span>
+                       </a>
+                   </li>
+               </ul>
            </div>
 </div>
 
-<section class="user-section">
+<div class="main-content">
+    <header>
+        <h2>
+            <label for=""> <span class="fas fa-bars"></span></label>
+            Dashboard
+        </h2>
+        <div class="user-wrapper">
+            <img src="images/human.png" width="40px" height="40px" alt="">
+            <div>
+                {{user.name}}
+            </div>
+        </div>
+    </header>
 
-        <h2>Welcome {{user.name}}</h2>
-           <div class="container">
-               <div class="row">
-                   <div class="col-12 col-md-6">
-                   <div class="card" style="width: 22rem; height:34rem; margin-top: 2em;">
-                        <img src="images/chkloan.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">View Loans</h5>
-                            <p class="card-text">See various loan request and start lending!</p>
-                            <a href="/users/lender/loans" class="btn btn-primary">view loans</a>
-                        </div>
-                    </div>
-                    </div>
-                      <div class="col-12 col-md-6">
-                     <div class="card" style="width: 22rem; height:34rem; margin-top: 2em;">
-                        <img src="images/viewloan.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">My Lends</h5>
-                            <p class="card-text">Check your lend status, pay tax and more!</p>
-                            <a href="/users/lender/acceptedLoans" class="btn btn-primary">view my lends</a>
-                        </div>
-                    </div>
-                    </div>
-               </div>
-               </div>
-</section>
+    <main>
+        <div class="cards">
+            <div class="card-single">
+                <div>
+                    <h1>{{lenders}}</h1>
+                    <span>Lenders</span>
+                </div>
+                <div>
+                    <span class="fas fa-users"></span>   
+                </div>
+            </div>
+             <div class="card-single">
+                <div>
+                    <h1>{{borrowers}}</h1>
+                    <span>Borrowers</span>
+                </div>
+                <div>
+                    <span class="fas fa-users"></span>   
+                </div>
+            </div>
+             <div class="card-single">
+                <div>
+                    <h1>79</h1>
+                    <span>Active Loans</span>
+                </div>
+                <div>
+                    <span class="fas fa-clipboard-list"></span>   
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+

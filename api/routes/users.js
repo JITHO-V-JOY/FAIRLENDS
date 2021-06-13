@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const {register, invokeTransaction, issueLoan, invokeLoan, getLoans, getLoansForLender, acceptLoan, getAcceptedLoansForLender, getLoan, getIssuer, getLender, getActiveLoan} = require('../controllers/users');
+const {register, invokeTransaction, issueLoan, invokeLoan, getLoans, getLoansForLender, acceptLoan, getAcceptedLoansForLender, getLoan, getIssuer, getLender, getActiveLoan, getActiveLoansForLender} = require('../controllers/users');
 const {getLoanById} = require('../controllers/loan');
 
 router.param("loan_id", getLoanById)
@@ -32,6 +32,14 @@ router.get('/lender/acceptedLoans', getAcceptedLoansForLender, function(req, res
   res.render('users/viewAcceptedLoan', {myLoan: res.loan});
 });
 
+router.get('/lender/activeLoans', getActiveLoansForLender, function(req, res) {
+  res.render('users/activeLends', {myLoan: res.loan});
+});
+
+router.get('/lender/activeLoan/:loan_id', getLoan, getIssuer, function(req, res) {
+  res.render('users/activeLend', {myLoan: res.loan, issuer: res.issuer});
+});
+
 router.get('/lender/loans/:loan_id', acceptLoan);
 
 router.post('/register', register);
@@ -39,6 +47,11 @@ router.post('/channels/:channelName/chaincodes/:chaincodeName', invokeTransactio
 
 router.get('/view/borrower/:loan_id',getLoan, getLender, function(req, res) {
   res.render('users/viewLoan', {myLoan: res.loan, lender: res.lender});
+
+});
+
+router.get('/lender/view/loan/:loan_id',getLoan, getIssuer, function(req, res) {
+  res.render('users/viewLend', {myLoan: res.loan, issuer: res.issuer});
 
 });
 
