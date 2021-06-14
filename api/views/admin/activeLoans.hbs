@@ -20,7 +20,7 @@
                        </a>
                    </li>
                    <li>
-                       <a href="/admin/accepted_loans" class="active" >
+                       <a href="/admin/accepted_loans" >
                             <span class="fas fa-clipboard"></span>
                             <span>Accepted Loans</span>
                        </a>
@@ -32,7 +32,7 @@
                        </a>
                    </li>
                     <li>
-                       <a href="/users/lender/activeLoans" >
+                       <a href="/admin/active_loans" class="active"  >
                             <span class="fas fa-clipboard"></span>
                             <span>Active Lends</span>
                        </a>
@@ -57,7 +57,7 @@
     <header>
         <h2>
             <label for=""> <span class="fas fa-bars"></span></label>
-            Accepted Loans
+            Active Loans
         </h2>
         <div class="user-wrapper">
             <img src="images/human.png" width="40px" height="40px" alt="">
@@ -70,7 +70,7 @@
      <div class="loan-container">
                   {{#if loanRequests}}
                     {{#each loanRequests}}
-                    <a href="/admin/view/loan_request/{{this.loan_id}}" style="text-decoration: none;">
+                    <a href="/admin/view/active_loan/{{this.loan_id}}" style="text-decoration: none;">
                          <div class="card">
                            <div class="card-header">
                                  <table>
@@ -112,6 +112,24 @@
                                         </td>
                                         <td>
                                              <p class="card-text">: {{this.status}}</p>
+
+                                        </td>
+                                    </tr>
+                                      <tr>
+                                        <td>
+                                            <span class="special-txt">Issuer </span>
+                                        </td>
+                                        <td>
+                                             <p class="card-text">: {{this.issuer}}</p>
+
+                                        </td>
+                                    </tr>
+                                     <tr>
+                                        <td>
+                                            <span class="special-txt">Lender </span>
+                                        </td>
+                                        <td>
+                                             <p class="card-text">: {{this.lender}}</p>
 
                                         </td>
                                     </tr>

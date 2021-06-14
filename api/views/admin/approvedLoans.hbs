@@ -1,25 +1,140 @@
-<section class="user-section">
-       
-           <div class="loan-container">
+<div class="sidebar">
+           <div class="sidebar-brand">
+               <h1>
+                    <span class="fas fa-hands-helping"></span>
+                    Fairlends
+               </h1>
+           </div>
+           <div class="sidebar-menu">
+               <ul>
+                   <li>
+                       <a href="/" >
+                            <span class="fas fa-tachometer-alt"></span>
+                            <span>Dashboard</span>
+                       </a>
+                   </li>
+                   <li>
+                       <a href="/admin/loan_requests" >
+                            <span class="fas fa-clipboard-list"></span>
+                            <span>Loan Requests</span>
+                       </a>
+                   </li>
+                   <li>
+                       <a href="/admin/accepted_loans" >
+                            <span class="fas fa-clipboard"></span>
+                            <span>Accepted Loans</span>
+                       </a>
+                   </li>
+                    <li>
+                       <a href="/admin/approved_loans" class="active" >
+                            <span class="fas fa-clipboard"></span>
+                            <span>Approved Loans</span>
+                       </a>
+                   </li>
+                    <li>
+                       <a href="/admin/active_loans"  >
+                            <span class="fas fa-clipboard"></span>
+                            <span>Active Lends</span>
+                       </a>
+                   </li>
+                   <li>
+                       <a href="/" >
+                            <span class="fas fa-user-circle"></span>
+                            <span>Profile</span>
+                       </a>
+                   </li>
+                   <li>
+                       <a href="/" >
+                            <span class="fas fa-sign-out-alt"></span>
+                            <span>Logout</span>
+                       </a>
+                   </li>
+               </ul>
+           </div>
+</div>
+
+<div class="main-content">
+    <header>
+        <h2>
+            <label for=""> <span class="fas fa-bars"></span></label>
+            Approved Loans
+        </h2>
+        <div class="user-wrapper">
+            <img src="images/human.png" width="40px" height="40px" alt="">
+            <div>
+                {{user.name}}
+            </div>
+        </div>
+    </header>
+  <main>
+     <div class="loan-container">
                   {{#if loanRequests}}
                     {{#each loanRequests}}
                     <a href="/admin/view/approved_loan/{{this.loan_id}}" style="text-decoration: none;">
+                         <div class="card">
+                           <div class="card-header">
+                                 <table>
+                                    <tr>
+                                        <td>
+                                            <span class="special-txt">Loan Id </span>
+                                        </td>
+                                        <td>
+                                             <p class="card-text">: {{this.loan_id}}</p>  
 
-                         <div class="media loan" style="margin-top: 2em; margin-bottom: 4em; max-width: 1000px">
-                             <div class="align-self-start mr-3">
-                                <img src="http://localhost:3000/images/human.png"  width="150px" height="130px" alt="Generic placeholder image">
-                                <p class="card-text"><span class="special-txt">issuer : </span> {{this.issuer}}</p>
-
+                                        </td>
+                                    </tr>
+                                    </table>
                              </div>
-                            <div class="media-body">
-                                <h5 class="mt-0"><span class="special-txt">Loan ID : </span>{{this.loan_id}}</h5>
-                                <p class="card-text"><span class="special-txt">Requested Loan Amount : </span>  <i class="fa fa-rupee"></i>{{this.amount}}</p>
-                                <p class="card-text"><span class="special-txt">Loan Tenure : </span> {{this.tenure}} months</p>
-                                <p class="card-text"><span class="special-txt">Affordable Interest : </span>{{this.interest}}%</p>
-                                <p class="card-text"><span class="special-txt">Lender : </span> {{this.lender}}</p>
-                                <p class="card-text"><span class="special-txt">Issued date : </span>{{this.issued_date}}</p>
+                            <div class="card-body" >
+                                <table>
+                                    
+                                    <tr>
+                                        <td>
+                                            <span class="special-txt">Issued On</span>
+                                        </td>
+                                        <td>
+                                             <p class="card-text">: {{this.issued_date}}</p>
 
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="special-txt">Requested Loan Amount </span>
+                                        </td>
+                                        <td>
+                                            <p class="card-text"> : <i class="fa fa-rupee"></i>{{this.amount}}</p>
 
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="special-txt">Status </span>
+                                        </td>
+                                        <td>
+                                             <p class="card-text">: {{this.status}}</p>
+
+                                        </td>
+                                    </tr>
+                                      <tr>
+                                        <td>
+                                            <span class="special-txt">Issuer </span>
+                                        </td>
+                                        <td>
+                                             <p class="card-text">: {{this.issuer}}</p>
+
+                                        </td>
+                                    </tr>
+                                     <tr>
+                                        <td>
+                                            <span class="special-txt">Lender </span>
+                                        </td>
+                                        <td>
+                                             <p class="card-text">: {{this.lender}}</p>
+
+                                        </td>
+                                    </tr>
+                                    
+                                </table>
                             </div>
                         </div>
                       </a>
@@ -28,4 +143,12 @@
                     <p>No loans yet!</p>
                   {{/if}}
                </div>
+  </main>
+
+</div>
+
+
+<section class="user-section">
+       
+          
 </section>
