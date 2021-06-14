@@ -331,3 +331,125 @@ thead td{
     font-weight: 700;
     color: black;
 }
+
+.home-header{
+    position: fixed;
+    z-index: 100;
+    top:0;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    height: 90px;
+    background: #fff;
+    width: 100%;
+    padding: 2rem;
+
+    nav{
+        display: flex;
+        justify-content: space-between;
+        background: none;
+        height: auto;
+        padding: 0;
+
+    }
+
+    ul{
+        display: flex;
+        margin: 0;
+        li{
+            margin: 0 0.5em;
+        }
+        
+    }
+    a{
+        color: black;
+        font-size: 1em;
+        padding: .1em 1em;
+    }
+
+}
+
+.home{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    margin-top: 5rem;
+
+    .subhead{
+        letter-spacing: .6em;
+        font-family: 'Poppins' sans-serif;
+        font-size: 50px;
+        font-weight: 600;
+        color: var(--secondary-color);
+    }
+}
+
+.logo{
+    text-decoration: none;
+    font-weight: bold;
+    color:var(--primary-color);
+    font-size: 1.2em;
+    letter-spacing: .3em;
+    span{
+        color: var(--primary-color);
+    }
+}
+
+.login-btn a{
+    padding: .5em;
+    border: 5px solid green;
+    border-radius: 20px;
+    font-size: 1.3em;
+    text-decoration: none;
+
+    &:hover{
+        background: green   ;
+        color: white;
+
+        font-weight: bold;
+        font-size: 1.3em;
+    }
+}
+.reg-btn a{
+    padding: .5em;
+    border: 5px solid var(--secondary-color);
+    border-radius: 20px;
+    font-size: 1.3em;
+    text-decoration: none;
+    
+
+    &:hover{
+        background:var(--secondary-color)   ;
+        color: white;
+
+        font-weight: bold;
+        font-size: 1.3em;
+    }
+}
+
+.login{
+    background: #fff;
+    padding: 5rem;
+    margin: auto;
+    width: 50%;
+    border-radius: 5px;
+   
+}
+
+.register{
+    background: #fff;
+    padding: 5rem;
+    margin: auto;
+    width: 50%;
+    border-radius: 5px;
+
+    textarea{
+        width: 100%;
+        padding: 1em
+    }
+   
+}
+

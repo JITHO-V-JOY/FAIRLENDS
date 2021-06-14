@@ -1,17 +1,21 @@
-<div class="navs">
-           <div class="head">
-               <a class="logo" href="#">FAIRLENDS</a>
+<div>
+           <div class="home-header">
+    
+                    
+               <a class="logo" href="#"> <span class="fas fa-handshake"></span>FAIRLENDS</a>
+        
+              
                <nav>
-                   <ul class="primary-nav">
-                        <li class="reg-btn"><a href="register">Register</a></li>
+                   <ul>
+                       <li class="login-btn active"><a  href="/auth/login">Login</a></li>
+                        <li class="reg-btn"><a href="/auth/register">Register</a></li>
                    </ul>
                </nav>
            </div>
 </div>
 
- <section class="login-section">
-           <div class="login-container">
-                   <h2>Login</h2>
+ <main>
+           <div class="login">
                    <form method="POST" action="/auth/signin">
                        <label for="adhar_id">Adhar ID</label>
                        <input type="text" name="adhar_id" id="adhar_id" >
@@ -19,7 +23,7 @@
                        <input type="password" name="password" id="password" >  
                        {{#if err}} 
                             <p class="error">{err}</p>
-                       {{/if}}
+                       {{/if}}  
                        {{#if loggedin}} 
                             <p class="error">success</p>
                        {{/if}}
@@ -27,4 +31,4 @@
                        <input type="submit" class="login">
                    </form>
                </div>
-</section>
+ </main>

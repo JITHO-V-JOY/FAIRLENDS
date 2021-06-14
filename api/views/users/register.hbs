@@ -1,31 +1,34 @@
-<div class="navs">
-           <div class="head">
-               <a class="logo" href="#">FAIRLENDS</a>
+<div>
+           <div class="home-header">
+    
+                    
+               <a class="logo" href="#"> <span class="fas fa-handshake"></span>FAIRLENDS</a>
+        
+              
                <nav>
-                   <ul class="primary-nav">
-                        <li class="reg-btn"><a href="login">Login</a></li>
+                   <ul>
+                       <li class="login-btn active"><a  href="/auth/login">Login</a></li>
+                        <li class="reg-btn"><a href="/auth/register">Register</a></li>
                    </ul>
                </nav>
            </div>
 </div>
-
- <section class="register-section">
-           <div class="register-container">
-               <div class="contact-left">
-                   <h2>Register</h2>
+ <main>
+           <div class="register">
+                   
                    <form method="POST" action="signup">
                        <label for="adhar_id">Adhar ID</label>
                        <input type="text" name="adhar_id" id="adhar_id" >
                         <label for="name">Name</label>
                        <input type="text" name="name" id="name" >
-                       <label for="role">Role</label>
+                       <label for="role">Role</label><br>
                        <select name="role" id="role">
                             <option value="null">Select Role:</option>
                             <option value="borrower">Borrower</option>
                             <option value="lender">Lender</option>
-                        </select>
-                       <label for="address">Address</label>
-                       <textarea name="address" id="address" cols="30" rows="3"></textarea>
+                        </select><br><br>
+                       <label for="address">Address</label><br>
+                       <textarea name="address" id="address" cols="30" rows="3"></textarea><br><br>
                        <label for="phone">Phone</label>
                        <input type="text" name="phone" id="phone" > 
                        <label for="upi_id">UPI ID</label>
@@ -47,5 +50,5 @@
 
                        <input type="submit" class="login">
                    </form>
-               </div>
-</section>
+            </div>
+ </main>
