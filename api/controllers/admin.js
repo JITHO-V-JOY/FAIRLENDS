@@ -156,7 +156,7 @@ exports.getActiveLoansForAdmin = async (req, res, next)=>{
         let fcn = "GetLoanById";
         let args = new Array();
         let userName = req.session.user.adhar_id;
-        let userOrg = (req.session.user.role == "borrower")? "Org1":"Org2";
+        let userOrg = (req.session.user.role == "borrower")? "Org1":(req.session.user.role == "admin")? "Org3":"Org2";
         let trasient = "";
 
         let arr = new Array();
