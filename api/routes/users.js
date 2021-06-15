@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const {register, invokeTransaction, issueLoan, invokeLoan, getLoans, getLoansForLender, acceptLoan, getAcceptedLoansForLender, getLoan, getIssuer, getLender, getActiveLoan, getActiveLoansForLender} = require('../controllers/users');
+const {register, invokeTransaction, issueLoan, invokeLoan, getLoans, getLoansForLender, acceptLoan, getAcceptedLoansForLender, getLoan, getIssuer, getLender, getActiveLoan, getActiveLoansForLender, complaint, getComplaints} = require('../controllers/users');
 const {getLoanById} = require('../controllers/loan');
 
 router.param("loan_id", getLoanById)
@@ -54,5 +54,12 @@ router.get('/lender/view/loan/:loan_id',getLoan, getIssuer, function(req, res) {
   res.render('users/viewLend', {myLoan: res.loan, issuer: res.issuer});
 
 });
+
+router.post('/lender/complaints', complaint)
+
+router.get('/lender/complaints', getComplaints, function(req, res){
+  res.render('users/complaints', {complaints: res.complaints})
+
+})
 
 module.exports = router;

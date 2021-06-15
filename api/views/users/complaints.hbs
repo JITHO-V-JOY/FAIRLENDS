@@ -8,7 +8,7 @@
            <div class="sidebar-menu">
                <ul>
                    <li>
-                       <a href="/" >
+                       <a href="/">
                             <span class="fas fa-tachometer-alt"></span>
                             <span>Dashboard</span>
                        </a>
@@ -26,16 +26,17 @@
                        </a>
                    </li>
                     <li>
-                       <a href="/users/lender/active_lends" class="active" >
+                       <a href="/users/lender/activeLoans" >
                             <span class="fas fa-clipboard"></span>
                             <span>Active Lends</span>
                        </a>
                    </li>
                    <li>
-                       <a href="/users/lender/complaints" >
-                            <span class="fas fa-clipboard"></span>
+                       <a href="/users/complaints" class="active">
+                            <span class="fas fa-tachometer-alt"></span>
                             <span>My Complaints</span>
                        </a>
+                   </li>
                    <li>
                        <a href="/" >
                             <span class="fas fa-user-circle"></span>
@@ -56,7 +57,7 @@
     <header>
         <h2>
             <label for=""> <span class="fas fa-bars"></span></label>
-            Active Lends
+            My Complaints
         </h2>
         <div class="user-wrapper">
             <img src="images/human.png" width="40px" height="40px" alt="">
@@ -65,20 +66,20 @@
             </div>
         </div>
     </header>
- <main>
-         <div class="loan-container">
-                  {{#if myLoan}}
-                    {{#each myLoan}}
-                        <a href="/users/lender/activeLoan/{{this.loan_id}}" style="text-decoration: none;">
+
+    <main>  
+       {{#if complaints}}
+            {{#each complaints}}
+                        <a href="/users/lender/view/loan/{{this.loan_id}}" style="text-decoration: none;">
                         <div class="card">
                             <div class="card-header">
                                  <table>
                                     <tr>
                                         <td>
-                                            <span class="special-txt">Loan Id </span>
+                                            <span class="special-txt">Complaint Id </span>
                                         </td>
                                         <td>
-                                             <p class="card-text">: {{this.loan_id}}</p>  
+                                             <p class="card-text">: {{this._id}}</p>  
 
                                         </td>
                                     </tr>
@@ -86,22 +87,23 @@
                              </div>
                             <div class="card-body">
                                 <table>
-                                    
-                                    <tr>
+
+                                      <tr>
                                         <td>
-                                            <span class="special-txt">Issued On</span>
+                                            <span class="special-txt">Loan Id</span>
                                         </td>
                                         <td>
-                                             <p class="card-text">: {{this.issued_date}}</p>
+                                             <p class="card-text">: {{this.loan_id}}</p>
 
                                         </td>
                                     </tr>
+                                    
                                     <tr>
                                         <td>
-                                            <span class="special-txt">Requested Loan Amount </span>
+                                            <span class="special-txt">Overdue Date</span>
                                         </td>
                                         <td>
-                                            <p class="card-text"> : <i class="fa fa-rupee"></i>{{this.amount}}</p>
+                                             <p class="card-text">: {{this.issue_date}}</p>
 
                                         </td>
                                     </tr>
@@ -114,27 +116,14 @@
 
                                         </td>
                                     </tr>
-                                     <tr>
-                                        <td>
-                                            <span class="special-txt">With</span>
-                                        </td>
-                                        <td>
-                                             <p class="card-text">: {{this.issuer}}</p>
-
-                                        </td>
-                                    </tr>
                                 </table>
                             </div>
                         </div>
                         </a>
                     {{/each}}
-                  {{else}}
-                    <p>No loans yet!</p>
-                  {{/if}}
-               </div>
-</div>
+                    {{else}}
+                        <p>No Complaints</p>
+       {{/if}}
     </main>
-    
-   
 </div>
 

@@ -32,6 +32,11 @@
                        </a>
                    </li>
                    <li>
+                       <a href="/users/lender/complaints" >
+                            <span class="fas fa-clipboard"></span>
+                            <span>My Complaints</span>
+                       </a>
+                   <li>
                        <a href="/" >
                             <span class="fas fa-user-circle"></span>
                             <span>Profile</span>
@@ -263,7 +268,7 @@
                                                             {{#if this.payment}}
                                                             <button disabled>Report</button>
                                                             {{else}}
-                                                            <button>Report</button>
+                                                            <button id="report"  onclick="report('{{this.date}}', '{{../myLoan.loan_id}}')" >Report</button>
                                                             {{/if}}
                                                         </td>
                                                     </tr>
@@ -345,7 +350,25 @@
             </div>
                     
     </main>
-
 </div>
+
+<script type="text/javascript">
+          async function report(date, id){
+            console.log(date, id)
+           
+          event.preventDefault();
+          try {
+               let body ={
+                "loan_id": id,
+                "due_date": date
+                 }
+                const response = await axios.post(`http://localhost:3000/users/lender/complaints`, body);
+                console.log(response);
+            } catch (errors) {
+                console.error(errors);
+            }
+         }
+</script>   
+
     
 

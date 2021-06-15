@@ -1,6 +1,7 @@
 const helper = require('../utils/helper');
 const invoke = require('../utils/invoke');
 const Loan = require('../models/loans');
+const Complaint = require('../models/complaints');
 const { response } = require('express');
 
 exports.register = async (req, res, next)=>{
@@ -501,6 +502,51 @@ exports.getLender = async(req, res, next) =>{
         res.lender = temp;;
         console.log("response ##############", res.lender);
         next();       
+    }else{
+        return res.status(400).json({
+            error:"not logged in"
+        })
+    }
+}
+
+exports.complaint = (req, res, next)=>{
+    const {loan_id, due_date} = req.body;
+    console.log("hello", req.body);
+    console.log("hello", req.body.loan_id);
+    const issue_date = String(new Date());
+    console.log("date", issue_date)
+    const lender = req.session.user.adhar_id
+    const status = 'pending'
+    const complaint = new Complaint({loan_id, issue_date, lender, due_date, status});
+    complaint.save((err, comp)=>{
+        if(err){
+            res.status(400).json({
+                error: err
+            })
+        }
+        if(comp){
+            console.log(comp);
+            res.redirect('/');
+        }
+    })
+
+}
+
+exports.getComplaints = (req, res, next)=>{
+    if(req.session.user){
+        const lender = req.session.user.adhar_id
+        Complaint.find({lender}, (err, comp)=>{
+            if(err){
+                res.status(400).json({
+                    error: err
+                })
+            }
+            if(comp){
+                res.complaints = comp;
+                console.log("complaints", res.complaints);
+                next();
+            }
+        })
     }else{
         return res.status(400).json({
             error:"not logged in"
