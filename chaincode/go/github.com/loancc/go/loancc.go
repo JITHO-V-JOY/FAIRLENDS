@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"math"
 	"time"
 
 	"github.com/hyperledger/fabric-contract-api-go/contractapi"
@@ -16,17 +17,18 @@ type LoanContract struct {
 var logger = flogging.MustGetLogger("loancc_cc")
 
 type Repayment struct {
-	Date    string `json:"date"`
-	Payment bool   `json:"payment"`
+	Date    string  `json:"date"`
+	Amount  float64 `json:"amount"`
+	Payment bool    `json:"payment"`
 }
 
 type Loan struct {
 	Loan_ID      string      `json:"loan_id"`
 	Issuer       string      `json:"issuer"`
 	Lender       string      `json:"lender"`
-	Amount       int64       `json:"amount"`
-	Interest     int         `json:"interest"`
-	Tenure       int         `json:"tenure"`
+	Amount       float64     `json:"amount"`
+	Interest     float64     `json:"interest"`
+	Tenure       float64     `json:"tenure"`
 	Approved     bool        `json:"approved"`
 	IssuedDate   string      `json:"issued_date"`
 	ApprovedDate string      `json:"approved_date"`
@@ -91,7 +93,7 @@ func (s *LoanContract) AddLender(ctx contractapi.TransactionContextInterface, ad
 
 // ******************************************** Approve Loan function *************************************************************
 
-func (s *LoanContract) ApproveLoan(ctx contractapi.TransactionContextInterface, loan_id string) (string, error) {
+func (s *LoanContract) ApproveLoan(ctx contractapi.TransactionContextInterface, loan_id string, tax float64) (string, error) {
 	if len(loan_id) == 0 {
 		return "", fmt.Errorf("Please pass the correct loan data")
 	}
@@ -116,14 +118,22 @@ func (s *LoanContract) ApproveLoan(ctx contractapi.TransactionContextInterface, 
 		return "", fmt.Errorf("Failed while geting timestamp. %s", err.Error())
 	}
 	loan.ApprovedDate = time.Unix(txntmsp.Seconds, int64(txntmsp.Nanos)).String()
-	loan.EndDate = time.Unix(txntmsp.Seconds, int64(txntmsp.Nanos)).AddDate(0, loan.Tenure, 0).String()
+	loan.EndDate = time.Unix(txntmsp.Seconds, int64(txntmsp.Nanos)).AddDate(0, int(loan.Tenure), 0).String()
 
-	for i := 1; i <= loan.Tenure; i++ {
-		loan.Emi = append(loan.Emi, Repayment{time.Unix(txntmsp.Seconds, int64(txntmsp.Nanos)).AddDate(0, i, 0).String(), false})
+	monthlyInterestPer := float64(loan.Interest / float64(100*12))
+	monthlyPayment := (loan.Amount * monthlyInterestPer * math.Pow(1+monthlyInterestPer, loan.Tenure) / (math.Pow(1+monthlyInterestPer, loan.Tenure) - 1))
+	interestAmount := monthlyInterestPer * loan.Amount
+	taxAmount := float64((tax / 100) * interestAmount)
+
+	rmp := math.Round(monthlyPayment * 100 / 100)
+	rmt := math.Round(taxAmount * 100 / 100)
+
+	for i := 1; i <= int(loan.Tenure); i++ {
+		loan.Emi = append(loan.Emi, Repayment{time.Unix(txntmsp.Seconds, int64(txntmsp.Nanos)).AddDate(0, i, 0).String(), rmp, false})
 	}
 
-	for i := 1; i <= loan.Tenure; i++ {
-		loan.Tax = append(loan.Tax, Repayment{time.Unix(txntmsp.Seconds, int64(txntmsp.Nanos)).AddDate(0, i, 0).String(), false})
+	for i := 1; i <= int(loan.Tenure); i++ {
+		loan.Tax = append(loan.Tax, Repayment{time.Unix(txntmsp.Seconds, int64(txntmsp.Nanos)).AddDate(0, i, 0).String(), rmt, false})
 	}
 
 	loanAsBytes, err = json.Marshal(loan)
