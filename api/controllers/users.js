@@ -382,7 +382,7 @@ exports.getLoansForLender = async (req, res, next)=>{
 }
 
 
-exports.getAcceptedLoansForLender = async (req, res, next)=>{
+exports.getLendsForLender = async (req, res, next)=>{
     if(req.session.user){
         let chaincodeName = "loan";
         let channelName = "mychannel";
@@ -407,7 +407,7 @@ exports.getAcceptedLoansForLender = async (req, res, next)=>{
                         args = String(loan[i]._id);
                         let response = await invoke.invokeTransaction(channelName, chaincodeName, fcn, args, userName, userOrg, trasient);
                         let temp  = JSON.parse(response.result.txid)
-                        if(temp.lender === userName){
+                        if(temp.lender === userName && temp.status !== "Active"){
                             arr.push(temp);
 
                         }
@@ -432,7 +432,7 @@ exports.getAcceptedLoansForLender = async (req, res, next)=>{
 
 exports.acceptLoan = async (req, res)=>{
     if(req.session.user){
-        console.log(req.profile);
+        console.log("/////////////////////",req.profile);
         let channelName = "mychannel";
         let chaincodeName = "loan";
         let fcn = "AddLender";
@@ -445,7 +445,13 @@ exports.acceptLoan = async (req, res)=>{
         let userOrg = (req.session.user.role == "borrower")? "Org1":"Org2";
         let trasient = "";
         invoke.invokeTransaction(channelName, chaincodeName, fcn, args, userName, userOrg, trasient).then((response)=>{
-        
+            Loan.updateOne({"_id": args[1]}, {$set: {"lender": args[0]}}, (err, loan)=>{
+                if(err){
+                    return res.status(400).json({
+                        error:"Failed to accept the loan"
+                    })
+                }
+            })
             console.log(response);
             res.redirect('/');
         }).catch((e)=>{

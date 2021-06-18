@@ -105,6 +105,24 @@
 
                                         </td>
                                     </tr>
+                                     <tr>
+                                        <td>
+                                            <span class="special-txt">Interest </span>
+                                        </td>
+                                        <td>
+                                             <p class="card-text">: {{myLoan.interest}}%</p>
+
+                                        </td>
+                                    </tr>
+                                     <tr>
+                                        <td>
+                                            <span class="special-txt">Tenure </span>
+                                        </td>
+                                        <td>
+                                             <p class="card-text">: {{myLoan.tenure}} months</p>
+
+                                        </td>
+                                    </tr>
                                     <tr>
                                         <td>
                                             <span class="special-txt">Status </span>
@@ -114,6 +132,7 @@
 
                                         </td>
                                     </tr>
+
                                      <tr>
                                         <td>
                                             <span class="special-txt">Approve On </span>
@@ -212,6 +231,73 @@
                     <p>No issuer yet!</p>
                   {{/if}}
                </div>
+
+             {{#if myLoan.approved}}
+            
+            <div class="card">
+                <div class="card-header">
+                     <h2 style="color: black;">EMI Schedule</h2>
+                </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table width="100%">
+                                        <thead>
+                                            <tr>
+                                                <td>
+                                                    No
+                                                </td>
+                                                <td>
+                                                    Due date
+                                                </td>
+                                                <td>
+                                                    Amount
+                                                </td>
+                                                <td>
+                                                    Status
+                                                </td>
+                                                <td>
+                                                    Make Payment
+                                                </td>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            {{#if myLoan}}
+                                                {{#each myLoan.emi}}
+                                                    <tr>
+                                                        <td>
+                                                            {{index}}
+                                                        </td>
+                                                        <td>
+                                                            {{this.date}}
+                                                        </td>
+                                                        <td>
+                                                            8976
+                                                        </td>
+                                                        <td>
+                                                            {{#if this.payment}}
+                                                            Payed
+                                                            {{else}}
+                                                            Not payed
+                                                            {{/if}}
+                                                        </td>
+                                                        <td>
+                                                            {{#if this.payment}}
+                                                            <button disabled>Pay</button>
+                                                            {{else}}
+                                                            <button>Pay</button>
+                                                            {{/if}}
+                                                        </td>
+                                                    </tr>
+                                                {{/each}}
+                                            {{/if}}
+                                        
+                                        </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                {{/if}}
 
             </div>
     </main>

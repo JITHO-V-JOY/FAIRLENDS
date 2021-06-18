@@ -12,7 +12,7 @@ exports.getLoanById = (req, res, next , id) => {
             })
         }
         req.profile = loan;
-        console.log(loan);
+        console.log("what.......",loan);
         next();
     })
 }

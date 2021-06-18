@@ -105,31 +105,32 @@
 
                                         </td>
                                     </tr>
-                                    <tr>
+                                   
+                                     <tr>
+                                        <td>
+                                            <span class="special-txt">Affordable Interest </span>
+                                        </td>
+                                        <td>
+                                             <p class="card-text">: {{myLoan.interest}}%</p>
+
+                                        </td>
+                                    </tr>
+
+                                     <tr>
+                                        <td>
+                                            <span class="special-txt">Tenure </span>
+                                        </td>
+                                        <td>
+                                             <p class="card-text">: {{myLoan.tenure}} months</p>
+
+                                        </td>
+                                    </tr>
+                                     <tr>
                                         <td>
                                             <span class="special-txt">Status </span>
                                         </td>
                                         <td>
                                              <p class="card-text">: {{myLoan.status}}</p>
-
-                                        </td>
-                                    </tr>
-                                     <tr>
-                                        <td>
-                                            <span class="special-txt">Approve On </span>
-                                        </td>
-                                        <td>
-                                             <p class="card-text">: {{myLoan.approved_date}}</p>
-
-                                        </td>
-                                    </tr>
-
-                                     <tr>
-                                        <td>
-                                            <span class="special-txt">End On </span>
-                                        </td>
-                                        <td>
-                                             <p class="card-text">: {{myLoan.end_date}}</p>
 
                                         </td>
                                     </tr>
@@ -211,10 +212,16 @@
                   {{else}}
                     <p>No issuer yet!</p>
                   {{/if}}
-                  <a href="/users/lender/loans/{{this.loan_id}}" class="btn btn-primary">Accept</a>
+
+                   
+                   <a href="/users/lender/loans/{{myLoan.loan_id}}" style="text-align: center;" class="btn btn-primary">Accept</a>
+             
+                 
                </div>
+               
 
             </div>
+             
     </main>
     
 </div>

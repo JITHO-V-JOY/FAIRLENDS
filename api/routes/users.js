@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const {register, invokeTransaction, issueLoan, invokeLoan, getLoans, getLoansForLender, acceptLoan, getAcceptedLoansForLender, getLoan, getIssuer, getLender, getActiveLoan, getActiveLoansForLender, complaint, getComplaints} = require('../controllers/users');
+const {register, invokeTransaction, issueLoan, invokeLoan, getLoans, getLoansForLender, acceptLoan, getLendsForLender, getLoan, getIssuer, getLender, getActiveLoan, getActiveLoansForLender, complaint, getComplaints} = require('../controllers/users');
 const {getLoanById} = require('../controllers/loan');
 
 router.param("loan_id", getLoanById)
@@ -28,7 +28,7 @@ router.get('/lender/loans', getLoansForLender, function(req, res) {
   res.render('users/viewLoanLender', {myLoan: res.loan});
 });
 
-router.get('/lender/acceptedLoans', getAcceptedLoansForLender, function(req, res) {
+router.get('/lender/acceptedLoans', getLendsForLender, function(req, res) {
   res.render('users/viewAcceptedLoan', {myLoan: res.loan});
 });
 
@@ -51,6 +51,11 @@ router.get('/view/borrower/:loan_id',getLoan, getLender, function(req, res) {
 });
 
 router.get('/lender/view/loan/:loan_id',getLoan, getIssuer, function(req, res) {
+  res.render('users/viewRequestedLoan', {myLoan: res.loan, issuer: res.issuer});
+
+});
+
+router.get('/lender/view/lend/:loan_id',getLoan, getIssuer, function(req, res) {
   res.render('users/viewLend', {myLoan: res.loan, issuer: res.issuer});
 
 });

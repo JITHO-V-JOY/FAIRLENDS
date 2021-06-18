@@ -56,7 +56,7 @@
     <header>
         <h2>
             <label for=""> <span class="fas fa-bars"></span></label>
-            Accepted Loans
+            My Lends
         </h2>
         <div class="user-wrapper">
             <img src="images/human.png" width="40px" height="40px" alt="">
@@ -69,7 +69,7 @@
          <div class="loan-container">
                   {{#if myLoan}}
                     {{#each myLoan}}
-                        <a href="/users/lender/view/loan/{{this.loan_id}}" style="text-decoration: none;">
+                        <a href="/users/lender/view/lend/{{this.loan_id}}" style="text-decoration: none;">
                         <div class="card">
                             <div class="card-header">
                                  <table>
@@ -132,7 +132,7 @@
                     <p>No loans yet!</p>
                   {{/if}}
                </div>
-</div>
+        </div>
     </main>
     
    
