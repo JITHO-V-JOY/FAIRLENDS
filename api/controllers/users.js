@@ -31,43 +31,45 @@ exports.register = async (req, res, next)=>{
     
 }
 
-exports.issueLoan = (req, res, next)=>{
+exports.issueLoan = async(req, res, next)=>{
     if(req.session.user){
-        const loan = new Loan({borrower: req.session.user.adhar_id});
-        let arr = new Array();
-        let arg;
-        loan.save((err, user)=>{
-            if(err){
-                return response(400).json({
-                    error: "NOT able to save user in DB"
-                })
-            }else if(user){
-                console.log(user);
-                let emi = new Array();
-                let tax = new Array();
-                arr.push(JSON.stringify({
-                      "loan_id": String(user._id),
-                      "issuer":String(user.borrower),
-                      "lender":"",
-                      "amount":Number(req.body.amount),
-                      "interest":Number(req.body.interest),
-                      "tenure":Number(req.body.tenure),
-                      "approved":Boolean(false),
-                      "issued_date":String(new Date()),
-                      "approved_date":"",
-                      "end_date":"",
-                      "emi":Array(),
-                      "tax":Array(),
-                      "status":"issued"
-                    }))
+        let loan = await queryLoan(req);
+        if(loan === null){
+            console.log("can issue loan..")
+            const loan = new Loan({borrower: req.session.user.adhar_id});
+            let arr = new Array();
+            let arg;
+            loan.save((err, user)=>{
+                if(err){
+                    return response(400).json({
+                        error: "NOT able to save user in DB"
+                    })
+                }else if(user){
+                    console.log(user);
+                    let emi = new Array();
+                    let tax = new Array();
+                    arr.push(JSON.stringify({
+                        "loan_id": String(user._id),
+                        "issuer":String(user.borrower),
+                        "lender":"",
+                        "amount":Number(req.body.amount),
+                        "interest":Number(req.body.interest),
+                        "tenure":Number(req.body.tenure),
+                        "approved":Boolean(false),
+                        "issued_date":String(new Date()),
+                        "approved_date":"",
+                        "end_date":"",
+                        "emi":Array(),
+                        "tax":Array(),
+                        "status":"issued"
+                        }))
 
-                console.log(arr);
+                    console.log(arr);
 
-                console.log(req.body);
+                    console.log(req.body);
 
-        
             }
-        })
+          })
 
         console.log(req.session.user.role); 
         req.userName = req.session.user.adhar_id;
@@ -78,6 +80,11 @@ exports.issueLoan = (req, res, next)=>{
         req.fcn = "IssueLoan";
 
         next();
+    }else{
+        console.log("can't issue loan..")
+
+        res.render('loanError');
+    }
     }else{
         res.status(400).json({
             error: "error in session"
@@ -137,6 +144,8 @@ exports.invokeLoan = (req, res) => {
 
 exports.getLoans = async (req, res, next)=>{
     if(req.session.user){
+        
+
         let chaincodeName = "loan";
         let channelName = "mychannel";
         let fcn = "GetLoanById";
@@ -178,6 +187,58 @@ exports.getLoans = async (req, res, next)=>{
     }
 }
 
+const queryLoan = async (req)=>{
+    if(req.session.user){
+        let chaincodeName = "loan";
+        let channelName = "mychannel";
+        let fcn = "GetLoanById";
+        let args = new Array();
+        let userName = req.session.user.adhar_id;
+        let userOrg = (req.session.user.role == "borrower")? "Org1":"Org2";
+        let trasient = "";
+
+        let arr = new Array();
+        let role  = (req.session.user.role == "borrower")? "borrower": "lender";
+        const query = Loan.find({"borrower": req.session.user.adhar_id}); // `query` is an instance of `Query`
+        query.setOptions({ lean : true });
+        query.collection(Loan.collection);
+        query.exec(async (err, loan)=>{
+            if(err){
+                return null;
+
+                }else if(loan){
+                    console.log("loans",loan);
+                    for(let i = 0; i < loan.length; i++){
+                        args = String(loan[i]._id);
+                        let response = await invoke.invokeTransaction(channelName, chaincodeName, fcn, args, userName, userOrg, trasient);
+                        let result = JSON.parse(response.result.txid)
+                        if(result.status !== 'Redeem'){
+                            arr.push(result);
+                        }
+                    }
+                    if(arr.length !== 0){
+                        console.log("@@@@@@@@@@@@@@@@@@@@@@@@", arr)
+                        return arr;
+                    }else{
+                        console.log("Hello........")
+                        return null;
+                    }
+                }
+               
+        });
+
+       
+      
+        
+    }else{
+        return res.status(400).json({
+            error:"not logged in"
+        })
+    }
+}
+
+
+
 exports.getActiveLoan = async (req, res, next)=>{
     if(req.session.user){
         let chaincodeName = "loan";
@@ -206,6 +267,8 @@ exports.getActiveLoan = async (req, res, next)=>{
                         if(result.issuer === userName && result.status === "Active"){
                             res.loan = result;
                                  
+                        }else{
+                          return res.render('users/activeLoan');
                         }
                         
                     }
@@ -492,16 +555,20 @@ exports.getIssuer = async (req, res, next)=>{
 
 exports.getLender = async(req, res, next) =>{
     if(req.session.user){
-       console.log("loan", res.loan.lender )
-        let userName = res.loan.lender;
-        let userOrg = (req.session.user.role == "borrower")? "Org1": (req.session.user.role == "admin")? "Org3": "Org2";
-        let trasient = "";
+        if(res.loan.lender){
+            console.log("loan", res.loan.lender )
+            let userName = res.loan.lender;
+            let userOrg = (req.session.user.role == "borrower")? "Org1": (req.session.user.role == "admin")? "Org3": "Org2";
+            let trasient = "";
 
-        let response = await invoke.invokeTransaction("mychannel", "fairlends", "QueryUser", userName,  userName, userOrg, trasient);
-        let temp  = JSON.parse(response.result.txid)   
-        res.lender = temp;;
-        console.log("response ##############", res.lender);
-        next();       
+            let response = await invoke.invokeTransaction("mychannel", "fairlends", "QueryUser", userName,  userName, userOrg, trasient);
+            let temp  = JSON.parse(response.result.txid)   
+            res.lender = temp;;
+            console.log("response ##############", res.lender);
+            next(); 
+        }else{
+            next();
+        }      
     }else{
         return res.status(400).json({
             error:"not logged in"

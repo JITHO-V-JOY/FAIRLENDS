@@ -102,6 +102,24 @@
 
                                         </td>
                                     </tr>
+                                     <tr>
+                                        <td>
+                                            <span class="special-txt">Affordable Interest</span>
+                                        </td>
+                                        <td>
+                                            <p class="card-text"> :  {{myLoan.interest}}%</p>
+
+                                        </td>
+                                    </tr>
+                                     <tr>
+                                        <td>
+                                            <span class="special-txt">Tenure </span>
+                                        </td>
+                                        <td>
+                                            <p class="card-text"> :  {{myLoan.tenure}} months</p>
+
+                                        </td>
+                                    </tr>
                                     <tr>
                                         <td>
                                             <span class="special-txt">Status </span>
@@ -206,7 +224,7 @@
                             </div>
                         </div>
                   {{else}}
-                    <p>No loans yet!</p>
+                    <p style="margin-top: 1rem;">No lender accepted yet!</p>
                   {{/if}}
                </div>
 

@@ -134,7 +134,7 @@
                             </div>
                         </div>
                   {{else}}
-                    <p>No loans yet!</p>
+                    <p>No Active loans!</p>
                   {{/if}}
 
 
@@ -205,11 +205,11 @@
                                 </table>
                             </div>
                         </div>
-                  {{else}}
-                    <p>No loans yet!</p>
+                 
                   {{/if}}
                </div>
             
+            {{#if myLoan}}
             <div class="card">
                 <div class="card-header">
                      <h2 style="color: black;">EMI Schedule</h2>
@@ -273,6 +273,7 @@
                             </div>
                         </div>
                     </div>
+                    {{/if}}
                     
                 </div>
             </div>
