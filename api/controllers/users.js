@@ -521,9 +521,9 @@ exports.invokeTransaction = (req, res) => {
 
 exports.getLoan = async (req, res, next)=>{
     if(req.session.user){
-       
+        console.log(req.session.user);
         let userName = req.session.user.adhar_id;
-        let userOrg = (req.session.user.role == "borrower")? "Org1": (req.session.user.role == "admin")? "Org3": "Org2";
+        let userOrg = (req.session.user.role === "borrower") ? "Org1": (req.session.user.role === "admin")? "Org3": "Org2";
         let trasient = "";
 
         let response = await invoke.invokeTransaction("mychannel", "loan", "GetLoanById", String(req.profile._id), userName, userOrg, trasient);
@@ -563,7 +563,7 @@ exports.getLender = async(req, res, next) =>{
     if(req.session.user){
         if(res.loan.lender){
             console.log("loan", res.loan.lender )
-            let userName = res.loan.lender;
+            let userName = req.session.user.adhar_id;
             let userOrg = (req.session.user.role == "borrower")? "Org1": (req.session.user.role == "admin")? "Org3": "Org2";
             let trasient = "";
 
