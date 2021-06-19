@@ -175,6 +175,7 @@
                    {{#if Issuer}}
                         
                                 <div class="col-md-6">
+                                    <h2>Issuer Details</h2>
                                 <div class="card">
                                     <div class="card-header">
                                  <table>
@@ -254,6 +255,7 @@
 
                 {{#if Lender}}
                             <div class="col-md-6">
+                                <h2>Lender Details</h2>
                                 <div class="card">
                                     <div class="card-header">
                                  <table>
@@ -364,7 +366,7 @@
                                                         {{this.date}}
                                                     </td>
                                                     <td>
-                                                        2045
+                                                       <i class="fa fa-rupee"></i> {{this.amount}}
                                                     </td>
                                                     <td>
                                                         {{#if this.payment}}
@@ -412,7 +414,7 @@
                                                         {{this.date}}
                                                     </td>
                                                     <td>
-                                                        2045
+                                                       <i class="fa fa-rupee"></i> {{this.amount}}
                                                     </td>
                                                     <td>
                                                         {{#if this.payment}}

@@ -1,64 +1,220 @@
-<section class="user-section">
-       
-           <div class="loan-container">
-               <div class="back">
-                   <a href="/admin/loan_requests"> Back</a>
-               </div>
-                  {{#if loanRequest}}
-                         <div class="card" style="margin-top: 2em; margin-bottom: 4em;">
-                              <div class="card-header">
-                            Loan Id : {{loanRequest.loan_id}}
+<div class="sidebar">
+           <div class="sidebar-brand">
+               <h1>
+                    <span class="fas fa-hands-helping"></span>
+                    Fairlends
+               </h1>
+           </div>
+           <div class="sidebar-menu">
+               <ul>
+                   <li>
+                       <a href="/" >
+                            <span class="fas fa-tachometer-alt"></span>
+                            <span>Dashboard</span>
+                       </a>
+                   </li>
+                   <li>
+                       <a href="/admin/loan_requests" class="active">
+                            <span class="fas fa-clipboard-list"></span>
+                            <span>Loan Requests</span>
+                       </a>
+                   </li>
+                   <li>
+                       <a href="/admin/accepted_loans" >
+                            <span class="fas fa-clipboard"></span>
+                            <span>Accepted Loans</span>
+                       </a>
+                   </li>
+                    <li>
+                       <a href="/admin/approved_loans" >
+                            <span class="fas fa-clipboard"></span>
+                            <span>Approved Loans</span>
+                       </a>
+                   </li>
+                    <li>
+                       <a href="/admin/active_loans"  >
+                            <span class="fas fa-clipboard"></span>
+                            <span>Active Lends</span>
+                       </a>
+                   </li>
+                   <li>
+                       <a href="/" >
+                            <span class="fas fa-user-circle"></span>
+                            <span>Profile</span>
+                       </a>
+                   </li>
+                   <li>
+                       <a href="/" >
+                            <span class="fas fa-sign-out-alt"></span>
+                            <span>Logout</span>
+                       </a>
+                   </li>
+               </ul>
+           </div>
+</div>
 
-                            </div>
-                            <div class="card-body">
-                                <p class="card-text"><span class="special-txt">issuer : </span> {{loanRequest.issuer}}</p>
-                                <p class="card-text"><span class="special-txt">Requested Loan Amount : </span>  <i class="fa fa-rupee"></i>{{loanRequest.amount}}</p>
-                                <p class="card-text"><span class="special-txt">Loan Tenure : </span> {{loanRequest.tenure}} months</p>
-                                <p class="card-text"><span class="special-txt">Affordable Interest : </span>{{loanRequest.interest}}%</p>
-                                <p class="card-text"><span class="special-txt">Issued date : </span>{{loanRequest.issued_date}}</p>
-                                <p class="card-text"><span class="special-txt">Status : </span>{{loanRequest.status}}</p>
-
-                               
-                            </div>
-                          
+<div class="main-content">
+    <header>
+        <h2>
+            <label for=""> <span class="fas fa-bars"></span></label>
+            Loan Id: {{loanRequest.loan_id}}
+        </h2>
+        <div class="user-wrapper">
+            <img src="images/human.png" width="40px" height="40px" alt="">
+            <div>
+                {{user.name}}
             </div>
-                          
-                  {{else}}
-                    <p>No loan</p>
-                  {{/if}}
+        </div>
+    </header>
+  <main>
+       
+         <div class="loan-container">
+              <div class="cards">
+                  {{#if loanRequest}}
+                 
+                         <div class="card">
+                             <div class="card-header">
+                                 <table>
+                                    <tr>
+                                        <td>
+                                            <span class="special-txt">Loan Id </span>
+                                        </td>
+                                        <td>
+                                             <p class="card-text">: {{loanRequest.loan_id}}</p>  
 
-                   {{#if Issuer}}
-                       
-                                <div class="card" style="margin-top: 2em; margin-bottom: 4em;">
-                                     <div class="card-header">
-                                        {{Issuer.role}}
+                                        </td>
+                                    </tr>
+                                    </table>
+                             </div>
+                            <div class="card-body">
+                                <table>
+                                    
+                                    <tr>
+                                        <td>
+                                            <span class="special-txt">Issued On</span>
+                                        </td>
+                                        <td>
+                                             <p class="card-text">: {{loanRequest.issued_date}}</p>
 
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <p class="mt-0"><span class="special-txt">Adhar Id : </span>{{Issuer.adhar_id}}</p>
-                                                <p class="card-text"><span class="special-txt">Name : </span>{{Issuer.name}}</p>
-                                                <p class="card-text"><span class="special-txt">Address : </span> {{Issuer.address}}</p>
-                                                <p class="card-text"><span class="special-txt">Phone : </span>{{Issuer.phone}}%</p>
-                                            </div>
-                                            <div class="col-md-6">
-                                                  <p class="card-text"><span class="special-txt">UPI ID: </span>{{Issuer.upi_id}}</p>
-                                                    <p class="card-text"><span class="special-txt">State : </span>{{Issuer.state}}</p>
-                                                    <p class="card-text"><span class="special-txt">City : </span>{{Issuer.city}}</p>
-                                                    <p class="card-text"><span class="special-txt">Pincode : </span>{{Issuer.pincode}}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="special-txt">Requested Loan Amount </span>
+                                        </td>
+                                        <td>
+                                            <p class="card-text"> : <i class="fa fa-rupee"></i>{{loanRequest.amount}}</p>
 
+                                        </td>
+                                    </tr>
+                                   
+                                     <tr>
+                                        <td>
+                                            <span class="special-txt">Affordable Interest </span>
+                                        </td>
+                                        <td>
+                                             <p class="card-text">: {{loanRequest.interest}}%</p>
 
-   
+                                        </td>
+                                    </tr>
 
+                                     <tr>
+                                        <td>
+                                            <span class="special-txt">Tenure </span>
+                                        </td>
+                                        <td>
+                                             <p class="card-text">: {{loanRequest.tenure}} months</p>
+
+                                        </td>
+                                    </tr>
+                                     <tr>
+                                        <td>
+                                            <span class="special-txt">Status </span>
+                                        </td>
+                                        <td>
+                                             <p class="card-text">: {{loanRequest.status}}</p>
+
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
-                        
+                        </div>
                   {{else}}
-                    <p>No Issuer</p>
+                    <p>No loans yet!</p>
                   {{/if}}
+
+                  {{#if Issuer}}
+                 
+                         <div class="card">
+                             <div class="card-header">
+                                 <table>
+                                     <tr>
+                                         <td>
+                                            <span class="special-txt">Issuer </span>
+
+                                         </td>
+                                         <td>
+                                            <p class="card-text">: {{Issuer.name}}</p>  
+
+                                         </td>
+                                     </tr>
+                                 </table>
+                             </div>
+                            <div class="card-body">
+                                <table> 
+                                    <tr>
+                                        <td>
+                                            <span class="special-txt">Adhar Id</span>
+                                        </td>
+                                        <td>
+                                             <p class="card-text">: {{Issuer.adhar_id}}</p>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="special-txt">Phone No </span>
+                                        </td>
+                                        <td>
+                                            <p class="card-text"> : {{Issuer.phone}}</p>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="special-txt">State </span>
+                                        </td>
+                                        <td>
+                                             <p class="card-text">: {{Issuer.state}}</p>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="special-txt">City</span>
+                                        </td>
+                                        <td>
+                                             <p class="card-text">: {{Issuer.city}}</p>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="special-txt">Pincode</span>
+                                        </td>
+                                        <td>
+                                             <p class="card-text">: {{Issuer.pincode}}</p>
+
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                  {{else}}
+                    <p>No issuer yet!</p>
+                  {{/if}}
+            </div>
+        </main>
+        </div>
+    
                
-</section>
