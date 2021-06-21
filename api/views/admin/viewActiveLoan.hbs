@@ -67,6 +67,88 @@
         </div>
     </header>
     <main>
+        <div class="cards">
+            <div class="card-single">
+                <div>
+                   <span>Lender</span>
+                    <h1>{{Issuer.name}}</h1>
+                </div>
+                <div>
+                    <span class="fas fa-user"></span>   
+                </div>
+            </div>
+             <div class="card-single">
+                <div>
+                    <span>Borrower</span>
+                    <h1>{{Lender.name}}</h1>
+                </div>
+                <div>
+                    <span class="fas fa-user"></span>   
+                </div>
+            </div>
+             <div  class="card-single" onclick="toggleComplaints()">
+                <div>
+                    <h3>Complaints</h3>
+                </div>
+                <div>
+                   <span class="fas fa-exclamation-circle"></span>  
+                </div>
+            </div>
+        </div>
+        {{#if complaints}}
+            {{#each complaints}}
+                        <div id="complaint" class="card" style="display: none;">
+                            <div class="card-header">
+                                 <table>
+                                    <tr>
+                                        <td>
+                                            <span class="special-txt">Complaint Id </span>
+                                        </td>
+                                        <td>
+                                             <p class="card-text">: {{this._id}}</p>  
+
+                                        </td>
+                                    </tr>
+                                    </table>
+                             </div>
+                            <div class="card-body">
+                                <table>
+
+                                      <tr>
+                                        <td>
+                                            <span class="special-txt">Loan Id</span>
+                                        </td>
+                                        <td>
+                                             <p class="card-text">: {{this.loan_id}}</p>
+
+                                        </td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>
+                                            <span class="special-txt">Overdue Date</span>
+                                        </td>
+                                        <td>
+                                             <p class="card-text">: {{this.due_date}}</p>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="special-txt">Status </span>
+                                        </td>
+                                        <td>
+                                             <p class="card-text">: {{this.status}}</p>
+
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        
+                    {{/each}}
+
+        {{/if}}
          <div class="loan-container">
                   {{#if loanRequest}}
                        
@@ -447,6 +529,17 @@
 
     </main>
 </div>
+
+<script type="text/javascript">
+    function toggleComplaints(){
+            var x = document.getElementById("complaint");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+    }
+</script>
 
 
 

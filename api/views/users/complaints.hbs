@@ -70,7 +70,6 @@
     <main>  
        {{#if complaints}}
             {{#each complaints}}
-                        <a href="/users/lender/view/loan/{{this.loan_id}}" style="text-decoration: none;">
                         <div class="card">
                             <div class="card-header">
                                  <table>
@@ -119,7 +118,7 @@
                                 </table>
                             </div>
                         </div>
-                        </a>
+                        
                     {{/each}}
                     {{else}}
                         <p>No Complaints</p>

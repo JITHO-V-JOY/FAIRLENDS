@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-const {getLoansForAdmin, getAcceptedLoansForAdmin, getLoan, getIssuer, getLender, approveLoan, getApprovedLoansForAdmin, getActiveLoansForAdmin} = require('../controllers/admin');
+const {getLoansForAdmin, getAcceptedLoansForAdmin, getLoan, getIssuer, getLender, approveLoan, getApprovedLoansForAdmin, getActiveLoansForAdmin, getComplaints} = require('../controllers/admin');
 const {getLoanById} = require('../controllers/loan');
 
 router.param("loan_id", getLoanById)
@@ -43,8 +43,8 @@ router.get('/view/approved_loan/:loan_id',getLoan, getIssuer, getLender, functio
     res.render('admin/viewApprovedLoan', {loanRequest: res.loan, Issuer: res.issuer, Lender: res.lender});
 
 });
-router.get('/view/active_loan/:loan_id',getLoan, getIssuer, getLender, function(req, res) {
-    res.render('admin/viewActiveLoan', {loanRequest: res.loan, Issuer: res.issuer, Lender: res.lender});
+router.get('/view/active_loan/:loan_id',getLoan, getIssuer, getLender, getComplaints, function(req, res) {
+    res.render('admin/viewActiveLoan', {loanRequest: res.loan, Issuer: res.issuer, Lender: res.lender, complaints: res.complaints});
 
 });
 

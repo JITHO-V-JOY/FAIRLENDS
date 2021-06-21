@@ -1,6 +1,7 @@
 const helper = require('../utils/helper');
 const invoke = require('../utils/invoke');
 const Loan = require('../models/loans');
+const Complaint = require('../models/complaints');
 const { response } = require('express');
 
 exports.getLoansForAdmin = async (req, res, next)=>{
@@ -265,6 +266,29 @@ exports.approveLoan = async(req, res, next)=>{
         let response = await invoke.invokeTransaction("mychannel", "loan", "ApproveLoan", String(req.profile._id), userName, userOrg, trasient);
         console.log("response ##############", response.result.txid);
         res.redirect('/admin/accepted_loans');
+    }else{
+        return res.status(400).json({
+            error:"not logged in"
+        })
+    }
+}
+
+exports.getComplaints = (req, res, next)=>{
+    if(req.session.user.role === "admin"){
+        const loan_id = String(req.profile._id)
+        console.log(loan_id)
+        Complaint.find({loan_id}, (err, comp)=>{
+            if(err){
+                res.status(400).json({
+                    error: err
+                })
+            }
+            if(comp){
+                res.complaints = comp;
+                console.log("complaints", res.complaints);
+                next();
+            }
+        })
     }else{
         return res.status(400).json({
             error:"not logged in"

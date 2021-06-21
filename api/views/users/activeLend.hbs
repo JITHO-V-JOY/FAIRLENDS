@@ -255,7 +255,7 @@
                                                             {{this.date}}
                                                         </td>
                                                         <td>
-                                                            8976
+                                                            <i class="fa fa-rupee"></i>{{this.amount}}
                                                         </td>
                                                         <td>
                                                             {{#if this.payment}}
@@ -268,7 +268,8 @@
                                                             {{#if this.payment}}
                                                             <button disabled>Report</button>
                                                             {{else}}
-                                                            <button id="report"  onclick="report('{{this.date}}', '{{../myLoan.loan_id}}')" >Report</button>
+                                                        
+                                                           <button id="report"  onclick="report('{{this.date}}', '{{../myLoan.loan_id}}')" >Report</button>
                                                             {{/if}}
                                                         </td>
                                                     </tr>
@@ -318,7 +319,8 @@
                                                             {{this.date}}
                                                         </td>
                                                         <td>
-                                                            23
+                                                            <i class="fa fa-rupee"></i>{{this.amount}}
+
                                                         </td>
                                                         <td>
                                                             {{#if this.payment}}

@@ -156,6 +156,7 @@ main .header {
   color: #ffffff;
   padding: 2rem;
   border-radius: 2px;
+  cursor: pointer;
 }
 
 .card {
