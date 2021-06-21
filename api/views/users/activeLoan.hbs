@@ -38,7 +38,7 @@
                        </a>
                    </li>
                    <li>
-                       <a href="/" >
+                       <a href="/auth/signout">
                             <span class="fas fa-sign-out-alt"></span>
                             <span>Logout</span>
                        </a>
@@ -99,6 +99,24 @@
                                         </td>
                                         <td>
                                             <p class="card-text"> : <i class="fa fa-rupee"></i>{{myLoan.amount}}</p>
+
+                                        </td>
+                                    </tr>
+                                     <tr>
+                                        <td>
+                                            <span class="special-txt">Interest </span>
+                                        </td>
+                                        <td>
+                                             <p class="card-text">: {{myLoan.interest}}%</p>
+
+                                        </td>
+                                    </tr>
+                                     <tr>
+                                        <td>
+                                            <span class="special-txt">Tenure </span>
+                                        </td>
+                                        <td>
+                                             <p class="card-text">: {{myLoan.tenure}} months</p>
 
                                         </td>
                                     </tr>
@@ -248,7 +266,7 @@
                                                             {{this.date}}
                                                         </td>
                                                         <td>
-                                                            8976
+                                                            <i class="fa fa-rupee"></i>{{this.amount}}
                                                         </td>
                                                         <td>
                                                             {{#if this.payment}}

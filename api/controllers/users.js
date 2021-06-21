@@ -267,8 +267,6 @@ exports.getActiveLoan = async (req, res, next)=>{
                         if(result.issuer === userName && result.status === "Active"){
                             res.loan = result;
                                  
-                        }else{
-                          return res.render('users/activeLoan');
                         }
                         
                     }
