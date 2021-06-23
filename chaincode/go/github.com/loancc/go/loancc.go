@@ -176,7 +176,7 @@ func (s *LoanContract) Redeem(ctx contractapi.TransactionContextInterface, loan_
 
 // ******************************************** pay emi *************************************************************
 
-func (s *LoanContract) PayEMI(ctx contractapi.TransactionContextInterface, loan_id string) (string, error) {
+func (s *LoanContract) PayEMI(ctx contractapi.TransactionContextInterface, loan_id string, pay_day string) (string, error) {
 	if len(loan_id) == 0 {
 		return "", fmt.Errorf("Please pass the correct date")
 	}
@@ -194,22 +194,20 @@ func (s *LoanContract) PayEMI(ctx contractapi.TransactionContextInterface, loan_
 	loan := new(Loan)
 	_ = json.Unmarshal(loanAsBytes, loan)
 
-	txntmsp, err := ctx.GetStub().GetTxTimestamp()
+	today, err := time.Parse("2006-01-02 15:04:05", pay_day)
+
 	if err != nil {
-		return "", fmt.Errorf("Failed while geting timestamp. %s", err.Error())
+		return "", fmt.Errorf("Failed while parsing date. %s", err.Error())
 	}
 
 	for i := 0; i < len(loan.Emi); i++ {
 		payDate, err := time.Parse("2006-01-02 15:04:05", loan.Emi[i].Date[:len(loan.Emi[i].Date)-20])
-		fmt.Println("pay date", payDate)
-		fmt.Println("checking before", payDate.Before(time.Unix(txntmsp.Seconds, int64(txntmsp.Nanos))))
-		fmt.Println("checking After", payDate.AddDate(0, -1, 0).After(time.Unix(txntmsp.Seconds, int64(txntmsp.Nanos))))
 
 		if err != nil {
 			return "", fmt.Errorf("Failed while parsing date. %s", err.Error())
 		}
 
-		if payDate.Equal(time.Unix(txntmsp.Seconds, int64(txntmsp.Nanos))) || (payDate.After(time.Unix(txntmsp.Seconds, int64(txntmsp.Nanos))) && payDate.AddDate(0, -1, 0).Before(time.Unix(txntmsp.Seconds, int64(txntmsp.Nanos)))) {
+		if payDate.Equal(today) {
 			loan.Emi[i].Payment = true
 			fmt.Println("loan", loan.Emi[i])
 			break
@@ -226,7 +224,7 @@ func (s *LoanContract) PayEMI(ctx contractapi.TransactionContextInterface, loan_
 
 // ******************************************** pay tax *************************************************************
 
-func (s *LoanContract) PayTax(ctx contractapi.TransactionContextInterface, loan_id string) (string, error) {
+func (s *LoanContract) PayTax(ctx contractapi.TransactionContextInterface, loan_id string, pay_day string) (string, error) {
 	if len(loan_id) == 0 {
 		return "", fmt.Errorf("Please pass the correct date")
 	}
@@ -244,9 +242,9 @@ func (s *LoanContract) PayTax(ctx contractapi.TransactionContextInterface, loan_
 	loan := new(Loan)
 	_ = json.Unmarshal(loanAsBytes, loan)
 
-	txntmsp, err := ctx.GetStub().GetTxTimestamp()
+	today, err := time.Parse("2006-01-02 15:04:05", pay_day)
 	if err != nil {
-		return "", fmt.Errorf("Failed while geting timestamp. %s", err.Error())
+		return "", fmt.Errorf("Failed while parsing date. %s", err.Error())
 	}
 
 	for i := 0; i < len(loan.Tax); i++ {
@@ -254,7 +252,7 @@ func (s *LoanContract) PayTax(ctx contractapi.TransactionContextInterface, loan_
 		if err != nil {
 			return "", fmt.Errorf("Failed while parsing date. %s", err.Error())
 		}
-		if payDate.Equal(time.Unix(txntmsp.Seconds, int64(txntmsp.Nanos))) || (payDate.After(time.Unix(txntmsp.Seconds, int64(txntmsp.Nanos))) && payDate.AddDate(0, -1, 0).Before(time.Unix(txntmsp.Seconds, int64(txntmsp.Nanos)))) {
+		if payDate.Equal(today) {
 			loan.Tax[i].Payment = true
 			break
 		}
