@@ -333,7 +333,7 @@
                                                             {{#if this.payment}}
                                                             <button disabled>Pay</button>
                                                             {{else}}
-                                                            <button>Pay</button>
+                                                            <button onclick="payTax('{{this.date}}', '{{../myLoan.loan_id}}')">Pay</button>
                                                             {{/if}}
                                                         </td>
                                                     </tr>
@@ -369,6 +369,23 @@
             } catch (errors) {
                 console.error(errors);
             }
+         }
+
+          async function payTax(date, id){
+                console.log("Hello", date, id)
+                
+                event.preventDefault();
+
+                try {
+                    let body ={
+                        "loan_id": id,
+                        "date": date
+                        }
+                        const response = await axios.post(`http://localhost:3000/users/lender/tax`, body);
+                        console.log(response);
+                    } catch (errors) {
+                        console.error(errors);
+                    }
          }
 </script>   
 

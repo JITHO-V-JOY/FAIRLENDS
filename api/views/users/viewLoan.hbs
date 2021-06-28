@@ -251,9 +251,7 @@
                                                 <td>
                                                     Status
                                                 </td>
-                                                <td>
-                                                    Make Payment
-                                                </td>
+                                        
                                             </tr>
                                         </thead>
 
@@ -268,22 +266,16 @@
                                                             {{this.date}}
                                                         </td>
                                                         <td>
-                                                            8976
+                                                           <i class="fa fa-rupee"></i>  {{this.amount}}
                                                         </td>
                                                         <td>
-                                                            {{#if this.payment}}
+                                                            {{#if this.payment}}    
                                                             Payed
                                                             {{else}}
                                                             Not payed
                                                             {{/if}}
                                                         </td>
-                                                        <td>
-                                                            {{#if this.payment}}
-                                                            <button disabled>Pay</button>
-                                                            {{else}}
-                                                            <button>Pay</button>
-                                                            {{/if}}
-                                                        </td>
+                                                       
                                                     </tr>
                                                 {{/each}}
                                             {{/if}}

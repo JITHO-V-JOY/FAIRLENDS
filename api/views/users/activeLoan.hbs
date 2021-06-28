@@ -279,7 +279,7 @@
                                                             {{#if this.payment}}
                                                             <button disabled>Pay</button>
                                                             {{else}}
-                                                            <button>Pay</button>
+                                                            <button onclick="payEmi('{{this.date}}', '{{../myLoan.loan_id}}')">Pay</button>
                                                             {{/if}}
                                                         </td>
                                                     </tr>
@@ -303,5 +303,26 @@
     </main>
 
 </div>
+
+
+<script type="text/javascript">
+        async function payEmi(date, id){
+          console.log(date, id)
+           
+          event.preventDefault();
+
+          try {
+               let body ={
+                "loan_id": id,
+                "date": date
+                 }
+                const response = await axios.post(`http://localhost:3000/users/borrower/emi`, JSON.stringify(body));
+                console.log(response);
+            } catch (errors) {
+                console.error(errors);
+            }
+         }
+</script>   
+
     
 

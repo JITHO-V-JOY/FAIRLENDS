@@ -548,7 +548,7 @@ exports.getLender = async(req, res, next) =>{
                 let userOrg = (req.session.user.role == "borrower")? "Org1": (req.session.user.role == "admin")? "Org3": "Org2";
                 let trasient = "";
 
-                let response = await invoke.invokeTransaction("mychannel", "fairlends", "QueryUser", userName,  userName, userOrg, trasient);
+                let response = await invoke.invokeTransaction("mychannel", "fairlends", "QueryUser", res.loan.lender,  userName, userOrg, trasient);
                 let temp  = JSON.parse(response.result.txid)   
                 res.lender = temp;;
                 console.log("response ##############", res.lender);
@@ -605,6 +605,50 @@ exports.getComplaints = (req, res, next)=>{
                 next();
             }
         })
+    }else{
+        return res.status(400).json({
+            error:"not logged in"
+        })
+    }
+}
+
+exports.payEmi = async (req, res, next)=>{
+    if(req.session.user){
+                let args = new Array()
+                args.push(String(req.body.loan_id));
+                args.push(String(req.body.date));
+                console.log(args)
+                let userName = req.session.user.adhar_id;
+                let userOrg = (req.session.user.role == "borrower")? "Org1": (req.session.user.role == "admin")? "Org3": "Org2";
+                let trasient = "";
+
+                let response = await invoke.invokeTransaction("mychannel", "loan", "PayEMI", args,  userName, userOrg, trasient);
+                let temp  = JSON.parse(response.result.txid)   
+                console.log("response ##############", temp);
+                next(); 
+        
+    }else{
+        return res.status(400).json({
+            error:"not logged in"
+        })
+    }
+}
+
+exports.payTax = async (req, res, next)=>{
+    if(req.session.user){
+                let args = new Array()
+                args.push(String(req.body.loan_id));
+                args.push(String(req.body.date));
+                console.log("my body", args)
+                let userName = req.session.user.adhar_id;
+                let userOrg = (req.session.user.role == "borrower")? "Org1": (req.session.user.role == "admin")? "Org3": "Org2";
+                let trasient = "";
+
+                let response = await invoke.invokeTransaction("mychannel", "loan", "PayTax", args,  userName, userOrg, trasient);
+                let temp  = JSON.parse(response.result.txid)   
+                console.log("response ##############", temp);
+                next(); 
+        
     }else{
         return res.status(400).json({
             error:"not logged in"
