@@ -1,6 +1,7 @@
 const User = require('../models/users');
 const jwt = require('jsonwebtoken');
 const expressjwt = require('express-jwt');
+var fs = require('fs')
 
 exports.fetchUsers = (req, res, next)=>{
     User.find({role: "borrower"}, (err, users)=>{
@@ -40,7 +41,8 @@ exports.signup = (req, res, next)=>{
     const user = new User({adhar_id, name, role, password}); // creating user object and populate with the request object..
     delete req.body.password;
     let arg = new Array(req.body);
-    console.log(arg, req.body)
+    console.log(arg)
+
     user.save((err, user)=>{
         if(err){
             return res.status(400).json({
@@ -50,7 +52,6 @@ exports.signup = (req, res, next)=>{
         
        
     });
-
     req.userName = req.body.adhar_id;
     req.userOrg = (role === "admin") ? "Org3": (role === "lender") ? "Org2": "Org1";
     req.args = arg;

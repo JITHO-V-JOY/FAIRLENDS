@@ -8,7 +8,7 @@
            <div class="sidebar-menu">
                <ul>
                    <li>
-                       <a href="/" class="active">
+                       <a href="/">
                             <span class="fas fa-tachometer-alt"></span>
                             <span>Dashboard</span>
                        </a>
@@ -32,15 +32,15 @@
                        </a>
                    </li>
                     <li>
-                       <a href="/admin/tax">
-                            <span class="fas fa-clipboard"></span>
-                            <span>Manage Tax</span>
-                       </a>
-                   </li>
-                   <li>
                        <a href="/admin/active_loans"  >
                             <span class="fas fa-clipboard"></span>
                             <span>Active Lends</span>
+                       </a>
+                   </li>
+                   <li>
+                       <a href="/admin/tax" class="active" >
+                            <span class="fas fa-clipboard"></span>
+                            <span>Manage Tax</span>
                        </a>
                    </li>
                    <li>
@@ -74,35 +74,36 @@
     </header>
 
     <main>
-        <div class="cards">
-            <div class="card-single">
-                <div>
-                    <h1>{{lenders}}</h1>
-                    <span>Lenders</span>
+        <div style="margin:auto; width:50%;">
+                <h2>Tax {{tax.tax}}%</h2>
+               
+
+                <div class="tax">
+                    <form method="POST" action="/admin/tax">
+                     <input type="text" name="_id" id="_id" value={{tax._id}} hidden>
+                      <div class="card">
+                           <label for="tax">Tax Percentage</label>
+                            <div class="slidecontainer">
+                            <input type="range" min="3" max="7"  class="slider" id="tax" step="1" name="tax">
+                            <p><span id="span-tax"></span>%</p>
+                        </div>
+                    </div>
+                    <input type="submit" value="update" class="login">
+                    </form>
+
                 </div>
-                <div>
-                    <span class="fas fa-users"></span>   
-                </div>
-            </div>
-             <div class="card-single">
-                <div>
-                    <h1>{{borrowers}}</h1>
-                    <span>Borrowers</span>
-                </div>
-                <div>
-                    <span class="fas fa-users"></span>   
-                </div>
-            </div>
-             <div class="card-single">
-                <div>
-                    <h1>79</h1>
-                    <span>Active Loans</span>
-                </div>
-                <div>
-                    <span class="fas fa-clipboard-list"></span>   
-                </div>
-            </div>
         </div>
     </main>
 </div>
+
+<script type="text/javascript">
+        var tax = document.getElementById("tax");
+        var spanTax = document.getElementById("span-tax");
+        spanTax.innerHTML = tax.value;
+
+        tax.oninput = function() {
+        spanTax.innerHTML = this.value;
+        }
+
+</script>
 

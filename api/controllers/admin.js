@@ -1,6 +1,7 @@
 const helper = require('../utils/helper');
 const invoke = require('../utils/invoke');
 const Loan = require('../models/loans');
+const Tax = require('../models/taxs');
 const Complaint = require('../models/complaints');
 const { response } = require('express');
 
@@ -262,8 +263,13 @@ exports.approveLoan = async(req, res, next)=>{
         let userName = req.session.user.adhar_id;
         let userOrg = (req.session.user.role == "borrower")? "Org1": (req.session.user.role == "admin")? "Org3": "Org2";
         let trasient = "";
+        let tax = res.percentage
+        console.log("percentage", tax)
+        let args = new Array()
+        args.push(String(req.profile._id))
+        args.push(String(tax))
 
-        let response = await invoke.invokeTransaction("mychannel", "loan", "ApproveLoan", String(req.profile._id), userName, userOrg, trasient);
+        let response = await invoke.invokeTransaction("mychannel", "loan", "ApproveLoan", args, userName, userOrg, trasient);
         console.log("response ##############", response.result.txid);
         res.redirect('/admin/accepted_loans');
     }else{
@@ -295,3 +301,46 @@ exports.getComplaints = (req, res, next)=>{
         })
     }
 }
+
+
+exports.updateTax = (req, res)=>{
+    if(req.session.user.role === "admin"){
+    const {tax, _id} = req.body;
+    Tax.updateOne({"_id": _id}, {$set: {"tax": tax}},(err, tax)=>{
+        if(err){
+            res.status(400).json({
+                error: err
+            })
+        }
+        if(tax){
+            console.log(tax);
+            res.redirect('/admin/tax');
+        }
+    })
+    
+    }else{
+        return res.status(400).json({
+            error:"not logged in"
+        }) 
+    }
+}
+
+exports.getTax = (req, res, next)=>{
+    const query = Tax.find(); // `query` is an instance of `Query`
+    query.setOptions({ lean : true });
+    query.collection(Tax.collection);
+    query.exec((err, tax)=>{
+        if(err){
+            res.status(400).json({
+                error: err
+            })
+        }
+        if(tax){
+            console.log("tax", tax[0])
+            res.tax = tax[0]
+            res.percentage = tax[0].tax
+            next();
+        }
+    })
+}
+

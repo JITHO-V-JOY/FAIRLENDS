@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 :root {
   --primary-color: #4a55e9;
-  --secondary-color:#b1b3b8;
+  --secondary-color:#ffffff;
 }
 
 * {
@@ -198,7 +198,7 @@ form {
   height: 15px;
   border-radius: 5px;
   border: none;
-  background: var(--secondary-color);
+  background: #9e9c9c;
   outline: none;
   opacity: 0.7;
   -webkit-transition: .2s;
@@ -283,7 +283,7 @@ input[type="submit"] {
 
 .loan-container .card {
   background: var(--secondary-color);
-  color: #ffffff;
+  color: #1b1a1a;
   padding: 2rem;
   border-radius: 2px;
   margin: 1rem 0rem;
@@ -291,7 +291,7 @@ input[type="submit"] {
 }
 
 .loan-container .card span {
-  color: #ffffff;
+  color: #141414;
   font-size: 1.1rem;
 }
 
@@ -323,11 +323,12 @@ td {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  border-bottom: 1px solid #979494;
+  background-color: #72d4f1;
+  border-bottom: 1px solid #91dee4;
 }
 
 .recent-grid .card {
-  background: #fff;
+  background: #91dee4;
   border-radius: 5px;
 }
 
