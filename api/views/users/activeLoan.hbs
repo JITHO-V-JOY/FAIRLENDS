@@ -260,7 +260,7 @@
                                                 {{#each myLoan.emi}}
                                                     <tr>
                                                         <td>
-                                                            {{index}}
+                                                            {{@index}}
                                                         </td>
                                                         <td>
                                                             {{this.date}}
@@ -277,9 +277,9 @@
                                                         </td>
                                                         <td>
                                                             {{#if this.payment}}
-                                                            <button disabled>Pay</button>
+                                                            <button class="pay-d" disabled>Pay</button>
                                                             {{else}}
-                                                            <button onclick="payEmi('{{this.date}}', '{{../myLoan.loan_id}}')">Pay</button>
+                                                            <button class="pay" onclick="payEmi('{{this.date}}', '{{../myLoan.loan_id}}')">Pay</button>
                                                             {{/if}}
                                                         </td>
                                                     </tr>
@@ -316,7 +316,7 @@
                 "loan_id": id,
                 "date": date
                  }
-                const response = await axios.post(`http://localhost:3000/users/borrower/emi`, JSON.stringify(body));
+                const response = await axios.post(`http://localhost:3000/users/borrower/emi`, body);
                 console.log(response);
             } catch (errors) {
                 console.error(errors);

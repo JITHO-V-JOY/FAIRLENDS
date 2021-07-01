@@ -526,7 +526,7 @@ exports.getIssuer = async (req, res, next)=>{
         let userOrg = (req.session.user.role == "borrower")? "Org1": (req.session.user.role == "admin")? "Org3": "Org2";
         let trasient = "";
 
-        let response = await invoke.invokeTransaction("mychannel", "fairlends", "QueryUser", userName,  userName, userOrg, trasient);
+        let response = await invoke.invokeTransaction("mychannel", "fairlends", "QueryUser", res.loan.issuer,  userName, userOrg, trasient);
         let temp  = JSON.parse(response.result.txid)   
         res.issuer = temp;;
         console.log("response ##############", res.issuer); 
@@ -615,6 +615,7 @@ exports.getComplaints = (req, res, next)=>{
 exports.payEmi = async (req, res, next)=>{
     if(req.session.user){
                 let args = new Array()
+
                 args.push(String(req.body.loan_id));
                 args.push(String(req.body.date));
                 console.log(args)

@@ -307,8 +307,9 @@ td{
     display: flex;
     justify-content: space-between; 
     align-items: center;
-    background-color: #72d4f1;
-    border-bottom: 1px solid #91dee4
+    background-color: #5588f0;
+    border-radius: 10px;
+    border-bottom: 1px solid #585858
 }
 
 .recent-grid .card{
@@ -384,7 +385,7 @@ thead td{
         font-family: 'Poppins' sans-serif;
         font-size: 50px;
         font-weight: 600;
-        color: var(--secondary-color);
+        color: gray;
     }
 }
 
@@ -416,14 +417,14 @@ thead td{
 }
 .reg-btn a{
     padding: .5em;
-    border: 5px solid var(--secondary-color);
+    border: 5px solid gray;
     border-radius: 20px;
     font-size: 1.3em;
     text-decoration: none;
     
 
     &:hover{
-        background:var(--secondary-color)   ;
+        background: gray   ;
         color: white;
 
         font-weight: bold;
@@ -452,5 +453,36 @@ thead td{
         padding: 1em
     }
    
+}
+
+.report{
+    background: red;
+    padding: 5px 10px;
+    border-radius: 5pc;
+    color: white;
+    border: none;
+}
+
+.report-d{
+    background: rgb(236, 155, 155);
+    padding: 5px 10px;
+    border-radius: 5pc;
+    color: white;
+    border: none;
+}
+
+.pay{
+    background: green;
+    padding: 5px 10px;
+    border-radius: 5pc;
+    color: white;
+    border: none;
+}
+.pay-d{
+    background: rgb(134, 221, 134);
+    padding: 5px 10px;
+    border-radius: 5pc;
+    color: white;
+    border: none;
 }
 

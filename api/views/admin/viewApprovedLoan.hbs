@@ -339,13 +339,16 @@
                                 <div class="col-md-6">
                                 <div class="card" style="margin-top: 2em; margin-bottom: 4em;">
                                      <div class="card-header">
-                                              <h2 style="color: black;">EMI Schedule</h2>
+                                              <h2 style="color: rgb(255, 255, 255);">EMI Schedule</h2>
                                     </div>
                                     <div class="card-body">
                                         <div class="table-responsive">
                                        <table width="100%">
                                            <thead>
                                                  <tr>
+                                                     <td>
+                                                         No
+                                                     </td>
                                                 <td>
                                                     Due Date
                                                 </td>
@@ -361,6 +364,9 @@
 
                                             {{#each loanRequest.emi}}
                                                 <tr>
+                                                    <td>
+                                                        {{@index}}
+                                                    </td>
                                                     
                                                     <td>
                                                         {{this.date}}
@@ -388,13 +394,16 @@
                             <div class="col-md-6">
                                 <div class="card" style="margin-top: 2em; margin-bottom: 4em;">
                                      <div class="card-header">
-                                             <h2 style="color: black;">Tax Schedule</h2>
+                                             <h2 style="color: rgb(255, 255, 255);">Tax Schedule</h2>
                                     </div>
                                     <div class="card-body">
                                         <div class="table-responsive">
                                          <table width="100%">
                                              <thead>
                                                  <tr>
+                                                     <td>
+                                                         No
+                                                     </td>
                                                 <td>
                                                     Due Date
                                                 </td>
@@ -409,6 +418,9 @@
 
                                             {{#each loanRequest.tax}}
                                                 <tr>
+                                                     <td>
+                                                        {{@index}}
+                                                    </td>
                                                     
                                                     <td>
                                                         {{this.date}}

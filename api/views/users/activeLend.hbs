@@ -249,7 +249,7 @@
                                                 {{#each myLoan.emi}}
                                                     <tr>
                                                         <td>
-                                                            {{index}}
+                                                              {{@index}} 
                                                         </td>
                                                         <td>
                                                             {{this.date}}
@@ -266,10 +266,10 @@
                                                         </td>
                                                         <td>
                                                             {{#if this.payment}}
-                                                            <button disabled>Report</button>
+                                                            <button  class="report-d" disabled>Report</button>
                                                             {{else}}
                                                         
-                                                           <button id="report"  onclick="report('{{this.date}}', '{{../myLoan.loan_id}}')" >Report</button>
+                                                           <button  class="report" id="report"  onclick="report('{{this.date}}', '{{../myLoan.loan_id}}')" >Report</button>
                                                             {{/if}}
                                                         </td>
                                                     </tr>
@@ -313,7 +313,7 @@
                                                 {{#each myLoan.tax}}
                                                     <tr>
                                                         <td>
-                                                            {{index}}
+                                                           {{@index}} 
                                                         </td>
                                                         <td>
                                                             {{this.date}}
@@ -331,9 +331,9 @@
                                                         </td>
                                                         <td>
                                                             {{#if this.payment}}
-                                                            <button disabled>Pay</button>
+                                                            <button class="pay-d" disabled>Pay</button>
                                                             {{else}}
-                                                            <button onclick="payTax('{{this.date}}', '{{../myLoan.loan_id}}')">Pay</button>
+                                                            <button class="pay" onclick="payTax('{{this.date}}', '{{../myLoan.loan_id}}')">Pay</button>
                                                             {{/if}}
                                                         </td>
                                                     </tr>
