@@ -194,14 +194,14 @@ func (s *LoanContract) PayEMI(ctx contractapi.TransactionContextInterface, loan_
 	loan := new(Loan)
 	_ = json.Unmarshal(loanAsBytes, loan)
 
-	today, err := time.Parse("2006-01-02 15:04:05", pay_day)
+	today, err := time.Parse("2006-01-02 15:04:05", pay_day[:19])
 
 	if err != nil {
 		return "", fmt.Errorf("Failed while parsing date. %s", err.Error())
 	}
 
 	for i := 0; i < len(loan.Emi); i++ {
-		payDate, err := time.Parse("2006-01-02 15:04:05", loan.Emi[i].Date[:len(loan.Emi[i].Date)-20])
+		payDate, err := time.Parse("2006-01-02 15:04:05", loan.Emi[i].Date[:19])
 
 		if err != nil {
 			return "", fmt.Errorf("Failed while parsing date. %s", err.Error())
@@ -242,13 +242,13 @@ func (s *LoanContract) PayTax(ctx contractapi.TransactionContextInterface, loan_
 	loan := new(Loan)
 	_ = json.Unmarshal(loanAsBytes, loan)
 
-	today, err := time.Parse("2006-01-02 15:04:05", pay_day)
+	today, err := time.Parse("2006-01-02 15:04:05", pay_day[:19])
 	if err != nil {
 		return "", fmt.Errorf("Failed while parsing date. %s", err.Error())
 	}
 
 	for i := 0; i < len(loan.Tax); i++ {
-		payDate, err := time.Parse("2006-01-02 15:04:05", loan.Tax[i].Date[:len(loan.Tax[i].Date)-20])
+		payDate, err := time.Parse("2006-01-02 15:04:05", loan.Tax[i].Date[:19])
 		if err != nil {
 			return "", fmt.Errorf("Failed while parsing date. %s", err.Error())
 		}

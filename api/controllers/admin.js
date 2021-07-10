@@ -344,3 +344,22 @@ exports.getTax = (req, res, next)=>{
     })
 }
 
+
+exports.redeemLoan = async(req, res, next)=>{
+    if(req.session.user.role === "admin"){
+        let userName = req.session.user.adhar_id;
+        let userOrg = (req.session.user.role == "borrower")? "Org1": (req.session.user.role == "admin")? "Org3": "Org2";
+        let trasient = "";
+        let args = new Array()
+        args.push(String(req.profile._id))
+        let response = await invoke.invokeTransaction("mychannel", "loan", "Redeem", args, userName, userOrg, trasient);
+        console.log("response ##############", response.result.txid);
+        res.redirect('/admin/active_loans');
+    }else{
+        return res.status(400).json({
+            error:"not logged in"
+        })
+    }
+}
+
+
